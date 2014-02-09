@@ -1,0 +1,23 @@
+// Allows
+// 	`size: w h` => `width: w; height: h`
+//  `size: l` => `width: l; height: l`
+size()
+  units = ()
+  importance = null
+
+  for arg in arguments
+    if arg is a 'unit'
+      push(units, arg)
+    else if arg is !important
+      importance = !important
+    else
+      error()
+
+  l = length(units)
+  if l == 1
+    push(units, units[0])
+  else if l != 2
+    error()
+
+  width: units[0] importance
+  height: (units[1] or units[0]) importance

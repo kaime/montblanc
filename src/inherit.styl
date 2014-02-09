@@ -1,0 +1,40 @@
+/**
+ * This is not trivial, because if:
+ *
+ *   body
+ *     border-radius: 2px
+ *
+ * yields:
+ *
+ *   body {
+ *     -moz-border-radius: 2px;
+ *     border-radius: 2px;
+ *   }
+ *
+ * then this:
+ *
+ *   body
+ *     inherit: background-color border-radius
+ *
+ * should yield:
+ *
+ *   body {
+ *     background-color: inherit;
+ *     -moz-border-radius: inherit;
+ *     border-radius: inherit;
+ *
+ **/
+
+inherit()
+  properties = ()
+  importance = ''
+
+  for arg in arguments
+    if arg is !important
+      importance = ' !important'
+    else
+      push(properties, arg)
+
+  for property in properties
+    val = unquote('inherit' + importance)
+    add-property(property, val)

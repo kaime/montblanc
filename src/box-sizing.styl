@@ -1,0 +1,25 @@
+/**
+ * http://caniuse.com/css3-boxsizing
+ */
+
+box-sizing(mode)
+  if support-for(ie lt 8)
+    warn('IE < 8 does not support `box-sizing`')
+
+  if support-for(opera lt 9.5)
+    warn('Opera < 9.5 does not support `box-sizing`')
+
+  vendors = ()
+
+  if support-for(firefox lt 29) or \
+    support-for(android-firefox)
+    push(vendors, moz)
+
+  if support-for(chrome lt 10) or \
+    support-for(safari lt 5.1) or \
+    support-for(ios-safari lt  5) \
+    support-for(android-browser lt 4) or \
+    support-for(blackberry-browser lt 10)
+    push(vendors, webkit)
+
+  vendor-prefix(box-sizing, mode, vendors)

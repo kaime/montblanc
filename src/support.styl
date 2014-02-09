@@ -1,0 +1,76 @@
+// Browser support
+no-support = false
+
+lt = 'lt'
+lte = 'lte'
+gt = 'gt'
+gte = 'gte'
+
+vendor-support = {
+  // Vendor             Min   Default
+  'ie':                 6     8,
+  'firefox':            3.5   10,
+  'chrome':             4     12,
+  'safari':             4     5,
+  'opera':              10    12,
+  'opera-mini':         5     no-support,
+  'opera-mobile':       10    no-support,
+  'android-chrome':     29    no-support,
+  'android-browser':    2.2   no-support,
+  'android-firefox':    23    no-support,
+  'ios-safari':         3.2   no-support,
+  'blackberry-browser': 7     no-support,
+  'ie-mobile':          10    no-support
+}
+
+for vendor, version in vendor-support
+  v = 'support-for-' + vendor
+  c = lookup(v)
+
+  if c is a 'unit'
+    if c < version[0]
+      error() // Cannot set a version lower than minimum
+  else if c is not no-support
+    define(v, version[1]) // Set default version
+  else
+    error()
+
+/**
+ * Checks the corresponding `support-for-{vendor}` variable: it returns `true`
+ * if it's not `false` and lower than given `version`. Otherwise, `false` is
+ * returned. Ie: `support-for(ie, 9)` checks if the minimum supported IE
+ * version is *lower* than 9.
+ */
+support-for(expr)
+  vendor = null
+  version = null
+  cmp = null
+
+  for arg in expr
+    if arg is a 'unit'
+      version = arg
+    else if arg in vendor-support
+      vendor = arg
+    else if arg in (lt lte gt gte)
+      cmp = arg
+    else
+      warn('Dont know what %s is' % (arg)) // @todo this does not work
+
+  if vendor is null
+    error('bad args')
+
+  s = lookup('support-for-' + vendor)
+
+  if s is no-support
+    return false
+  else if version is not null
+    if cmp is gt
+      return s > version
+    else if cmp is gte
+      return s >= version
+    else if cmp is lt
+      return s < version
+    else
+      return s <= version
+  else if cmp is not null
+    error('bad args') // comparison operator but no version number

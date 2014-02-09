@@ -1,0 +1,19 @@
+html {
+  font: inherit;
+  display: inherit;
+}
+html body {
+  width: inherit !important;
+}
+html body blockquote {
+  font-style: inherit;
+  color: inherit;
+}
+html body blockquote p {
+  font-size: inherit !important;
+  -webkit-border-radius: inherit !important;
+  border-radius: inherit !important;
+  -moz-box-sizing: inherit !important;
+  -webkit-box-sizing: inherit !important;
+  box-sizing: inherit !important;
+}

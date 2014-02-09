@@ -1,0 +1,11 @@
+// See https://github.com/LearnBoost/stylus/issues/826
+// grey(50% alpha?)
+// grey(128 alpha?)
+
+grey(level, alpha = 1)
+  if level is a 'unit'
+    u = unit(level)
+    if u is '%'
+      level = level / 100
+    level = 255 - unit(level, '') * 255
+    return rgba(level, level, level, alpha)

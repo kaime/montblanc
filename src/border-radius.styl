@@ -1,0 +1,21 @@
+/**
+ * References:
+ * http://caniuse.com/border-radius
+ */
+
+border-radius()
+  if support-for(ie lt 9)
+    warn('IE < 9 does not support `border-radius`');
+
+  vendors = ()
+
+  if support-for(firefox lt 4)
+    push(vendors, moz)
+
+  if support-for(chrome lt 5) or \
+    support-for(android-browser lt 2.2) or \
+    support-for(safari lt 5) or \
+    support-for(ios-safari lt 4)
+    push(vendors, webkit)
+
+  vendor-prefix(border-radius, arguments, vendors)
