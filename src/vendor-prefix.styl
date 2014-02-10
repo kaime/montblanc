@@ -1,0 +1,58 @@
+vendor-prefix()
+  // Lots of trouble here with lists and lists of lists...
+  // Some things may look weirdly implemented
+  args = ((arguments[0]) (arguments[1]) (arguments[2]) (arguments[3]))
+
+  // args = arguments
+
+  //args = arguments
+  l = length(arguments)
+
+  if mixin
+    property = shift(args)
+    l = l - 1
+  else
+    property = current-property
+
+  if property is a 'string'
+    property = unquote(property)
+
+  if l > 0
+    value = args[0]
+  else
+    value = null
+
+  if value is a 'string'
+    value = unquote(value)
+
+  if l > 1
+    prefixes = (args[1])
+  else
+    prefixes = ()
+
+  if l > 2
+    unprefixed = args[2] ? true : false
+  else
+    unprefixed = true
+
+  if mixin
+    // @dtodo Don't know why, but this dummy `if` is a workaround for a
+    // bug. If removed, variables are not available after `if unprefixed`
+    if true
+      for prefix in prefixes
+        prefixed = '-%s-%s' % (prefix property)
+        add-property(prefixed, value)
+
+    if unprefixed
+      add-property('%s' % property, value)
+
+  else
+    p = length(prefixes)
+    for prefix, i in prefixes
+      prefixed = '-%s-%s' % (prefix value)
+      if ((i + 1) >= p) and (not unprefixed)
+        return prefixed
+      else
+        add-property(property, prefixed)
+    if unprefixed
+      return value
