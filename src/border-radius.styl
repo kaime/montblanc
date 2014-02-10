@@ -4,18 +4,18 @@
  */
 
 border-radius()
-  if support-for(ie lt 9)
+  if has-support(ie lt 9)
     warn('IE < 9 does not support `border-radius`');
 
   vendors = ()
 
-  if support-for(firefox lt 4)
+  if has-support(firefox lt 4)
     push(vendors, moz)
 
-  if support-for(chrome lt 5) or \
-    support-for(android-browser lt 2.2) or \
-    support-for(safari lt 5) or \
-    support-for(ios-safari lt 4)
+  if has-support(chrome lt 5) or \
+    has-support(android-browser lt 2.2) or \
+    has-support(safari lt 5) or \
+    has-support(ios-safari lt 4)
     push(vendors, webkit)
 
   vendor-prefix(border-radius, arguments, vendors)

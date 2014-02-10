@@ -36,12 +36,9 @@ for vendor, version in vendor-support
     error()
 
 /**
- * Checks the corresponding `support-for-{vendor}` variable: it returns `true`
- * if it's not `false` and lower than given `version`. Otherwise, `false` is
- * returned. Ie: `support-for(ie, 9)` checks if the minimum supported IE
- * version is *lower* than 9.
+ * Checks the corresponding `support-for-{vendor}` variables.
  */
-support-for(expr)
+has-support(expr)
   vendor = null
   version = null
   cmp = null
