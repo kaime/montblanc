@@ -16,7 +16,7 @@
   "scripts": {
     "test": "./node_modules/.bin/mocha test --require should --reporter dot"
   },
-  "repository": "",
+  "repository": "https://github.com/krokis/montblanc.git",
   "dependencies": {
     "stylus": "~0.42.2"
   },
