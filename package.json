@@ -6,10 +6,9 @@
   "contributors": [],
   "license": "mit",
   "keywords": [
-    "css",
-    "stylesheet",
     "stylus",
-    "extension",
+    "mixins",
+    "css",
     "library"
   ],
   "main": "index.js",
@@ -22,6 +21,8 @@
   },
   "devDependencies": {
     "should": "~3.1.2",
-    "mocha": "~1.17.1"
+    "mocha": "~1.17.1",
+    "glob": "~3.2.8",
+    "path": "~0.4.9"
   }
 }
