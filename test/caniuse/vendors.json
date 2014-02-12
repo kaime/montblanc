@@ -1,0 +1,15 @@
+{
+  "ie"        : "ie",
+  "firefox"   : "firefox",
+  "chrome"    : "chrome",
+  "safari"    : "safari",
+  "opera"     : "opera",
+  "ios_saf"   : "ios-safari",
+  "op_mini"   : "opera-mini",
+  "android"   : "android-browser",
+  "op_mob"    : "opera-mobile",
+  "bb"        : "blackberry-browser",
+  "and_chr"   : "android-chrome",
+  "and_ff"    : "android-firefox",
+  "ie_mob"    : "ie-mobile"
+}
