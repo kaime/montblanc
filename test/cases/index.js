@@ -1,5 +1,5 @@
 var stylus = require('stylus'),
-    montblanc = require('../'),
+    montblanc = require('../../'),
     fs = require('fs'),
     path = require('path'),
     glob = require('glob');
