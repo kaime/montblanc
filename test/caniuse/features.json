@@ -26,5 +26,11 @@
       "type": "property",
       "name": "border-bottom-right-radius"
     }
+  ],
+  "css-boxshadow": [
+    {
+      "type": "property",
+      "name": "box-shadow"
+    }
   ]
 }

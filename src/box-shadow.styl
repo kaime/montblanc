@@ -1,0 +1,33 @@
+/**
+ * http://caniuse.com/css-boxshadow
+ */
+
+box-shadow()
+  if has-support(ie lt 9)
+    warn('IE < 9 does not support `box-shadow`')
+
+  if has-support(firefox lt 3.5)
+    warn('Firefox < 3.5 does not support `box-shadow`')
+
+  if has-support(opera lt 10.5)
+    warn('Opera < 10.5 does not support `box-shadow`')
+
+  if has-support(opera-mini)
+    warn('Opera Mini does not support `box-shadow`')
+
+  if has-support(opera-mobile lt 11)
+    warn('Opera Mobile < 11 does not support `box-shadow`')
+
+  vendors = ()
+
+  if has-support(firefox lt 4)
+    push(vendors, moz)
+
+  if has-support(chrome lt 10) or \
+    has-support(safari lt 5.1) or \
+    has-support(ios-safari lt  5) or \
+    has-support(android-browser lt 4) or \
+    has-support(blackberry-browser lt 10)
+    push(vendors, webkit)
+
+  vendor-prefix('box-shadow', arguments, vendors)
