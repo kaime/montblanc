@@ -10,7 +10,7 @@ var readFile = function(file) {
  return fs.readFileSync(file, 'utf8').replace(/\r/g, '');
 }
 
-describe('Test cases', function() {
+describe('Cases', function() {
 
   // Reset all `support-to-*` vars on every case to avoid prefixes here.
   var reset = [];
