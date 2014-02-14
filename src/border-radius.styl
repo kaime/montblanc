@@ -18,7 +18,7 @@ border-radius()
     has-support(ios-safari lt 4)
     push(vendors, webkit)
 
-  vendor-prefix('border-radius', arguments, vendors)
+  vendorize('border-radius', arguments, vendors)
 
 
 border-top-left-radius()
@@ -36,7 +36,7 @@ border-top-left-radius()
     has-support(ios-safari lt 4)
     push(vendors, webkit)
 
-  vendor-prefix('border-top-left-radius', arguments, vendors)
+  vendorize('border-top-left-radius', arguments, vendors)
 
 border-top-right-radius()
   if has-support(ie lt 9)
@@ -53,7 +53,7 @@ border-top-right-radius()
     has-support(ios-safari lt 4)
     push(vendors, webkit)
 
-  vendor-prefix('border-top-right-radius', arguments, vendors)
+  vendorize('border-top-right-radius', arguments, vendors)
 
 border-bottom-left-radius()
   if has-support(ie lt 9)
@@ -70,7 +70,7 @@ border-bottom-left-radius()
     has-support(ios-safari lt 4)
     push(vendors, webkit)
 
-  vendor-prefix('border-bottom-left-radius', arguments, vendors)
+  vendorize('border-bottom-left-radius', arguments, vendors)
 
 border-bottom-right-radius()
   if has-support(ie lt 9)
@@ -87,4 +87,4 @@ border-bottom-right-radius()
     has-support(ios-safari lt 4)
     push(vendors, webkit)
 
-  vendor-prefix('border-bottom-right-radius', arguments, vendors)
+  vendorize('border-bottom-right-radius', arguments, vendors)
