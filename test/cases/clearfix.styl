@@ -1,3 +1,6 @@
+// @describe `clearfix()`
+
+// @it
 support-for-ie = 8
 .clearfix
   clearfix()
@@ -5,3 +8,24 @@ support-for-ie = 8
 support-for-ie = 7
 .clearfix
   clearfix()
+
+// @expect
+.clearfix:before,
+.clearfix:after {
+  content: " ";
+  display: table;
+}
+.clearfix:after {
+  clear: both;
+}
+.clearfix {
+  *zoom: 1;
+}
+.clearfix:before,
+.clearfix:after {
+  content: " ";
+  display: table;
+}
+.clearfix:after {
+  clear: both;
+}

@@ -1,3 +1,6 @@
+// @describe `vendor()`
+
+// @it
 #beatles
   vendorize(john, -rythm-guitar vocals !important, (rip), true)
   paul: vendorize(guitar, (bass), false) vocals !important
@@ -9,3 +12,26 @@ html
   cool-feature: vendorize(foo, (ms), true)
   vendorize('old-feature', 57%, (), true)
   deprecated-feature: vendorize(none, (o ms), false)
+
+// @expect
+#beatles {
+  -rip-john: -rythm-guitar vocals !important;
+  john: -rythm-guitar vocals !important;
+  paul: -bass-guitar vocals !important;
+  george: -lead-guitar !important;
+  george: -rythm-guitar !important;
+  george: -bass-guitar !important;
+  george: guitar !important;
+  ringo: -just-drums;
+  ringo: drums;
+}
+html {
+  -moz-fancy-feature: 2px;
+  -webkit-fancy-feature: 2px;
+  fancy-feature: 2px;
+  cool-feature: -ms-foo;
+  cool-feature: foo;
+  old-feature: 57%;
+  deprecated-feature: -o-none;
+  deprecated-feature: -ms-none;
+}

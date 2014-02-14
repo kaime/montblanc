@@ -1,3 +1,6 @@
+// @describe `define()`
+
+// @it
 foo = #123456
 define('foo', #234567)
 define('bar', #345678)
@@ -22,3 +25,13 @@ for prop, val in border
 
 body
   border: border-length border-style border-color
+
+// @expect
+hey {
+  foo: #234567;
+  bar: #456789;
+  baz: 42;
+}
+body {
+  border: 1px solid #000;
+}

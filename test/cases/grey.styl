@@ -1,5 +1,16 @@
+// @describe `grey()`
+
+// @it
 body
   color: grey(100%)
   background-color: grey
   border-color: grey(50%, 25%)
   box-shadow-color: grey(.5, .17)
+
+// @expect
+body {
+  color: #000;
+  background-color: grey;
+  border-color: rgba(128,128,128,0.25);
+  box-shadow-color: rgba(128,128,128,0.17);
+}
