@@ -1,3 +1,3 @@
 # montblanc
 
-A Stylus library.
+A [Stylus](https://github.com/LearnBoost/stylus) library.
