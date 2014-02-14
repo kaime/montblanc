@@ -6,24 +6,25 @@ lte = 'lte'
 gt = 'gt'
 gte = 'gte'
 
-vendor-support = {
-  // Vendor             Min   Default
-  'ie':                 6     8,
-  'firefox':            3.5   10,
-  'chrome':             4     12,
-  'safari':             4     5,
-  'opera':              10    12,
-  'opera-mini':         5     no-support,
-  'opera-mobile':       10    no-support,
-  'android-chrome':     29    no-support,
-  'android-browser':    2.2   no-support,
-  'android-firefox':    23    no-support,
-  'ios-safari':         3.2   no-support,
-  'blackberry-browser': 7     no-support,
-  'ie-mobile':          10    no-support
+browsers = json('support/browsers.json', { hash: true })
+
+default-support = {
+  'ie':                 8,
+  'firefox':            10,
+  'chrome':             12,
+  'safari':             5,
+  'opera':              12,
+  'opera-mini':         no-support,
+  'opera-mobile':       no-support,
+  'android-chrome':     no-support,
+  'android-browser':    no-support,
+  'android-firefox':    no-support,
+  'ios-safari':         no-support,
+  'blackberry-browser': no-support,
+  'ie-mobile':          no-support
 }
 
-for vendor, version in vendor-support
+for vendor, version in browsers
   v = 'support-for-' + vendor
   c = lookup(v)
 
@@ -31,7 +32,7 @@ for vendor, version in vendor-support
     if c < version[0]
       error() // Cannot set a version lower than minimum
   else if c is not no-support
-    define(v, version[1]) // Set default version
+    define(v, default-support[vendor]) // Set default version
   else
     error()
 
@@ -46,7 +47,7 @@ has-support(expr)
   for arg in expr
     if arg is a 'unit'
       version = arg
-    else if arg in vendor-support
+    else if arg in browsers
       vendor = arg
     else if arg in (lt lte gt gte)
       cmp = arg
