@@ -1,0 +1,30 @@
+{
+  "css3-boxsizing": [
+    {
+      "type": "property",
+      "name": "box-sizing"
+    }
+  ],
+  "border-radius": [
+    {
+      "type": "property",
+      "name": "border-radius"
+    },
+    {
+      "type": "property",
+      "name": "border-top-left-radius"
+    },
+    {
+      "type": "property",
+      "name": "border-top-right-radius"
+    },
+    {
+      "type": "property",
+      "name": "border-bottom-left-radius"
+    },
+    {
+      "type": "property",
+      "name": "border-bottom-right-radius"
+    }
+  ]
+}

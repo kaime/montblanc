@@ -18,4 +18,73 @@ border-radius()
     has-support(ios-safari lt 4)
     push(vendors, webkit)
 
-  vendor-prefix(border-radius, arguments, vendors)
+  vendor-prefix('border-radius', arguments, vendors)
+
+
+border-top-left-radius()
+  if has-support(ie lt 9)
+    warn('IE < 9 does not support `border-radius`');
+
+  vendors = ()
+
+  if has-support(firefox lt 4)
+    push(vendors, moz)
+
+  if has-support(chrome lt 5) or \
+    has-support(android-browser lt 2.2) or \
+    has-support(safari lt 5) or \
+    has-support(ios-safari lt 4)
+    push(vendors, webkit)
+
+  vendor-prefix('border-top-left-radius', arguments, vendors)
+
+border-top-right-radius()
+  if has-support(ie lt 9)
+    warn('IE < 9 does not support `border-radius`');
+
+  vendors = ()
+
+  if has-support(firefox lt 4)
+    push(vendors, moz)
+
+  if has-support(chrome lt 5) or \
+    has-support(android-browser lt 2.2) or \
+    has-support(safari lt 5) or \
+    has-support(ios-safari lt 4)
+    push(vendors, webkit)
+
+  vendor-prefix('border-top-right-radius', arguments, vendors)
+
+border-bottom-left-radius()
+  if has-support(ie lt 9)
+    warn('IE < 9 does not support `border-radius`');
+
+  vendors = ()
+
+  if has-support(firefox lt 4)
+    push(vendors, moz)
+
+  if has-support(chrome lt 5) or \
+    has-support(android-browser lt 2.2) or \
+    has-support(safari lt 5) or \
+    has-support(ios-safari lt 4)
+    push(vendors, webkit)
+
+  vendor-prefix('border-bottom-left-radius', arguments, vendors)
+
+border-bottom-right-radius()
+  if has-support(ie lt 9)
+    warn('IE < 9 does not support `border-radius`');
+
+  vendors = ()
+
+  if has-support(firefox lt 4)
+    push(vendors, moz)
+
+  if has-support(chrome lt 5) or \
+    has-support(android-browser lt 2.2) or \
+    has-support(safari lt 5) or \
+    has-support(ios-safari lt 4)
+    push(vendors, webkit)
+
+  vendor-prefix('border-bottom-right-radius', arguments, vendors)
