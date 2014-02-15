@@ -1,41 +1,40 @@
 // @describe `inherit`
 
-// @it
+// @it takes a list of property names and adds them all as `inherit` to current block
 html
-  inherit: font, display
-
-  body
-    inherit: width !important
-
-    blockquote
-      inherit(font-style, color)
-
-support-for-chrome = 2
-support-for-firefox = 10
-
-html
-  body
-    blockquote
-      p
-        inherit: font-size border-radius box-sizing !important;
+  inherit: font display background-color -moz-appareance
 
 // @expect
 html {
   font: inherit;
   display: inherit;
+  background-color: inherit;
+  -moz-appareance: inherit;
 }
+
+// @it can be used more than once on the same block
+body
+  inherit: margin padding
+  inherit(font-style, font-weight)
+  inherit: font-family
+
+// @expect
+body {
+  margin: inherit;
+  padding: inherit;
+  font-style: inherit;
+  font-weight: inherit;
+  font-family: inherit;
+}
+
+// @it handles `!important`
+html
+  body
+    inherit: width !important
+    inherit(height !important)
+
+// @expect
 html body {
   width: inherit !important;
-}
-html body blockquote {
-  font-style: inherit;
-  color: inherit;
-}
-html body blockquote p {
-  font-size: inherit !important;
-  -webkit-border-radius: inherit !important;
-  border-radius: inherit !important;
-  -moz-box-sizing: inherit !important;
-  -webkit-box-sizing: inherit !important;
-  box-sizing: inherit !important;
+  height: inherit !important;
 }

@@ -47,7 +47,7 @@ function getVersions(versions) {
 
 describe("Our `browsers.json` file", function() {
 
-  it("should include all caniuse vendors and versions", function() {
+  it("includes all caniuse vendors and versions", function() {
 
     caniuse.data.should.have.property('agents');
     caniuse.data.agents.should.be.an.Object;
@@ -79,7 +79,7 @@ describe("Our `browsers.json` file", function() {
 
 });
 
-describe("According to caniuse browser support data", function() {
+describe("According to caniuse browser data", function() {
 
   caniuse.data.should.have.property('data');
   caniuse.data['data'].should.be.an.Object;
@@ -163,7 +163,7 @@ describe("According to caniuse browser support data", function() {
 
                   if (prefix) {
 
-                    it('the property `' + node.name + '` should be prefixed with "' + prefix + '" on ' + browsers[caniuse.vendors[vendor]].name + ' ' + version, function() {
+                    it('the property `' + node.name + '` needs to be prefixed with "' + prefix + '" on ' + browsers[caniuse.vendors[vendor]].name + ' ' + version, function() {
 
                       var prefix = this.prefix,
                           vendor = this.vendor;

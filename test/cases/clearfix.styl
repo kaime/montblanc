@@ -1,15 +1,14 @@
 // @describe `clearfix()`
 
-// @it
-support-for-ie = 8
-.clearfix
-  clearfix()
-
+// @it mixes-in Nicolas Gallagher's "micro clearfix hack"
 support-for-ie = 7
 .clearfix
   clearfix()
 
 // @expect
+.clearfix {
+  *zoom: 1;
+}
 .clearfix:before,
 .clearfix:after {
   content: " ";
@@ -18,9 +17,13 @@ support-for-ie = 7
 .clearfix:after {
   clear: both;
 }
-.clearfix {
-  *zoom: 1;
-}
+
+// @it only includes IE specific rules when `support-for-ie` is < 8
+support-for-ie = 8
+.clearfix
+  clearfix()
+
+// @expect
 .clearfix:before,
 .clearfix:after {
   content: " ";

@@ -5,7 +5,6 @@ var stylus = require('stylus'),
     glob = require('glob'),
     browsers = require('../../src/support/browsers.json');
 
-
 var readFile = function(file) {
  return fs.readFileSync(file, 'utf8').replace(/\r/g, '');
 }
@@ -143,7 +142,8 @@ describe('Cases', function() {
                 }
 
               } else {
-                throw ":(";
+                i--;
+                break;
               }
 
             } else {
@@ -156,6 +156,8 @@ describe('Cases', function() {
         } else {
           throw ":( @ " + file;
         }
+      } else {
+        throw ":(";
       }
     }
 

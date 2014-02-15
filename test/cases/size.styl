@@ -1,20 +1,27 @@
 // @describe `size`
 
-// @it
+// @it takes one or two unit arguments and sets both `width` and `height` at once
 div
   size: 10px
-  size: 10px !important
   size: 10px 20px
-  size: 10px 20px !important
 
 // @expect
 div {
   width: 10px;
   height: 10px;
-  width: 10px !important;
-  height: 10px !important;
   width: 10px;
   height: 20px;
+}
+
+// @it handles `!important`
+div
+  size: 10px !important
+  size: 10px 20px !important
+
+// @expect
+div {
+  width: 10px !important;
+  height: 10px !important;
   width: 10px !important;
   height: 20px !important;
 }

@@ -1,16 +1,46 @@
 // @describe `grey()`
 
-// @it
+// @it creates a shade of grey
 body
   color: grey(100%)
-  background-color: grey
+
+// @expect
+body {
+  color: #000;
+}
+
+// @it accepts a percentage or a float between [0..1] as black level
+body
+  border-color: grey(50%)
+  color: grey(.2)
+
+// @expect
+body {
+  border-color: #808080;
+  color: #ccc;
+}
+
+// @it has an optional `alpha` argument
+body
   border-color: grey(50%, 25%)
   box-shadow-color: grey(.5, .17)
 
 // @expect
 body {
-  color: #000;
-  background-color: grey;
   border-color: rgba(128,128,128,0.25);
   box-shadow-color: rgba(128,128,128,0.17);
 }
+
+// @it does not break the CSS `grey` named color
+body
+  background-color: grey;
+
+// @expect
+body {
+  background-color: grey;
+}
+
+
+
+
+
