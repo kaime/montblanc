@@ -3,23 +3,27 @@
  */
 
 box-sizing(mode)
-  if has-support(ie lt 8)
+  if has-support('ie < 8')
     warn('IE < 8 does not support `box-sizing`')
 
-  if has-support(opera lt 9.5)
+  if has-support('opera < 9.5')
     warn('Opera < 9.5 does not support `box-sizing`')
 
   vendors = ()
 
-  if has-support(firefox lt 29) or \
-    has-support(android-firefox)
+  if has-support(
+      'firefox < 29',
+      'android-firefox'
+    )
     push(vendors, moz)
 
-  if has-support(chrome lt 10) or \
-    has-support(safari lt 5.1) or \
-    has-support(ios-safari lt  5) or \
-    has-support(android-browser lt 4) or \
-    has-support(blackberry-browser lt 10)
+  if has-support(
+      'chrome < 10',
+      'safari < 5.1',
+      'ios-safari < 5',
+      'android-browser < 4',
+      'blackberry-browser < 10'
+    )
     push(vendors, webkit)
 
   vendorize(box-sizing, mode, vendors)

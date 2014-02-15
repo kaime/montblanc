@@ -1,19 +1,14 @@
 // Browser support
 no-support = false
 
-lt = 'lt'
-lte = 'lte'
-gt = 'gt'
-gte = 'gte'
-
 browsers = json('support/browsers.json', { hash: true })
 
 default-support = {
-  'ie':                 8,
-  'firefox':            10,
-  'chrome':             12,
-  'safari':             5,
-  'opera':              12,
+  'ie':                 '8',
+  'firefox':            '10',
+  'chrome':             '12',
+  'safari':             '5',
+  'opera':              '12',
   'opera-mini':         no-support,
   'opera-mobile':       no-support,
   'android-chrome':     no-support,
@@ -39,36 +34,42 @@ for vendor, version in browsers
 /**
  * Checks the corresponding `support-for-{vendor}` variables.
  */
-has-support(expr)
-  vendor = null
-  version = null
-  cmp = null
+has-support()
+  for arg in arguments
+    arg = split(' ', '%s' % unquote(arg))
 
-  for arg in expr
-    if arg is a 'unit'
-      version = arg
-    else if arg in browsers
-      vendor = arg
-    else if arg in (lt lte gt gte)
-      cmp = arg
-    else
-      warn('Dont know what %s is' % (arg)) // @todo this does not work
+    vendor = null
+    version = null
+    cmp = null
 
-  if vendor is null
-    error('bad args')
+    for a in arg
+      if a in browsers
+        vendor = a
+      else if match('^[0-9]+(\.[0-9]+)?$', a)
+        version = a
+      else if a in ('<' '<=' '>' '>=')
+        cmp = a
+      else
+        error('bad args')
 
-  s = lookup('support-for-' + vendor)
+    if vendor is null
+      error('bad args')
 
-  if s is no-support
-    return false
-  else if version is not null
-    if cmp is gt
-      return s > version
-    else if cmp is gte
-      return s >= version
-    else if cmp is lt
-      return s < version
-    else
-      return s <= version
-  else if cmp is not null
-    error('bad args') // comparison operator but no version number
+    if cmp is not null and version is null
+      error('bad args')
+
+    s = lookup('support-for-' + vendor)
+
+    if version is null
+      return true if s is not no-support
+    else if s is not no-support
+      if cmp is '>'
+        return true if s > version
+      else if cmp is '>='
+        return true if s >= version
+      else if cmp is '<'
+        return true if s < version
+      else
+        return true if s <= version
+
+  return false
