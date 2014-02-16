@@ -45,9 +45,9 @@ function getVersions(versions) {
   return ret;
 }
 
-describe("Our `browsers.json` file", function() {
+describe("The `browsers.json` file", function() {
 
-  it("includes all caniuse vendors and versions", function() {
+  it("contains all caniuse vendors and versions", function() {
 
     caniuse.data.should.have.property('agents');
     caniuse.data.agents.should.be.an.Object;
