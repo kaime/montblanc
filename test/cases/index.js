@@ -56,7 +56,7 @@ describe('Cases', function() {
 
   tests.forEach(function(file) {
 
-    var name = path.basename(file, '.styl'),
+    var name = '',
         expected = null,
         them = [];
 
@@ -75,6 +75,10 @@ describe('Cases', function() {
         }
       }
       break;
+    }
+
+    if ('' === name) {
+      name = path.basename(file, '.styl');
     }
 
     for (; i < l; i++) {
