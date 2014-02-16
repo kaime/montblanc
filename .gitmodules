@@ -1,3 +1,6 @@
 [submodule "test/caniuse/data"]
 	path = test/caniuse/data
 	url = https://github.com/Fyrd/caniuse.git
+[submodule "src/normalize"]
+	path = src/normalize
+	url = https://github.com/necolas/normalize.css.git
