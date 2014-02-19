@@ -1,0 +1,31 @@
+// @describe `cast()`
+
+// @it converts between units, strings and literals
+a = '2.1'
+b = 2
+c = 'hello'
+d = inline-box
+
+div
+  foo: cast(a, 'unit')
+  foo: cast(b, 'unit')
+  foo: cast(c, 'string')
+  foo: cast(a, 'string')
+  foo: cast(b, 'string')
+  foo: cast(a, 'literal')
+  foo: cast(b, 'literal')
+  foo: cast(c, 'literal')
+  foo: cast(d, 'string')
+
+// @expect
+div {
+  foo: 2.1;
+  foo: 2;
+  foo: 'hello';
+  foo: '2.1';
+  foo: '2';
+  foo: 2.1;
+  foo: 2;
+  foo: hello;
+  foo: 'inline-box';
+}
