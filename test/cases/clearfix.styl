@@ -1,7 +1,8 @@
 // @describe `clearfix()`
 
 // @it mixes-in Nicolas Gallagher's "micro clearfix hack"
-support-for-ie = 7
+support('ie 7')
+
 .clearfix
   clearfix()
 
@@ -19,7 +20,8 @@ support-for-ie = 7
 }
 
 // @it only includes IE specific rules when `support-for-ie` is < 8
-support-for-ie = 8
+support('ie 8')
+
 .clearfix
   clearfix()
 

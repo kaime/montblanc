@@ -168,18 +168,10 @@ describe("According to caniuse browser data", function() {
                       var prefix = this.prefix,
                           vendor = this.vendor;
 
-                      var styl = [];
-
-                      for (var uv in caniuse.vendors) {
-                        var support =
-                          (uv != vendor)
-                            ? 'no-support' // Disable support or other vendors
-                            : version;
-
-                        styl.push(
-                          'support-for-' + caniuse.vendors[uv] + ' = ' + support
-                        );
-                      }
+                      var styl = [
+                        'support-none()',
+                        "support('" + caniuse.vendors[vendor] + ' ' + version + "')"
+                      ];
 
                       styl.push(
                         'div',

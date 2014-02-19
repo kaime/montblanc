@@ -1,0 +1,24 @@
+// @describe `support()`
+
+// @it sets the corresponding `support-for-*` variables
+
+support('ie 8')
+support('firefox 3.5')
+support('chrome 4', 'safari 5')
+
+#support
+  ie: has-support('ie 8') ? 8 : false
+  firefox: support-for('firefox')
+  if has-support('chrome 4')
+    chrome: support-for('chrome')
+  else
+    chrome: false
+  safari: support-for('safari')
+
+// @expect
+#support {
+  ie: 8;
+  firefox: 3.5;
+  chrome: 4;
+  safari: 5;
+}

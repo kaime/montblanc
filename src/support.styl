@@ -1,14 +1,19 @@
+// @todo this is temporary
+-regexp-version = '^[0-9]+(\.[0-9]+)?$'
+
+n = cast('22', 'unit')
+
 // Browser support
 no-support = false
 
 browsers = json('support/browsers.json', { hash: true })
 
-default-support = {
-  'ie':                 '8',
-  'firefox':            '10',
-  'chrome':             '12',
-  'safari':             '5',
-  'opera':              '12',
+supported-browsers = {
+  'ie':                 8,
+  'firefox':            20,
+  'chrome':             12,
+  'safari':             5,
+  'opera':              12,
   'opera-mini':         no-support,
   'opera-mobile':       no-support,
   'android-chrome':     no-support,
@@ -19,57 +24,86 @@ default-support = {
   'ie-mobile':          no-support
 }
 
-for vendor, version in browsers
-  v = 'support-for-' + vendor
-  c = lookup(v)
+support()
+  for arg in arguments
+    arg = cast(arg, 'string')
 
-  if c is a 'unit'
-    if c < version[0]
-      error() // Cannot set a version lower than minimum
-  else if c is not no-support
-    define(v, default-support[vendor]) // Set default version
-  else
-    error()
+    vendor = null
+    version = null
+
+    for a in split(' ', arg)
+      if a in browsers
+        vendor = a
+      else if match(-regexp-version, a)
+        version = cast(a, 'unit')
+      else if a is not '>='
+        // Only this operator is supported right now
+        error('bad args')
+
+    supported-browsers[vendor] = version
+
+unsupport()
+  for vendor in arguments
+    arg = cast(arg, 'string')
+
+    if vendor in browsers
+      supported-browsers[vendor] = no-support
+
+support-none()
+  for vendor in supported-browsers
+    supported-browsers[vendor] = no-support
 
 /**
  * Checks the corresponding `support-for-{vendor}` variables.
  */
 has-support()
   for arg in arguments
-    arg = split(' ', '%s' % unquote(arg))
+    arg = cast(arg, 'string')
 
     vendor = null
     version = null
     cmp = null
 
-    for a in arg
+    for a in split(' ', arg)
       if a in browsers
         vendor = a
-      else if match('^[0-9]+(\.[0-9]+)?$', a)
-        version = a
+      else if match(-regexp-version, a)
+        version = cast(a, 'unit')
       else if a in ('<' '<=' '>' '>=')
         cmp = a
       else
         error('bad args')
 
-    if vendor is null
+    if vendor == null
       error('bad args')
 
-    if cmp is not null and version is null
+    if cmp != null and version == null
       error('bad args')
 
-    s = lookup('support-for-' + vendor)
+    supported = supported-browsers[vendor]
 
     if version is null
-      return true if s is not no-support
-    else if s is not no-support
+      if supported != no-support
+        return true
+    else if supported is not no-support
       if cmp is '>'
-        return true if s > version
+        if supported > version
+          return true
       else if cmp is '>='
-        return true if s >= version
+        if supported >= version
+          return true
       else if cmp is '<'
-        return true if s < version
+        if supported < version
+          return true
       else
-        return true if s <= version
+        if supported <= version
+          return true
 
   return false
+
+support-for(vendor)
+  vendor = cast(vendor, 'string')
+
+  if vendor in browsers
+    return supported-browsers[vendor]
+
