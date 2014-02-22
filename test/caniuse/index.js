@@ -45,9 +45,9 @@ function getVersions(versions) {
   return ret;
 }
 
-describe("Our `browsers.json` file", function() {
+describe("The `browsers.json` file", function() {
 
-  it("includes all caniuse vendors and versions", function() {
+  it("contains all caniuse vendors and versions", function() {
 
     caniuse.data.should.have.property('agents');
     caniuse.data.agents.should.be.an.Object;
@@ -168,18 +168,10 @@ describe("According to caniuse browser data", function() {
                       var prefix = this.prefix,
                           vendor = this.vendor;
 
-                      var styl = [];
-
-                      for (var uv in caniuse.vendors) {
-                        var support =
-                          (uv != vendor)
-                            ? 'no-support' // Disable support or other vendors
-                            : version;
-
-                        styl.push(
-                          'support-for-' + caniuse.vendors[uv] + ' = ' + support
-                        );
-                      }
+                      var styl = [
+                        'support-none()',
+                        "support('" + caniuse.vendors[vendor] + ' ' + version + "')"
+                      ];
 
                       styl.push(
                         'div',

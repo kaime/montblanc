@@ -1,0 +1,25 @@
+/**
+ * References:
+ * [1] http://caniuse.com/css-opacity
+ * [2] https://developer.mozilla.org/en-US/docs/Web/CSS/opacity
+ */
+opacity()
+  importance = unquote('')
+  for arg in arguments
+    if type-of(arg) is 'unit'
+      alpha = arg
+    else if arg is !important
+      importance = arg
+    else
+      throw('bad args')
+
+  if has-support('ie < 9')
+    perc = round(alpha * 100)
+
+    // IE did not support `opacity` until version 9
+    if has-support('ie <= 7')
+      *filter: 'alpha(opacity=%s)' % perc importance
+    else
+      -ms-filter: '"progid:DXImageTransform.Microsoft.Alpha(Opacity=%s)"' % perc importance
+
+  opacity: alpha importance

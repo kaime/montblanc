@@ -1,0 +1,34 @@
+// @describe `opacity`
+
+// @it adds a `filter` workaround for IE < 8
+support('ie 7')
+div
+  opacity: .37
+
+// @expect
+div {
+  *filter: alpha(opacity=37);
+  opacity: 0.37;
+}
+
+// @it adds a `-ms-filter` workaround for IE >= 8
+support('ie 8')
+div
+  opacity: .99
+
+// @expect
+div {
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=99)";
+  opacity: 0.99;
+}
+
+// @it handles `!important`
+support('ie 8')
+div
+  opacity: .99 !important;
+
+// @expect
+div {
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=99)" !important;
+  opacity: 0.99 !important;
+}

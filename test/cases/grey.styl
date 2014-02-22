@@ -31,21 +31,29 @@ body {
   box-shadow-color: rgba(128,128,128,0.17);
 }
 
-// @it only breaks Stylus/CSS `grey` color *a bit*
+// @it is aliased `gray`
+body
+  border-color: gray(50%)
+
+// @expect
+body {
+  border-color: #808080;
+}
+
+// @it only breaks Stylus/CSS `grey` and `gray` colors *a bit*
 // When we do: "color: grey", Stylus will print "grey", which is the name of
 // The function, nor the color variable `grey`, which would print as '#808080'.
 // Not big deal.
 body
   background-color: grey
   color: grey()
+  border-color: gray
+  color: gray()
 
 // @expect
 body {
   background-color: grey;
   color: #808080;
+  border-color: grey;
+  color: #808080;
 }
-
-
-
-
-

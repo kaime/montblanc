@@ -41,14 +41,12 @@ var getDirectiveComment = function(str) {
 
 describe('Cases', function() {
 
-  // Reset all `support-to-*` vars on every case to avoid prefixes here.
   var reset = [];
 
-  for (var browser in browsers) {
-    reset.push(
-      'support-for-' + browser + ' = no-support'
-    );
-  }
+  // Reset all `support-to-*` vars on every case to avoid prefixes here.
+  reset.push(
+    'support-none()'
+  )
 
   reset = reset.join("\n")
 
