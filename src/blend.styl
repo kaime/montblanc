@@ -1,0 +1,149 @@
+/**
+ * http://www.w3.org/TR/compositing-1/
+ */
+
+// Separable modes
+blend-channel-normal(s, b)
+  return s
+
+blend-channel-multiply(s, b)
+  return b * s
+
+blend-channel-screen(s, b)
+  return b + s - (b * s)
+
+blend-channel-overlay(s, b)
+  return blend-channel-hard-light(b, s)
+
+blend-channel-darken(s, b)
+  return min(b, s)
+
+blend-channel-lighten(s, b)
+  return max(b, s)
+
+blend-channel-color-dodge(s, b)
+  if b == 0
+    return 0
+  else if s == 1
+    return 1
+  else
+    return min(1, b / (1 - s))
+
+blend-channel-color-burn(s, b)
+  if b == 1
+    return 1
+  else if s == 0
+    return 0
+  else
+    return 1 - min(1, (1 - b) / s)
+
+blend-channel-hard-light(s, b)
+  if s <= 0.5
+    return blend-channel-multiply(2 * s, b)
+  else
+    return blend-channel-screen(2 * s - 1, b)
+
+blend-channel-soft-light(s, b)
+  return s
+
+blend-channel-difference(s, b)
+  return abs(b - s)
+
+blend-channel-exclusion(s, b)
+  return s - 2 * b * s
+
+blend-channels(s, b, fn)
+  return rgba(
+    fn(red(s) / 255, red(b) / 255) * 255,
+    fn(green(s) / 255, green(b) / 255) * 255,
+    fn(blue(s) / 255, blue(b) / 255) * 255,
+    alpha(s) * alpha(b)
+  )
+
+blend-normal(source, backgrop)
+  return source
+
+blend-multiply(s, b)
+  return blend-channels(s, b, blend-channel-multiply)
+
+blend-screen(s, b)
+  return blend-channels(s, b, blend-channel-screen)
+
+blend-overlay(s, b)
+  return blend-channels(s, b, blend-channel-overlay)
+
+blend-darken(s, b)
+  return blend-channels(s, b, blend-channel-darken)
+
+blend-lighten(s, b)
+  return blend-channels(s, b, blend-channel-lighten)
+
+blend-color-dodge(s, b)
+  return blend-channels(s, b, blend-channel-color-dodge)
+
+blend-color-burn(s, b)
+  return blend-channels(s, b, blend-channel-color-burn)
+
+blend-hard-light(s, b)
+  return blend-channels(s, b, blend-channel-hard-light)
+
+blend-soft-light(s, b)
+  return blend-channels(s, b, blend-channel-soft-light)
+
+blend-difference(s, b)
+  return blend-channels(s, b, blend-channel-difference)
+
+blend-exclusion(s, b)
+  return blend-channels(s, b, blend-channel-exclusion)
+
+// Non-separable modes
+blend-hue(s, b)
+  return oops
+
+blend-saturation(s, b)
+  return oops
+
+blend-color(s, b)
+  return oops
+
+blend-luminosity(s, b)
+  return oops
+
+blend(source, backgrop = #fff, mode = normal)
+  if mode is a 'literal'
+    mode = '%s' % mode
+
+  if mode is 'normal'
+    return blend-normal(source, backgrop)
+  else if mode is 'multiply'
+    return blend-multiply(source, backgrop)
+  else if mode is 'screen'
+    return blend-screen(source, backgrop)
+  else if mode is 'overlay'
+    return blend-overlay(source, backgrop)
+  else if mode is 'darken'
+    return blend-darken(source, backgrop)
+  else if mode is 'lighten'
+    return blend-lighten(source, backgrop)
+  else if mode is 'color-dodge'
+    return blend-color-dodge(source, backgrop)
+  else if mode is 'color-burn'
+    return blend-color-burn(source, backgrop)
+  else if mode is 'hard-light'
+    return blend-hard-light(source, backgrop)
+  else if mode is 'soft-light'
+    return blend-soft-light(source, backgrop)
+  else if mode is 'difference'
+    return blend-difference(source, backgrop)
+  else if mode is 'exclusion'
+    return blend-exclusion(source, backgrop)
+  else if mode is 'hue'
+    return blend-hue(source, backgrop)
+  else if mode is 'saturation'
+    return blend-saturation(source, backgrop)
+  else if mode is 'color'
+    return blend-color(source, backgrop)
+  else if mode is 'luminosity'
+    return blend-luminosity(source, backgrop)
+  else
+    error('bad blend mode')

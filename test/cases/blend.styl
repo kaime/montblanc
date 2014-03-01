@@ -1,0 +1,22 @@
+// @describe `blend()`
+
+// @it
+#blendmodes
+  multiply: blend(#f60000, #f60000, multiply)
+  screen: blend(#f60000, #0000f6, 'screen')
+  overlay: blend-overlay(#f60000, #0000f6)
+  softlight: blend(#f60000, #ffffff, soft-light)
+  hardlight: blend-hard-light(#f60000, #0000f6)
+  difference: blend(#f60000, #0000f6, difference)
+  exclusion: blend(#f60000, #0000f6, exclusion)
+
+// @expect
+#blendmodes {
+  multiply: #ed0000;
+  screen: #f600f6;
+  overlay: #ed0000;
+  softlight: #fa0000;
+  hardlight: #0000ed;
+  difference: #f600f6;
+  exclusion: #f600f6;
+}
