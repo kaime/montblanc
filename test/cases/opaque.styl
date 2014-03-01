@@ -1,0 +1,12 @@
+// @describe `opaque()`
+
+// @it returns a color with its alpha channel set to 100%
+body
+  color: opaque(red)
+  color: opaque(rgba(0,0,0,.1))
+
+// @expect
+body {
+  color: #f00;
+  color: #000;
+}
