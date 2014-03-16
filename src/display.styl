@@ -1,0 +1,22 @@
+/**
+ * References:
+ *
+ * https://developer.mozilla.org/es/docs/CSS/display
+ * http://blog.mozilla.org/webdev/2009/02/20/cross-browser-inline-block/
+ */
+display(mode)
+  importance = unquote('')
+  for arg in arguments
+    if arg is !important
+      importance = !important
+
+  if mode is inline-block
+    if has-support('ie < 8')
+      *zoom: 1
+      *display: inline importance
+
+    if has-support('firefox < 3')
+      display: -moz-inline-stack importance
+
+  display: arguments
+
