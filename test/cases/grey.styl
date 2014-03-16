@@ -40,10 +40,8 @@ body {
   border-color: #808080;
 }
 
-// @it only breaks Stylus/CSS `grey` and `gray` colors *a bit*
-// When we do: "color: grey", Stylus will print "grey", which is the name of
-// The function, nor the color variable `grey`, which would print as '#808080'.
-// Not big deal.
+
+// @it does not break Stylus/CSS `grey` and `gray` colors
 body
   background-color: grey
   color: grey()
@@ -52,8 +50,8 @@ body
 
 // @expect
 body {
-  background-color: grey;
+  background-color: #808080;
   color: #808080;
-  border-color: grey;
+  border-color: #808080;
   color: #808080;
 }
