@@ -1,6 +1,11 @@
 // @describe `normalize()`
 
-// @it should import all Nicolas Gallagher's "normalize.css" rules
+// @it should import all Nicolas Gallagher's "normalize.css" rules for default
+support('ie 8')
+support('safari 5')
+support('chrome 4')
+support('firefox 4')
+
 normalize()
 
 // @expect
@@ -94,6 +99,7 @@ figure {
 }
 hr {
   -moz-box-sizing: content-box;
+  -webkit-box-sizing: content-box;
   box-sizing: content-box;
   height: 0;
 }
@@ -144,6 +150,8 @@ input {
 }
 input[type="checkbox"],
 input[type="radio"] {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
   box-sizing: border-box;
   padding: 0;
 }
