@@ -1,0 +1,30 @@
+// @describe `align-items`
+
+// @it Adds old flexbox synax for older browser support
+support('ie 9', 'chrome 10', 'firefox 8')
+body
+  align-items: flex-start
+  align-items: flex-end !important
+  align-items: baseline
+
+// @expect
+body {
+  -ms-flex-align: start;
+  -moz-box-align: start;
+  -webkit-box-align: start;
+  -moz-align-items: flex-start;
+  -webkit-align-items: flex-start;
+  align-items: flex-start;
+  -ms-flex-align: end !important;
+  -moz-box-align: end !important;
+  -webkit-box-align: end !important;
+  -moz-align-items: flex-end !important;
+  -webkit-align-items: flex-end !important;
+  align-items: flex-end !important;
+  -ms-flex-align: baseline;
+  -moz-box-align: baseline;
+  -webkit-box-align: baseline;
+  -moz-align-items: baseline;
+  -webkit-align-items: baseline;
+  align-items: baseline;
+}

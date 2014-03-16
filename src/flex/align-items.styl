@@ -1,0 +1,51 @@
+align-items(mode, args...)
+  // Old syntax
+  if has-support(
+      'chrome < 21',
+      'safari < 6.1',
+      'ios-safari < 7',
+      'android-browser < 4.4',
+      'blackberry-browser < 10',
+      'firefox < 28',
+      'android-firefox',
+      'ie < 11'
+    )
+    if mode is flex-start
+      old-mode = start
+    else if mode is flex-end
+      old-mode = end
+    else
+      old-mode = mode
+
+    if has-support('ie < 11')
+      vendorize('flex-align', old-mode args, (ms), false)
+
+    vendors = ()
+
+    if has-support('firefox < 28', 'android-firefox')
+      vendorize('box-align', old-mode args, (moz), false)
+
+    if has-support(
+        'chrome < 21',
+        'safari < 6.1',
+        'ios-safari < 7',
+        'android-browser < 4.4',
+        'blackberry-browser < 10'
+      )
+      vendorize('box-align', old-mode args, (webkit), false)
+
+  // New syntax
+  vendors = ()
+
+  if has-support('firefox < 22')
+    push(vendors, moz)
+
+  if has-support(
+        'chrome < 29',
+        'opera < 17',
+        'ios-safari',
+        'blackberry-browser'
+      )
+    push(vendors, webkit)
+
+  vendorize('align-items', arguments, vendors)
