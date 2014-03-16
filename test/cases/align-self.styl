@@ -1,0 +1,24 @@
+// @describe `align-self`
+
+// @it Adds prefixes for old Firefox and Webkit and shims old IE 10 syntax
+support('ie 9', 'chrome 10', 'firefox 8')
+body
+  align-self: flex-start
+  align-self: flex-end !important
+  align-self: baseline
+
+// @expect
+body {
+  -ms-flex-item-align: start;
+  -moz-align-self: flex-start;
+  -webkit-align-self: flex-start;
+  align-self: flex-start;
+  -ms-flex-item-align: end !important;
+  -moz-align-self: flex-end !important;
+  -webkit-align-self: flex-end !important;
+  align-self: flex-end !important;
+  -ms-flex-item-align: baseline;
+  -moz-align-self: baseline;
+  -webkit-align-self: baseline;
+  align-self: baseline;
+}
