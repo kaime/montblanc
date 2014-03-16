@@ -5,6 +5,7 @@ support('ie 8')
 support('safari 5')
 support('chrome 4')
 support('firefox 4')
+support('ios-safari 5')
 
 normalize()
 
@@ -20,16 +21,20 @@ body {
 }
 article,
 aside,
-details,
 figcaption,
 figure,
 footer,
 header,
 hgroup,
-main,
 nav,
-section,
+section {
+  display: block;
+}
+details,
 summary {
+  display: block;
+}
+main {
   display: block;
 }
 audio,
@@ -43,7 +48,9 @@ audio:not([controls]) {
   display: none;
   height: 0;
 }
-[hidden],
+[hidden] {
+  display: none;
+}
 template {
   display: none;
 }
