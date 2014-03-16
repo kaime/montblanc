@@ -1,0 +1,90 @@
+flex-flow()
+  if has-support(
+      'chrome < 21',
+      'safari < 6.1',
+      'ios-safari < 7',
+      'android-browser < 4.4',
+      'blackberry-browser < 10',
+      'firefox < 28',
+      'android-firefox',
+      'ie < 11'
+    )
+
+    importance = unquote('')
+    direction = null
+    wrapping = null
+
+    for arg in arguments
+      if arg is !important
+        importance = !important
+      else if arg in (row column row-reverse)
+        direction = arg
+      else if arg in (wrap nowrap wrap-reverse)
+        wrapping = arg
+
+    vendors = ()
+
+    if has-support('firefox < 28', 'android-firefox')
+      push(vendors, moz)
+
+    if has-support(
+        'chrome < 21',
+        'safari < 6.1',
+        'ios-safari < 7',
+        'android-browser < 4.4',
+        'blackberry-browser < 10'
+      )
+      push(vendors, webkit)
+
+    if direction isnt null
+      if has-support('ie < 11')
+        vendorize('flex-direction', (direction importance), (ms), false)
+
+      reverse = false
+
+      if direction is row
+        orient = horizontal
+      else if direction is row-reverse
+        orient = horizontal
+        reverse = true
+      else if direction is column
+        orient = vertical
+      else if direction is column-reverse
+        orient = vertical
+        reverse = true
+      else
+        orient = direction
+
+      for vendor in vendors
+        vendorize('box-orient', (orient importance), (vendor), false)
+        if reverse
+          vendorize('box-direction', (unquote('reverse') importance), (vendor), false)
+
+    if wrapping isnt null
+      if has-support('ie < 11')
+        vendorize('flex-wrap', (wrapping importance), (ms), false)
+
+      if wrapping is nowrap
+        lines = single
+      else if wrapping is wrap
+        lines = multiple
+      else
+        // Warning: wrap-reverse is not supported in old syntax
+        lines = wrapping
+      vendorize('box-lines', (lines importance), vendors, false)
+
+  vendors = ()
+
+  if has-support('firefox < 22')
+    push(vendors, moz)
+
+  if has-support(
+      'chrome < 29',
+      'safari',
+      'opera < 17',
+      'ios-safari',
+      'blackberry-browser'
+    )
+    push(vendors, webkit)
+
+  vendorize('flex-flow', arguments, vendors)
