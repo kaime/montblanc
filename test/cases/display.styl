@@ -13,18 +13,69 @@ body {
   display: inline-block;
 }
 
+// @it shims `display: flex` with prefixes and old `box` syntax
+div
+  display: flex
+
+support('ie 9')
+div
+  display: flex
+  display: inline-flex
+
+support('safari 5', 'chrome 23')
+div
+  display: flex
+  display: inline-flex
+
+unsupport('safari', 'chrome', 'ie')
+support('firefox 20')
+div
+  display: flex
+  display: inline-flex
+
+// @expect
+div {
+  display: flex;
+}
+div {
+  display: -ms-flexbox;
+  display: flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+}
+div {
+  display: -ms-flexbox;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  display: -ms-inline-flexbox;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: inline-flex;
+}
+div {
+  display: -moz-box;
+  display: flex;
+  display: -moz-inline-box;
+  display: inline-flex;
+}
+
 // @it handles `!important`
-support('ie 7', 'firefox 2')
+support('ie 7', 'firefox 2', 'chrome 1')
 
 body
-  display: table !important
+  display: flex !important
 
   div
     display: inline-block !important
 
 // @expect
 body {
-  display: table !important;
+  display: -ms-flexbox !important;
+  display: -moz-box !important;
+  display: -webkit-box !important;
+  display: -webkit-flex !important;
+  display: flex !important;
 }
 body div {
   *zoom: 1;

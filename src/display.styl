@@ -3,6 +3,11 @@
  *
  * https://developer.mozilla.org/es/docs/CSS/display
  * http://blog.mozilla.org/webdev/2009/02/20/cross-browser-inline-block/
+ * http://caniuse.com/flexbox
+ * http://css-tricks.com/old-flexbox-and-new-flexbox/
+ * http://coding.smashingmagazine.com/2013/05/22/centering-elements-with-flexbox/
+ * https://github.com/visionmedia/nib/blob/master/lib/nib/flex.styl
+ * https://github.com/h5bp/lazyweb-requests/issues/120
  */
 display(mode)
   importance = unquote('')
@@ -17,6 +22,40 @@ display(mode)
 
     if has-support('firefox < 3')
       display: -moz-inline-stack importance
+
+  else if mode is flex or mode is inline-flex
+    // Old spec (`box`)
+
+    if has-support('ie < 11', 'ie-mobile < 11')
+      add-property('display', '-ms-%sbox %s' % (mode importance))
+
+    if has-support('firefox < 28', 'android-firefox')
+      if mode is flex
+        add-property('display', '-moz-box %s' % importance)
+      else
+        add-property('display', '-moz-inline-box %s' % importance)
+
+    if has-support(
+        'chrome < 21',
+        'safari < 6.1',
+        'ios-safari < 7',
+        'android-browser < 4.4',
+        'blackberry-browser < 10'
+      )
+      if mode is flex
+        add-property('display', '-webkit-box %s' % importance)
+      else
+        add-property('display', '-webkit-inline-box %s' % importance)
+
+    // New spec (`flex`)
+    if has-support(
+        'chrome < 29',
+        'opera < 17',
+        'ios-safari',
+        'blackberry-browser'
+      )
+      // Funny, Opera *did* support flexbox w/o prefixes in 12.1
+      add-property('display', '-webkit-%s %s' % (mode importance))
 
   display: arguments
 
