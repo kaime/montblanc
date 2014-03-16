@@ -1,26 +1,109 @@
 /**
+ * W3C blend modes.
+ *
  * http://www.w3.org/TR/compositing-1/
+ *
+ * @todo Alpha channels. More and more tests against other implementations and
+ *       actual Photoshop results.
  */
 
-// Separable modes
+// Separable modes //
+
+/**
+ * Helper for separable modes.
+ */
+blend-channels(s, b, fn)
+  as = alpha(s)
+  ab = alpha(b)
+
+  return rgba(
+    fn(red(s) / 255, red(b) / 255) * 255,
+    fn(green(s) / 255, green(b) / 255) * 255,
+    fn(blue(s) / 255, blue(b) / 255) * 255,
+    alpha(s) * alpha(b)
+  )
+
+/**
+ * The no-blending mode. This simply selects the source color.
+ */
 blend-channel-normal(s, b)
   return s
 
+blend-normal(source, backgrop)
+  return source
+
+/**
+ * The source color is multiplied by the destination color and replaces the
+ * destination.
+ *
+ * The resultant color is always at least as dark as either the source or
+ * destination color. Multiplying any color with black results in black.
+ * Multiplying any color with white preserves the original color.
+ */
 blend-channel-multiply(s, b)
   return b * s
 
+blend-multiply(s, b)
+  return blend-channels(s, b, blend-channel-multiply)
+
+/**
+ * Multiplies the complements of the backdrop and source color values, then
+ * complements the result.
+ *
+ * The result color is always at least as light as either of the two constituent
+ *  colors. Screening any color with white produces white; screening with black
+ *  leaves the original color unchanged. The effect is similar to projecting
+ *  multiple photographic slides simultaneously onto a single screen.
+ */
 blend-channel-screen(s, b)
   return b + s - (b * s)
 
+blend-screen(s, b)
+  return blend-channels(s, b, blend-channel-screen)
+
+/**
+ * Multiplies or screens the colors, depending on the backdrop color value.
+ *
+ * Source colors overlay the backdrop while preserving its highlights and
+ * shadows. The backdrop color is not replaced but is mixed with the source
+ * color to reflect the lightness or darkness of the backdrop.
+ *
+ * Overlay is the inverse of the `hard-light` blend mode.
+ */
 blend-channel-overlay(s, b)
   return blend-channel-hard-light(b, s)
 
+blend-overlay(s, b)
+  return blend-channels(s, b, blend-channel-overlay)
+
+/**
+ * Selects the darker of the backdrop and source colors.
+ *
+ * The backdrop is replaced with the source where the source is darker;
+ * otherwise, it is left unchanged.
+ */
 blend-channel-darken(s, b)
   return min(b, s)
 
+blend-darken(s, b)
+  return blend-channels(s, b, blend-channel-darken)
+
+/**
+ * Selects the lighter of the backdrop and source colors.
+ *
+ * The backdrop is replaced with the source where the source is lighter;
+ * otherwise, it is left unchanged.
+ */
 blend-channel-lighten(s, b)
   return max(b, s)
 
+blend-lighten(s, b)
+  return blend-channels(s, b, blend-channel-lighten)
+
+/**
+ * Brrightens the backdrop color to reflect the source color. Painting with
+ * black produces no changes.
+ */
 blend-channel-color-dodge(s, b)
   if b == 0
     return 0
@@ -29,6 +112,13 @@ blend-channel-color-dodge(s, b)
   else
     return min(1, b / (1 - s))
 
+blend-color-dodge(s, b)
+  return blend-channels(s, b, blend-channel-color-dodge)
+
+/**
+ * Darkens the backdrop color to reflect the source color. Painting with white
+ * produces no change.
+ */
 blend-channel-color-burn(s, b)
   if b == 1
     return 1
@@ -37,78 +127,121 @@ blend-channel-color-burn(s, b)
   else
     return 1 - min(1, (1 - b) / s)
 
+blend-color-burn(s, b)
+  return blend-channels(s, b, blend-channel-color-burn)
+
+/**
+ * Multiplies or screens the colors, depending on the source color value. The
+ * effect is similar to shining a harsh spotlight on the backdrop.
+ */
 blend-channel-hard-light(s, b)
   if s <= 0.5
     return blend-channel-multiply(2 * s, b)
   else
     return blend-channel-screen(2 * s - 1, b)
 
-blend-channel-soft-light(s, b)
-  return s
-
-blend-channel-difference(s, b)
-  return abs(b - s)
-
-blend-channel-exclusion(s, b)
-  return s - 2 * b * s
-
-blend-channels(s, b, fn)
-  return rgba(
-    fn(red(s) / 255, red(b) / 255) * 255,
-    fn(green(s) / 255, green(b) / 255) * 255,
-    fn(blue(s) / 255, blue(b) / 255) * 255,
-    alpha(s) * alpha(b)
-  )
-
-blend-normal(source, backgrop)
-  return source
-
-blend-multiply(s, b)
-  return blend-channels(s, b, blend-channel-multiply)
-
-blend-screen(s, b)
-  return blend-channels(s, b, blend-channel-screen)
-
-blend-overlay(s, b)
-  return blend-channels(s, b, blend-channel-overlay)
-
-blend-darken(s, b)
-  return blend-channels(s, b, blend-channel-darken)
-
-blend-lighten(s, b)
-  return blend-channels(s, b, blend-channel-lighten)
-
-blend-color-dodge(s, b)
-  return blend-channels(s, b, blend-channel-color-dodge)
-
-blend-color-burn(s, b)
-  return blend-channels(s, b, blend-channel-color-burn)
 
 blend-hard-light(s, b)
   return blend-channels(s, b, blend-channel-hard-light)
 
+/**
+ * Darkens or lightens the colors, depending on the source color value.
+ * The effect is similar to shining a diffused spotlight on the backdrop
+ */
+blend-channel-soft-light(s, b)
+  if s <= 0.5
+    return b - (1 - 2 * s) * b * (1 - b)
+  else
+    if b <= 0.25
+      d = ((16 * b - 12) * b + 4) * b
+    else
+      d = math(b, 'sqrt')
+    return b + (2 * s - 1) * (d - b)
+
 blend-soft-light(s, b)
   return blend-channels(s, b, blend-channel-soft-light)
+
+/**
+ * Subtracts the darker of the two constituent colors from the lighter color.
+ *
+ * Painting with white inverts the backdrop color; painting with black produces
+ * no change.
+ */
+blend-channel-difference(s, b)
+  return abs(b - s)
 
 blend-difference(s, b)
   return blend-channels(s, b, blend-channel-difference)
 
+/**
+ * Produces an effect similar to that of the `difference` mode but lower in
+ * contrast. Painting with white inverts the backdrop color; painting with black
+ * produces no change.
+ */
+blend-channel-exclusion(s, b)
+  return b + s - 2 * b * s
+
 blend-exclusion(s, b)
   return blend-channels(s, b, blend-channel-exclusion)
 
-// Non-separable modes
+/**
+ * Computes the average of the source and backdrop colors on a per-channel basis.
+ */
+blend-channel-average(s, b)
+  return (s + b) / 2;
+
+blend-average(s, b)
+  return blend-channels(s, b, blend-channel-average)
+
+/**
+ * Produces the opposite effect to `difference`. The result is a brighter color.
+ */
+blend-channel-negation(s, b)
+  return 1 - abs(s + b - 1)
+
+blend-negation(s, b)
+  return blend-channels(s, b, blend-channel-negation)
+
+// Non-separable modes //
+
+/**
+ * Creates a color with the hue of the source color and the saturation and
+ * luminosity of the backdrop color.
+ */
 blend-hue(s, b)
-  return oops
-
+  return hsla(hue(s), saturation(b), lightness(b), alpha(s) * alpha(b))
+/**
+ * Creates a color with the saturation of the source color and the hue and
+ * luminosity of the backdrop color.
+ *
+ * Painting with this mode in an area of the backdrop that is a pure gray (no
+ * saturation) produces no change.
+ */
 blend-saturation(s, b)
-  return oops
+  return hsla(hue(b), saturation(s), lightness(b), alpha(s) * alpha(b))
 
+/**
+ * Creates a color with the hue and saturation of the source color and the
+ * luminosity of the backdrop color.
+ *
+ * This preserves the gray levels of the backdrop and is useful for coloring
+ * monochrome images or tinting color images.
+ */
 blend-color(s, b)
-  return oops
+  return hsla(hue(s), saturation(s), lightness(b), alpha(s) * alpha(b))
 
+/**
+ * Creates a color with the luminosity of the source color and the hue and
+ * saturation of the backdrop color. This produces an inverse effect to that of
+ * the `color` mode.
+ */
 blend-luminosity(s, b)
-  return oops
+  return hsla(hue(b), saturation(b), lightness(s), alpha(s) * alpha(b))
 
+
+/**
+ * Generic `blend()` function.
+ */
 blend(source, backgrop = #fff, mode = normal)
   if mode is a 'literal'
     mode = '%s' % mode
@@ -137,6 +270,10 @@ blend(source, backgrop = #fff, mode = normal)
     return blend-difference(source, backgrop)
   else if mode is 'exclusion'
     return blend-exclusion(source, backgrop)
+  else if mode is 'average'
+    return blend-average(source, backgrop)
+  else if mode is 'negation'
+    return blend-negation(source, backgrop)
   else if mode is 'hue'
     return blend-hue(source, backgrop)
   else if mode is 'saturation'
@@ -146,4 +283,4 @@ blend(source, backgrop = #fff, mode = normal)
   else if mode is 'luminosity'
     return blend-luminosity(source, backgrop)
   else
-    error('bad blend mode')
+    error('Unknown blend mode')
