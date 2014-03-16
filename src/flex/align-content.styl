@@ -1,0 +1,31 @@
+align-content(mode, args...)
+  // Old
+  if has-support('ie < 11')
+    if mode is flex-start
+      old-mode = start
+    else if mode is flex-end
+      old-mode = end
+    else if mode is space-between
+      old-mode = justify
+    else if mode is space-around
+      old-mode = distribute
+    else
+      old-mode = mode
+
+    vendorize('flex-line-pack', old-mode args, (ms), false)
+
+  // New syntax
+  vendors = ()
+
+  if has-support('firefox < 22')
+    push(vendors, moz)
+
+  if has-support(
+        'chrome < 29',
+        'opera < 17',
+        'ios-safari',
+        'blackberry-browser'
+      )
+    push(vendors, webkit)
+
+  vendorize('align-content', arguments, vendors)
