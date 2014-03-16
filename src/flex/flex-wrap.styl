@@ -1,0 +1,58 @@
+flex-wrap(mode, args...)
+  // IE syntax
+  if has-support('ie < 11')
+      vendorize('flex-wrap', arguments, (ms), false)
+
+  // Old spec
+  if has-support(
+      'chrome < 21',
+      'safari < 6.1',
+      'ios-safari < 7',
+      'android-browser < 4.4',
+      'blackberry-browser < 10',
+      'firefox < 28',
+      'android-firefox'
+    )
+
+    reverse = false
+
+    if mode is nowrap
+      lines = single
+    else if mode is wrap
+      lines = multiple
+    else
+      // Warning: wrap-reverse is not supported in old syntax
+      lines = mode
+
+    vendors = ()
+
+    if has-support('firefox < 28', 'android-firefox')
+      push(vendors, moz)
+
+    if has-support(
+        'chrome < 21',
+        'safari < 6.1',
+        'ios-safari < 7',
+        'android-browser < 4.4',
+        'blackberry-browser < 10'
+      )
+      push(vendors, webkit)
+
+    vendorize('box-lines', (lines args), vendors, false)
+
+  // New syntax
+  vendors = ()
+
+  if has-support('firefox < 22')
+    push(vendors, moz)
+
+  if has-support(
+      'chrome < 29',
+      'safari',
+      'opera < 17',
+      'ios-safari',
+      'blackberry-browser'
+    )
+    push(vendors, webkit)
+
+  vendorize('flex-wrap', arguments, vendors)
