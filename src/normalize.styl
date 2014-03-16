@@ -22,7 +22,6 @@
  * IN THE SOFTWARE.
  */
 
-
 normalize()
   /*! normalize.css v3.0.0 | MIT License | git.io/normalize */
 
@@ -34,8 +33,8 @@ normalize()
       -ms-text-size-adjust: 100%
 
     if has-support('ios-safari')
-      // Prevent iOS text size adjust after orientation change, without disabling
-      // user zoom.
+      // Prevent iOS text size adjust after orientation change, without
+      // disabling user zoom.
       -webkit-text-size-adjust: 100%
 
   body
@@ -58,7 +57,8 @@ normalize()
       display: block
 
   if has-support('ie', 'firefox')
-    // Correct `block` display not defined for `details` or `summary` in IE 10/11 and Firefox.
+    // Correct `block` display not defined for `details` or `summary` in IE
+    // 10/11 and Firefox.
     details,
     summary
       display: block
@@ -259,18 +259,18 @@ normalize()
   // It's recommended that you don't attempt to style these elements.
   // Firefox's implementation doesn't respect box-sizing, padding, or width.
 
-  // 1. Address box sizing set to `content-box` in IE 8/9/10.
-  // 2. Remove excess padding in IE 8/9/10.
   if has-support('ie < 11')
     input[type="checkbox"],
     input[type="radio"]
-      box-sizing: border-box // 1
-      padding: 0 // 2
+      // Address box sizing set to `content-box` in IE 8/9/10.
+      box-sizing: border-box
+      // Remove excess padding in IE 8/9/10.
+      padding: 0
 
   if has-support('chrome')
-    // Fix the cursor style for Chrome's increment/decrement buttons. For certain
-    // `font-size` values of the `input`, it causes the cursor style of the
-    // decrement button to change from `default` to `text`.
+    // Fix the cursor style for Chrome's increment/decrement buttons. For
+    // certain `font-size` values of the `input`, it causes the cursor style of
+    // the decrement button to change from `default` to `text`.
     input[type="number"]::-webkit-inner-spin-button,
     input[type="number"]::-webkit-outer-spin-button
       height: auto
@@ -283,9 +283,9 @@ normalize()
       -webkit-appearance: textfield // 1
       box-sizing: content-box // 2
 
-    // Remove inner padding and search cancel button in Safari and Chrome on OS X.
-    // Safari (but not Chrome) clips the cancel button when the search input has
-    // padding (and `textfield` appearance).
+    // Remove inner padding and search cancel button in Safari and Chrome on
+    // OS X Safari (but not Chrome) clips the cancel button when the search
+    // input has padding (and `textfield` appearance).
     input[type="search"]::-webkit-search-cancel-button,
     input[type="search"]::-webkit-search-decoration
       -webkit-appearance: none
