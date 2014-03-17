@@ -32,5 +32,11 @@
       "type": "property",
       "name": "box-shadow"
     }
+  ],
+  "border-image": [
+    {
+      "type": "property",
+      "name": "border-image"
+    }
   ]
 }
