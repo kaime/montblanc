@@ -1,6 +1,9 @@
 /**
  * All rules and most comments based on Nicolas Gallagher's "normalize.css".
  *
+ * normalize.css v1.1.3 | MIT License | git.io/normalize
+ * normalize.css v3.0.0 | MIT License | git.io/normalize
+ *
  * Copyright (c) Nicolas Gallagher and Jonathan Neal
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -23,9 +26,6 @@
  */
 
 normalize()
-  /*! normalize.css v1.1.3 | MIT License | git.io/normalize */
-  /*! normalize.css v3.0.0 | MIT License | git.io/normalize */
-
   html
     // Set default font family to sans-serif
     font-family: sans-serif
@@ -43,8 +43,6 @@ normalize()
   body
     // Remove default margin.
     margin: 0
-
-  // HTML5 display definitions //
 
   if has-support('ie < 10')
     // Correct `block` display not defined for any HTML5 element in IE 6/7/8/9
@@ -101,8 +99,6 @@ normalize()
     template
       display: none
 
-  // Links //
-
   a
     // Remove the gray background color from active links in IE 10.
     if has-support('ie < 11')
@@ -112,8 +108,6 @@ normalize()
     &:active,
     &:hover
       outline: 0
-
-  // Text-level semantics //
 
   // Address styling not present in IE 7/8/9/10/11 Safari, and Chrome.
   if has-support('ie', 'safari', 'chrome')
@@ -180,9 +174,6 @@ normalize()
   sub
     bottom: -0.25em
 
-
-  // Lists //
-
   if has-support('ie < 8')
     // Address margins and paddings set differently in IE 6/7.
     dl,
@@ -206,8 +197,6 @@ normalize()
         list-style: none
         list-style-image: none
 
-  // Embedded content //
-
   // Remove border when inside `a` element in IE 6/7/8/9 and Firefox 3.
   if has-support('ie < 10', 'firefox < 4')
     img
@@ -220,8 +209,6 @@ normalize()
   if has-support('ie')
     svg:not(:root)
       overflow: hidden
-
-  // Grouping content //
 
   // Address margin not present in IE 6/7/8/9, Safari and Opera 11.
   if has-support('ie < 10', 'safari', 'opera < 12')
@@ -247,7 +234,6 @@ normalize()
     font-family: monospace, monospace
     font-size: 1em
 
-  // Forms //
   if has-support('ie < 8')
     // Correct margin displayed oddly in IE 6/7.
     form
@@ -312,7 +298,6 @@ normalize()
   button[disabled],
   html input[disabled]
     cursor: default
-
 
   if has-support('firefox')
     // Remove inner padding and border in Firefox 3+.
@@ -398,8 +383,6 @@ normalize()
   // NOTE: the default cannot safely be changed in Chrome and Safari on OS X.
   optgroup
     font-weight: bold
-
-  // Tables //
 
   // Remove most spacing between table cells.
   table
