@@ -1,6 +1,6 @@
 align-content(mode, args...)
   // Old
-  if has-support('ie < 11')
+  if has-support('ie < 11', 'ie-mobile < 11')
     if mode is flex-start
       old-mode = start
     else if mode is flex-end

@@ -1,6 +1,6 @@
 flex-wrap(mode, args...)
-  // IE syntax
-  if has-support('ie < 11')
+  // Mid syntax
+  if has-support('ie < 11', 'ie-mobile < 11')
     vendorize('flex-wrap', arguments, (ms), false)
 
   // Old spec

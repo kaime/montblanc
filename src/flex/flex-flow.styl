@@ -7,7 +7,8 @@ flex-flow()
       'blackberry-browser < 10',
       'firefox < 28',
       'android-firefox',
-      'ie < 11'
+      'ie < 11',
+      'ie-mobile < 11'
     )
 
     importance = unquote('')
@@ -37,7 +38,7 @@ flex-flow()
       push(vendors, webkit)
 
     if direction isnt null
-      if has-support('ie < 11')
+      if has-support('ie < 11', 'ie-mobile < 11')
         vendorize('flex-direction', (direction importance), (ms), false)
 
       reverse = false
@@ -61,7 +62,7 @@ flex-flow()
           vendorize('box-direction', (unquote('reverse') importance), (vendor), false)
 
     if wrapping isnt null
-      if has-support('ie < 11')
+      if has-support('ie < 11', 'ie-mobile < 11')
         vendorize('flex-wrap', (wrapping importance), (ms), false)
 
       if wrapping is nowrap

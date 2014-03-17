@@ -1,4 +1,8 @@
 order()
+  // Mid syntax
+  if has-support('ie < 11', 'ie-mobile < 11')
+    vendorize('flex-order', arguments, (ms), false)
+
   // Old syntax
   if has-support(
       'chrome < 21',
@@ -7,12 +11,8 @@ order()
       'android-browser < 4.4',
       'blackberry-browser < 10',
       'firefox < 28',
-      'android-firefox',
-      'ie < 11'
+      'android-firefox'
     )
-
-    if has-support('ie < 11')
-      vendorize('flex-order', arguments, (ms), false)
 
     vendors = ()
 

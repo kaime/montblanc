@@ -8,8 +8,10 @@ align-items(mode, args...)
       'blackberry-browser < 10',
       'firefox < 28',
       'android-firefox',
-      'ie < 11'
+      'ie < 11',
+      'ie-mobile < 11'
     )
+
     if mode is flex-start
       old-mode = start
     else if mode is flex-end
@@ -17,7 +19,7 @@ align-items(mode, args...)
     else
       old-mode = mode
 
-    if has-support('ie < 11')
+    if has-support('ie < 11', 'ie-mobile < 11')
       vendorize('flex-align', old-mode args, (ms), false)
 
     vendors = ()

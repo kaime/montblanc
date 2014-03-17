@@ -5,7 +5,7 @@ flex-direction(mode, args...)
       importance = !important
 
   // IE syntax
-  if has-support('ie < 11')
+  if has-support('ie < 11', 'ie-mobile < 11')
     vendorize('flex-direction', arguments, (ms), false)
 
   // Old spec

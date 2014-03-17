@@ -8,29 +8,30 @@ justify-content(mode, args...)
       'blackberry-browser < 10',
       'firefox < 28',
       'android-firefox',
-      'ie < 11'
+      'ie < 11',
+      'ie-mobile < 11'
     )
     if mode is flex-start
-      old-mode = start
+      pack = start
     else if mode is flex-end
-      old-mode = end
+      pack = end
     else if mode is space-between
-      old-mode = justify
+      pack = justify
     else if mode is space-around
       // Warning, only supported by "Mid" syntax (IE 10)
-      old-mode = distribute
+      pack = distribute
     else if mode is center
-      old-mode = center
+      pack = center
     else
       error()
 
-    if has-support('ie < 11')
-      vendorize('flex-pack', old-mode args, (ms), false)
+    if has-support('ie < 11', 'ie-mobile < 11')
+      vendorize('flex-pack', pack args, (ms), false)
 
     vendors = ()
 
     if has-support('firefox < 28', 'android-firefox')
-      vendorize('box-pack', old-mode args, (moz), false)
+      vendorize('box-pack', pack args, (moz), false)
 
     if has-support(
         'chrome < 21',
@@ -39,7 +40,7 @@ justify-content(mode, args...)
         'android-browser < 4.4',
         'blackberry-browser < 10'
       )
-      vendorize('box-pack', old-mode args, (webkit), false)
+      vendorize('box-pack', pack args, (webkit), false)
 
   // New syntax
   vendors = ()

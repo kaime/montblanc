@@ -3,13 +3,8 @@
  *
  * https://developer.mozilla.org/es/docs/CSS/display
  * http://blog.mozilla.org/webdev/2009/02/20/cross-browser-inline-block/
- * http://caniuse.com/flexbox
- * http://css-tricks.com/old-flexbox-and-new-flexbox/
- * http://coding.smashingmagazine.com/2013/05/22/centering-elements-with-flexbox/
- * https://github.com/visionmedia/nib/blob/master/lib/nib/flex.styl
- * https://github.com/h5bp/lazyweb-requests/issues/120
  *
- * Big thanks to Smashing Magazine article!
+ * Also see: `flex.sty`
  */
 display(mode)
   importance = unquote('')
@@ -56,7 +51,7 @@ display(mode)
         'ios-safari',
         'blackberry-browser'
       )
-      // Funny, Opera *did* support flexbox w/o prefixes in 12.1
+      // Funny, Opera *did* support prefix-less flexbox in 12.1
       add-property('display', '-webkit-%s %s' % (mode importance))
 
   display: arguments
