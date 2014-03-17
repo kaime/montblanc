@@ -38,5 +38,27 @@
       "type": "property",
       "name": "border-image"
     }
+  ],
+  "css-transitions": [
+    {
+      "type": "property",
+      "name": "transition"
+    },
+    {
+      "type": "property",
+      "name": "transition-property"
+    },
+    {
+      "type": "property",
+      "name": "transition-duration"
+    },
+    {
+      "type": "property",
+      "name": "transition-timing-function"
+    },
+    {
+      "type": "property",
+      "name": "transition-delay"
+    }
   ]
 }

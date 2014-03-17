@@ -1,0 +1,41 @@
+/**
+ * References:
+ *
+ * http://www.w3.org/TR/css3-transitions/
+ * http://caniuse.com/css-transitions
+ */
+-vendorize-transition(property, args)
+  vendors = ()
+
+  if has-support('firefox < 16')
+    push(vendors, moz)
+
+  if has-support(
+      'chrome < 26',
+      'safari < 6.1',
+      'ios-safari < 7',
+      'android-browser < 4.4',
+      'blackberry-browser'
+    )
+    push(vendors, webkit)
+
+  if has-support('opera <= 12', 'opera-mobile <= 12')
+    push(vendors, o)
+
+  vendorize(property, args, vendors)
+
+transition-property()
+  -vendorize-transition('transition-property', arguments)
+
+transition-duration()
+  -vendorize-transition('transition-duration', arguments)
+
+transition-timing-function()
+  -vendorize-transition('transition-timing-function', arguments)
+
+transition-delay()
+  -vendorize-transition('transition-delay', arguments)
+
+transition()
+  -vendorize-transition('transition', arguments)
+
