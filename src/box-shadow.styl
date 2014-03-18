@@ -3,21 +3,6 @@
  */
 
 box-shadow()
-  if has-support('ie < 9')
-    warn('IE < 9 does not support `box-shadow`')
-
-  if has-support('firefox < 3.5')
-    warn('Firefox < 3.5 does not support `box-shadow`')
-
-  if has-support('opera < 10.5')
-    warn('Opera < 10.5 does not support `box-shadow`')
-
-  if has-support('opera-mini')
-    warn('Opera Mini does not support `box-shadow`')
-
-  if has-support('opera-mobile < 11')
-    warn('Opera Mobile < 11 does not support `box-shadow`')
-
   vendors = ()
 
   if has-support('firefox < 4')

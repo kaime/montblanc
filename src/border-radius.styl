@@ -6,9 +6,6 @@
  */
 
 -vendorize-border-radius(property, arguments)
-  if has-support('ie < 9')
-    warn('IE < 9 does not support `border-radius`');
-
   vendors = ()
 
   if has-support('firefox < 4')
