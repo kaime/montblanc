@@ -2,7 +2,7 @@
  * http://caniuse.com/css3-boxsizing
  */
 
-box-sizing(mode)
+box-sizing()
   vendors = ()
 
   if has-support(
@@ -20,4 +20,4 @@ box-sizing(mode)
     )
     push(vendors, webkit)
 
-  vendorize(box-sizing, mode, vendors)
+  vendorize(box-sizing, arguments, vendors)
