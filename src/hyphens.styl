@@ -1,0 +1,20 @@
+/**
+ * References:
+ *
+ * - https://developer.mozilla.org/en-US/docs/Web/CSS/hyphens
+ * - http://caniuse.com/css-hyphens
+ * - http://dev.w3.org/csswg/css-text/#hyphens
+ */
+hyphens()
+  vendors = ()
+
+  if has-support('firefox', 'android-firefox')
+    push(vendors, moz)
+
+  if has-support('safari', 'ios-safari')
+    push(vendors, webkit)
+
+  if has-support('ie')
+    push(vendors, ms)
+
+  vendorize('hyphens', arguments, vendors)

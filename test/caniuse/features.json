@@ -60,5 +60,11 @@
       "type": "property",
       "name": "transition-delay"
     }
+  ],
+  "css-hyphens": [
+    {
+      "type": "property",
+      "name": "hyphens"
+    }
   ]
 }
