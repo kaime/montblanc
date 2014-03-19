@@ -165,6 +165,11 @@ describe("According to caniuse browser data", function() {
 
                     it('the property `' + node.name + '` needs to be prefixed with "' + prefix + '" on ' + browsers[caniuse.vendors[vendor]].name + ' ' + version, function() {
 
+                      var values = [
+                        'bar',
+                        'foo baz("bar") !important'
+                      ];
+
                       var prefix = this.prefix,
                           vendor = this.vendor;
 
@@ -173,19 +178,23 @@ describe("According to caniuse browser data", function() {
                         "support('" + caniuse.vendors[vendor] + ' ' + version + "')"
                       ];
 
-                      styl.push(
-                        'div',
-                        '  ' + node.name + ': foo'
-                      );
+                      var expected = [];
+
+                      values.forEach(function(value) {
+                        styl.push(
+                          'div',
+                          '  ' + node.name + ': ' + value
+                        );
+                        expected.push(
+                          'div {',
+                          '  ' + String(prefix) + node.name + ': ' + value + ';',
+                          '  ' + node.name + ': ' + value + ';',
+                          '}'
+                        );
+                      });
 
                       styl = styl.join("\n");
-
-                      var expected = [
-                        'div {',
-                        '  ' + String(prefix) + node.name + ': foo;',
-                        '  ' + node.name + ': foo;',
-                        '}'
-                      ].join("\n");
+                      expected = expected.join("\n");
 
                       var style = stylus(styl)
                                     .use(montblanc())
