@@ -1,0 +1,30 @@
+flex(grow)
+  if grow is none
+    grow = 0
+
+  if arguments[length(arguments) - 1] is !important
+    importance = !important
+  else
+    importance = unquote('')
+
+  -old-flex-grow(grow, importance)
+
+  vendors = ()
+
+  if has-support('ie < 11', 'ie-mobile < 11')
+    vendorize('flex', arguments, (ms), false)
+
+  if has-support('firefox < 22')
+    push(vendors, moz)
+
+  if has-support(
+      'chrome < 29',
+      'safari',
+      'opera < 17',
+      'ios-safari',
+      'blackberry-browser'
+    )
+    push(vendors, webkit)
+
+  vendorize('flex', arguments, vendors)
+
