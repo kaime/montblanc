@@ -1,5 +1,4 @@
-flex-wrap(mode, args...)
-  // Mid syntax
+-old-flex-wrap(mode, args...)
   if has-support('ie < 11', 'ie-mobile < 11')
     vendorize('flex-wrap', arguments, (ms), false)
 
@@ -16,12 +15,12 @@ flex-wrap(mode, args...)
 
     reverse = false
 
+    // Warning: wrap-reverse is not supported in old syntax
     if mode is nowrap
       lines = single
     else if mode is wrap
       lines = multiple
     else
-      // Warning: wrap-reverse is not supported in old syntax
       lines = mode
 
     vendors = ()
@@ -39,6 +38,9 @@ flex-wrap(mode, args...)
       push(vendors, webkit)
 
     vendorize('box-lines', (lines args), vendors, false)
+
+flex-wrap(mode, args...)
+  -old-flex-wrap(mode, args)
 
   // New syntax
   vendors = ()

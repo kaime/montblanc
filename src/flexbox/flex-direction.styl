@@ -1,6 +1,6 @@
-flex-direction(mode, args...)
+-old-flex-direction(mode, args...)
   importance = unquote('')
-  for arg in arguments
+  for arg in args
     if arg is !important
       importance = !important
 
@@ -52,6 +52,10 @@ flex-direction(mode, args...)
       vendorize('box-orient', (orient args), (vendor), false)
       if reverse
         vendorize('box-direction', (unquote('reverse') importance), (vendor), false)
+
+
+flex-direction(mode, args...)
+  -old-flex-direction(mode, args)
 
   // New syntax
   vendors = ()
