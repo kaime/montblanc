@@ -1,0 +1,36 @@
+flex-flow()
+  // Old spec
+  importance = unquote('')
+  direction = null
+  wrapping = null
+
+  for arg in arguments
+    if arg is !important
+      importance = !important
+    else if arg in (row column row-reverse)
+      direction = arg
+    else if arg in (wrap nowrap wrap-reverse)
+      wrapping = arg
+
+  if direction isnt null
+    -old-flex-direction(direction, importance)
+
+  if wrapping isnt null
+    -old-flex-wrap(wrapping, importance)
+
+  // New spec
+  vendors = ()
+
+  if has-support('firefox < 22')
+    push(vendors, moz)
+
+  if has-support(
+      'chrome < 29',
+      'safari',
+      'opera < 17',
+      'ios-safari',
+      'blackberry-browser'
+    )
+    push(vendors, webkit)
+
+  vendorize('flex-flow', arguments, vendors)

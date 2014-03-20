@@ -1,0 +1,39 @@
+// @describe `flex-wrap`
+
+// @it shims old spec
+support('ie 10', 'safari 3.2', 'android-firefox 26')
+body
+  flex-wrap: wrap
+  flex-wrap: nowrap !important
+  flex-wrap: wrap-reverse
+
+support('firefox 14')
+body
+  flex-wrap: wrap
+
+// @expect
+body {
+  -ms-flex-wrap: wrap;
+  -moz-box-lines: multiple;
+  -webkit-box-lines: multiple;
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -ms-flex-wrap: nowrap !important;
+  -moz-box-lines: single !important;
+  -webkit-box-lines: single !important;
+  -webkit-flex-wrap: nowrap !important;
+  flex-wrap: nowrap !important;
+  -ms-flex-wrap: wrap-reverse;
+  -moz-box-lines: wrap-reverse;
+  -webkit-box-lines: wrap-reverse;
+  -webkit-flex-wrap: wrap-reverse;
+  flex-wrap: wrap-reverse;
+}
+body {
+  -ms-flex-wrap: wrap;
+  -moz-box-lines: multiple;
+  -webkit-box-lines: multiple;
+  -moz-flex-wrap: wrap;
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
+}

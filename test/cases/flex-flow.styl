@@ -1,0 +1,36 @@
+// @describe `flex-flow`
+
+// @it adds the needed prefixes and `flex-direction` and `flex-wrap` properties
+// for old browsers
+support('ie 9', 'safari 4', 'firefox 8', 'chrome 5')
+body
+  flex-flow: row
+  flex-flow: wrap-reverse
+  flex-flow: row-reverse nowrap !important
+
+// @expect
+body {
+  -ms-flex-direction: row;
+  -moz-box-orient: horizontal;
+  -webkit-box-orient: horizontal;
+  -moz-flex-flow: row;
+  -webkit-flex-flow: row;
+  flex-flow: row;
+  -ms-flex-wrap: wrap-reverse;
+  -moz-box-lines: wrap-reverse;
+  -webkit-box-lines: wrap-reverse;
+  -moz-flex-flow: wrap-reverse;
+  -webkit-flex-flow: wrap-reverse;
+  flex-flow: wrap-reverse;
+  -ms-flex-direction: row-reverse !important;
+  -moz-box-orient: horizontal !important;
+  -moz-box-direction: reverse !important;
+  -webkit-box-orient: horizontal !important;
+  -webkit-box-direction: reverse !important;
+  -ms-flex-wrap: nowrap !important;
+  -moz-box-lines: single !important;
+  -webkit-box-lines: single !important;
+  -moz-flex-flow: row-reverse nowrap !important;
+  -webkit-flex-flow: row-reverse nowrap !important;
+  flex-flow: row-reverse nowrap !important;
+}

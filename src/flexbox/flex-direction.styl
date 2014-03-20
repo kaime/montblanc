@@ -1,0 +1,74 @@
+-old-flex-direction(mode, args...)
+  importance = unquote('')
+  for arg in args
+    if arg is !important
+      importance = !important
+
+  // IE syntax
+  if has-support('ie < 11', 'ie-mobile < 11')
+    vendorize('flex-direction', arguments, (ms), false)
+
+  // Old spec
+  if has-support(
+      'chrome < 21',
+      'safari < 6.1',
+      'ios-safari < 7',
+      'android-browser < 4.4',
+      'blackberry-browser < 10',
+      'firefox < 28',
+      'android-firefox'
+    )
+
+    reverse = false
+
+    if mode is row
+      orient = horizontal
+    else if mode is row-reverse
+      orient = horizontal
+      reverse = true
+    else if mode is column
+      orient = vertical
+    else if mode is column-reverse
+      orient = vertical
+      reverse = true
+    else
+      orient = mode
+
+    vendors = ()
+
+    if has-support('firefox < 28', 'android-firefox')
+      push(vendors, moz)
+
+    if has-support(
+        'chrome < 21',
+        'safari < 6.1',
+        'ios-safari < 7',
+        'android-browser < 4.4',
+        'blackberry-browser < 10'
+      )
+      push(vendors, webkit)
+
+    for vendor in vendors
+      vendorize('box-orient', (orient args), (vendor), false)
+      if reverse
+        vendorize('box-direction', (unquote('reverse') importance), (vendor), false)
+
+
+flex-direction(mode, args...)
+  -old-flex-direction(mode, args)
+
+  // New syntax
+  vendors = ()
+
+  if has-support('firefox < 22')
+    push(vendors, moz)
+
+  if has-support(
+        'chrome < 29',
+        'opera < 17',
+        'ios-safari',
+        'blackberry-browser'
+      )
+    push(vendors, webkit)
+
+  vendorize('flex-direction', arguments, vendors)
