@@ -29,7 +29,7 @@ blend-channels(s, b, fn)
 blend-channel-normal(s, b)
   return s
 
-blend-normal(source, backgrop)
+blend-normal(source, backdrop)
   return source
 
 /**
@@ -242,45 +242,11 @@ blend-luminosity(s, b)
 /**
  * Generic `blend()` function.
  */
-blend(source, backgrop = #fff, mode = normal)
-  if mode is a 'literal'
-    mode = '%s' % mode
+blend(source, backdrop = #fff, mode = normal)
+  mode = cast(mode, 'string')
+  blend-fn = lookup('blend-' + mode)
 
-  if mode is 'normal'
-    return blend-normal(source, backgrop)
-  else if mode is 'multiply'
-    return blend-multiply(source, backgrop)
-  else if mode is 'screen'
-    return blend-screen(source, backgrop)
-  else if mode is 'overlay'
-    return blend-overlay(source, backgrop)
-  else if mode is 'darken'
-    return blend-darken(source, backgrop)
-  else if mode is 'lighten'
-    return blend-lighten(source, backgrop)
-  else if mode is 'color-dodge'
-    return blend-color-dodge(source, backgrop)
-  else if mode is 'color-burn'
-    return blend-color-burn(source, backgrop)
-  else if mode is 'hard-light'
-    return blend-hard-light(source, backgrop)
-  else if mode is 'soft-light'
-    return blend-soft-light(source, backgrop)
-  else if mode is 'difference'
-    return blend-difference(source, backgrop)
-  else if mode is 'exclusion'
-    return blend-exclusion(source, backgrop)
-  else if mode is 'average'
-    return blend-average(source, backgrop)
-  else if mode is 'negation'
-    return blend-negation(source, backgrop)
-  else if mode is 'hue'
-    return blend-hue(source, backgrop)
-  else if mode is 'saturation'
-    return blend-saturation(source, backgrop)
-  else if mode is 'color'
-    return blend-color(source, backgrop)
-  else if mode is 'luminosity'
-    return blend-luminosity(source, backgrop)
-  else
-    error('Unknown blend mode')
+  if blend-fn is a 'function'
+    return blend-fn(source, backdrop)
+
+  error('Unknown blend mode: ' + mode)
