@@ -12,7 +12,7 @@ flex(grow)
   vendors = ()
 
   if has-support('ie < 11', 'ie-mobile < 11')
-    vendorize('flex', arguments, (ms), false)
+    push(vendors, ms)
 
   if has-support('firefox < 22')
     push(vendors, moz)
