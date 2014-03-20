@@ -1,4 +1,4 @@
-flex-grow()
+-old-flex-grow()
   // Old spec
   if has-support(
       'chrome < 21',
@@ -25,6 +25,9 @@ flex-grow()
       push(vendors, webkit)
 
     vendorize('box-flex', arguments, vendors, false)
+
+flex-grow()
+  -old-flex-grow(arguments)
 
   // New syntax
   vendors = ()
