@@ -130,3 +130,13 @@ body {
   -webkit-box-shadow: none;
   box-shadow: none;
 }
+
+// @it can be called with no arguments
+body
+  reset()
+  foo: bar
+
+// @expect
+body {
+  foo: bar;
+}
