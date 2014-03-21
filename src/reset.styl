@@ -1,1 +1,50 @@
 reset()
+  importance = unquote('')
+  if arguments[length(arguments) - 1] is !important
+    importance = !important
+
+  for p in arguments
+
+    v = null
+
+    if \
+      p is width or \
+      p is height or \
+      p is min-width or \
+      p is min-height or \
+      p is max-width or \
+      p is max-height or \
+      p is size or \
+      p is top or \
+      p is right or \
+      p is bottom or \
+      p is left
+
+      v = auto
+
+    else if \
+      p is border-radius or \
+      p is border-top-left-radius or \
+      p is border-top-right-radius or \
+      p is border-bottom-right-radius or \
+      p is border-bottom-left-radius or\
+      p is margin or \
+      p is margin-top or \
+      p is margin-right or \
+      p is margin-bottom or \
+      p is margin-left or \
+      p is padding or \
+      p is padding-top or \
+      p is padding-right or \
+      p is padding-bottom or \
+      p is padding-left
+
+      v = 0
+
+    else if \
+      p is float
+
+      v = none
+
+    if v isnt null
+      add-property(p, v importance)

@@ -1,1 +1,94 @@
 // @describe `reset`
+
+// @it can reset `top`, `right`, `bottom`, `left`, `width` and `height` and `min/max-width/height` to `auto`
+body
+  reset: width height
+body
+  reset: left !important;
+body
+  reset: right top bottom;
+body
+  reset: min-width max-height min-height max-width
+
+// @expect
+body {
+  width: auto;
+  height: auto;
+}
+body {
+  left: auto !important;
+}
+body {
+  right: auto;
+  top: auto;
+  bottom: auto;
+}
+body {
+  min-width: auto;
+  max-height: auto;
+  min-height: auto;
+  max-width: auto;
+}
+
+// @it can set both `width` and `height` to `auto` with `reset: size`
+body
+  reset: size !important;
+
+// @expect
+body {
+  width: auto !important;
+  height: auto !important;
+}
+
+// @it resets paddings and and margins to `0`
+body
+  reset: padding margin;
+  reset: padding-left margin-right padding-top margin-bottom;
+  reset: margin-left padding-right margin-top padding-bottom;
+
+// @expect
+body {
+  padding: 0;
+  margin: 0;
+  padding-left: 0;
+  margin-right: 0;
+  padding-top: 0;
+  margin-bottom: 0;
+  margin-left: 0;
+  padding-right: 0;
+  margin-top: 0;
+  padding-bottom: 0;
+}
+
+// @it resets `border-radius` to `0`
+body
+  reset: border-top-left-radius;
+  reset: border-top-right-radius;
+  reset: border-bottom-right-radius;
+  reset: border-bottom-left-radius;
+
+support('firefox 1', 'chrome 1')
+body
+  reset: border-radius !important;
+
+// @expect
+body {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+body {
+  -moz-border-radius: 0 !important;
+  -webkit-border-radius: 0 !important;
+  border-radius: 0 !important;
+}
+
+// @it resets `float` to `none`
+body
+  reset: float
+
+// @expect
+body {
+  float: none;
+}
