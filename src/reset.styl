@@ -45,8 +45,13 @@ reset()
       v = 0
 
     else if \
-      p is float
-
+      p is float or \
+      p is font-decoration or \
+      p is text-transform or \
+      p is background or \
+      p is background-image or \
+      p is box-shadow or \
+      p is border
       v = none
 
     if v isnt null

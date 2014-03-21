@@ -1,6 +1,6 @@
 // @describe `reset`
 
-// @it can reset `top`, `right`, `bottom`, `left`, `width` and `height` and `min/max-width/height` to `auto`
+// @it resets `top`, `right`, `bottom`, `left`, `width` and `height` and `min/max-width/height` to `auto`
 body
   reset: width height
 body
@@ -91,4 +91,42 @@ body
 // @expect
 body {
   float: none;
+}
+
+// @it resets `text-transform` and `font-decoration` to `none`
+body
+  reset: text-transform font-decoration
+
+// @expect
+body {
+  text-transform: none;
+  font-decoration: none;
+}
+
+// @it resets `background` and `background-image` to `none`
+body
+  reset: background
+  reset: background-image
+
+// @expect
+body {
+  background: none;
+  background-image: none;
+}
+
+// @it resets `box-shadow` to `none`
+body
+  reset: box-shadow
+
+support('safari 3')
+body
+  reset: box-shadow
+
+// @expect
+body {
+  box-shadow: none;
+}
+body {
+  -webkit-box-shadow: none;
+  box-shadow: none;
 }
