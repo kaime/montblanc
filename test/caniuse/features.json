@@ -66,5 +66,11 @@
       "type": "property",
       "name": "hyphens"
     }
+  ],
+  "user-select-none": [
+    {
+      "type": "property",
+      "name": "user-select"
+    }
   ]
 }
