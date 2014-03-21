@@ -127,8 +127,11 @@ describe("According to caniuse browser data", function() {
               partial = true;
               break;
 
+            case 'u': // Unknown
+              continue;
+
             default:
-              throw "Unexpected status!"
+              throw "Unexpected status: " + p[0];
           }
 
           if (p.length > 1) {
