@@ -164,6 +164,25 @@ body {
   box-sizing: content-box;
 }
 
+// @it resets `opacity` to `1`
+support('ie 8')
+body
+  reset: opacity
+
+support('ie 7')
+body
+  reset: opacity !important
+
+// @expect
+body {
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+  opacity: 1;
+}
+body {
+  *filter: alpha(opacity=100) !important;
+  opacity: 1 !important;
+}
+
 // @it can be called with no arguments
 body
   reset()
