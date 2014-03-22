@@ -1,20 +1,12 @@
 // @describe `reset`
 
-// @it resets `top`, `right`, `bottom`, `left`, `width` and `height` and `min/max-width/height` to `auto`
-body
-  reset: width height
+// @it resets `top`, `right`, `bottom`, `left` to `auto`
 body
   reset: left !important;
 body
   reset: right top bottom;
-body
-  reset: min-width max-height min-height max-width
 
 // @expect
-body {
-  width: auto;
-  height: auto;
-}
 body {
   left: auto !important;
 }
@@ -22,6 +14,18 @@ body {
   right: auto;
   top: auto;
   bottom: auto;
+}
+
+// @it resets `(min/max-)width/height` to `auto`
+body
+  reset: width height
+body
+  reset: min-width max-height min-height max-width
+
+// @expect
+body {
+  width: auto;
+  height: auto;
 }
 body {
   min-width: auto;
