@@ -68,5 +68,10 @@ reset()
 
       v = visible
 
+    else if \
+      p is box-sizing
+
+      v = content-box
+
     if v isnt null
       add-property(p, v importance)

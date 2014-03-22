@@ -153,6 +153,17 @@ body {
   visibility: visible;
 }
 
+// @it resets `box-sizing` to `content-box`
+support('firefox 1')
+body
+  reset: box-sizing
+
+// @expect
+body {
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+}
+
 // @it can be called with no arguments
 body
   reset()
