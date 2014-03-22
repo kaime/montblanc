@@ -210,6 +210,37 @@ body {
   border-width: medium;
 }
 
+// @it resets `transition` and `transition-property` to `none`
+body
+  reset: transition-property !important
+  reset: transition
+
+// @expect
+body {
+  transition-property: none !important;
+  transition: none;
+}
+
+// @it resets `transition-duration` and `transition-delay` to `0`
+body
+  reset: transition-duration transition-delay !important
+
+
+// @expect
+body {
+  transition-duration: 0 !important;
+  transition-delay: 0 !important;
+}
+
+// @it resets `transition-timing-function` to `ease`
+body
+  reset: transition-timing-function
+
+// @expect
+body {
+  transition-timing-function: ease;
+}
+
 // @it can be called with no arguments
 body
   reset()

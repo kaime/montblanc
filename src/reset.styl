@@ -40,7 +40,9 @@ reset()
       p is padding-top or \
       p is padding-right or \
       p is padding-bottom or \
-      p is padding-left
+      p is padding-left or \
+      p is transition-delay or \
+      p is transition-duration
 
       v = 0
 
@@ -56,7 +58,9 @@ reset()
       p is background or \
       p is background-image or \
       p is box-shadow or \
-      p is border
+      p is border or\
+      p is transition or\
+      p is transition-property
 
       v = none
 
@@ -88,6 +92,11 @@ reset()
       p is box-sizing
 
       v = content-box
+
+    else if \
+      p is transition-timing-function
+
+      v = ease
 
     if v isnt null
       add-property(p, v importance)
