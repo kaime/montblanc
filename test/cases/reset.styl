@@ -183,6 +183,15 @@ body {
   opacity: 1 !important;
 }
 
+// @it resets `cursor` to `default`
+body
+  reset: cursor
+
+// @expect
+body {
+  cursor: default;
+}
+
 // @it can be called with no arguments
 body
   reset()
