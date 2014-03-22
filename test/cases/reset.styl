@@ -241,6 +241,15 @@ body {
   transition-timing-function: ease;
 }
 
+// @it resets `tab-size` to `8`
+body
+  reset: tab-size
+
+// @expect
+body {
+  tab-size: 8;
+}
+
 // @it can be called with no arguments
 body
   reset()
