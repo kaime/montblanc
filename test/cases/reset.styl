@@ -144,6 +144,15 @@ body {
   box-shadow: none;
 }
 
+// @it resets `visibility` to `visible`
+body
+  reset: visibility
+
+// @expect
+body {
+  visibility: visible;
+}
+
 // @it can be called with no arguments
 body
   reset()
