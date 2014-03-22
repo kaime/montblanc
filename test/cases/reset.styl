@@ -192,6 +192,24 @@ body {
   cursor: default;
 }
 
+// @it resets `border-style` to `normal`
+body
+  reset: border-style
+
+// @expect
+body {
+  border-style: normal;
+}
+
+// @it resets `border-width` to `medium`
+body
+  reset: border-width
+
+// @expect
+body {
+  border-width: medium;
+}
+
 // @it can be called with no arguments
 body
   reset()
