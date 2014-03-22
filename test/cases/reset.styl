@@ -114,6 +114,19 @@ body {
   background-image: none;
 }
 
+// @it resets `font-weight`, `font-style`, `font-stretch` and `line-height` to `normal`
+body
+  reset: font-weight font-style font-stretch
+  reset: line-height
+
+// @expect
+body {
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+}
+
 // @it resets `box-shadow` to `none`
 body
   reset: box-shadow

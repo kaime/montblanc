@@ -52,7 +52,16 @@ reset()
       p is background-image or \
       p is box-shadow or \
       p is border
+
       v = none
+
+    else if \
+      p is font-style or \
+      p is font-stretch or \
+      p is font-weight or \
+      p is line-height
+
+      v = normal
 
     if v isnt null
       add-property(p, v importance)
