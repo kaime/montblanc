@@ -1,4 +1,13 @@
 {
+  "animation": "none",
+  "animation-name": "none",
+  "animation-direction": "normal",
+  "animation-delay": "0",
+  "animation-duration": "0",
+  "animation-fill-mode": "none",
+  "animation-iteration-count": "1",
+  "animation-property": "none",
+  "animation-timing-function": "ease",
   "backface-visibility": "visible",
   "background": "none",
   "background-attachment": "scroll",

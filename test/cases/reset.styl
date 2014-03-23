@@ -1,5 +1,15 @@
 // @describe `reset`
 
+// @it can be called with no arguments and does nothing
+body
+  reset()
+  foo: bar
+
+// @expect
+body {
+  foo: bar;
+}
+
 // @it resets `top`, `right`, `bottom`, `left` to `auto`
 body
   reset: left !important;
@@ -465,12 +475,50 @@ body {
   border-left-color: currentColor;
 }
 
-// @it can be called with no arguments
+// @it resets `animation` and `animation-property` to `none`
 body
-  reset()
-  foo: bar
+  reset: animation-property !important
+  reset: animation
 
 // @expect
 body {
-  foo: bar;
+  animation-property: none !important;
+  animation: none;
+}
+
+// @it resets `animation-duration` and `animation-delay` to `0`
+body
+  reset: animation-duration animation-delay !important
+
+// @expect
+body {
+  animation-duration: 0 !important;
+  animation-delay: 0 !important;
+}
+
+// @it resets `animation-timing-function` to `ease`
+body
+  reset: animation-timing-function
+
+// @expect
+body {
+  animation-timing-function: ease;
+}
+
+// @it resets `animation-fill-mode` to `none`
+body
+  reset: animation-fill-mode
+
+// @expect
+body {
+  animation-fill-mode: none;
+}
+
+// @it resets `animation-iteration-count` to `1`
+body
+  reset: animation-iteration-count
+
+// @expect
+body {
+  animation-iteration-count: 1;
 }
