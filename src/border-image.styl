@@ -1,0 +1,31 @@
+/**
+ * References:
+ *
+ * http://www.w3.org/TR/css3-background/#border-images
+ * http://caniuse.com/css3-boxsizing
+ *
+ * Note:
+ *
+ * Most expermiental (prefixed) support is limited to the shorthand
+ * `border-image` property, not the `border-image-*` individual properties.
+ * Maybe we could provide a shim for those.
+ */
+border-image()
+  vendors = ()
+
+  if has-support('firefox < 15')
+    push(vendors, moz)
+
+  if has-support(
+      'chrome < 16',
+      'safari < 6',
+      'ios-safari < 6',
+      'android-browser < 4.4',
+      'blackberry-browser < 10'
+    )
+    push(vendors, webkit)
+
+  if has-support('opera < 15', 'opera-mobile < 16')
+    push(vendors, o)
+
+  vendorize(border-image, arguments, vendors)

@@ -1,0 +1,41 @@
+// @describe `flex-direction`
+
+// @it shims old spec syntax
+support('ie 9', 'chrome 10', 'firefox 8')
+body
+  flex-direction: row
+  flex-direction: row-reverse !important
+  flex-direction: column
+  flex-direction: column-reverse
+
+// @expect
+body {
+  -ms-flex-direction: row;
+  -moz-box-orient: horizontal;
+  -webkit-box-orient: horizontal;
+  -moz-flex-direction: row;
+  -webkit-flex-direction: row;
+  flex-direction: row;
+  -ms-flex-direction: row-reverse !important;
+  -moz-box-orient: horizontal !important;
+  -moz-box-direction: reverse !important;
+  -webkit-box-orient: horizontal !important;
+  -webkit-box-direction: reverse !important;
+  -moz-flex-direction: row-reverse !important;
+  -webkit-flex-direction: row-reverse !important;
+  flex-direction: row-reverse !important;
+  -ms-flex-direction: column;
+  -moz-box-orient: vertical;
+  -webkit-box-orient: vertical;
+  -moz-flex-direction: column;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+  -ms-flex-direction: column-reverse;
+  -moz-box-orient: vertical;
+  -moz-box-direction: reverse;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: reverse;
+  -moz-flex-direction: column-reverse;
+  -webkit-flex-direction: column-reverse;
+  flex-direction: column-reverse;
+}

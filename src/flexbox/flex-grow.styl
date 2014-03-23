@@ -1,0 +1,47 @@
+-old-flex-grow()
+  // Old spec
+  if has-support(
+      'chrome < 21',
+      'safari < 6.1',
+      'ios-safari < 7',
+      'android-browser < 4.4',
+      'blackberry-browser < 10',
+      'firefox < 28',
+      'android-firefox'
+    )
+
+    vendors = ()
+
+    if has-support('firefox < 28', 'android-firefox')
+      push(vendors, moz)
+
+    if has-support(
+        'chrome < 21',
+        'safari < 6.1',
+        'ios-safari < 7',
+        'android-browser < 4.4',
+        'blackberry-browser < 10'
+      )
+      push(vendors, webkit)
+
+    vendorize('box-flex', arguments, vendors, false)
+
+flex-grow()
+  -old-flex-grow(arguments)
+
+  // New syntax
+  vendors = ()
+
+  if has-support('firefox < 22')
+    push(vendors, moz)
+
+  if has-support(
+      'chrome < 29',
+      'safari',
+      'opera < 17',
+      'ios-safari',
+      'blackberry-browser'
+    )
+    push(vendors, webkit)
+
+  vendorize('flex-grow', arguments, vendors)

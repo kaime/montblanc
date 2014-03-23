@@ -1,0 +1,45 @@
+order()
+  // Mid syntax
+  if has-support('ie < 11', 'ie-mobile < 11')
+    vendorize('flex-order', arguments, (ms), false)
+
+  // Old syntax
+  if has-support(
+      'chrome < 21',
+      'safari < 6.1',
+      'ios-safari < 7',
+      'android-browser < 4.4',
+      'blackberry-browser < 10',
+      'firefox < 28',
+      'android-firefox'
+    )
+
+    vendors = ()
+
+    if has-support('firefox < 28', 'android-firefox')
+      vendorize('box-ordinal-group', arguments, (moz), false)
+
+    if has-support(
+        'chrome < 21',
+        'safari < 6.1',
+        'ios-safari < 7',
+        'android-browser < 4.4',
+        'blackberry-browser < 10'
+      )
+      vendorize('box-ordinal-group', arguments, (webkit), false)
+
+  // New syntax
+  vendors = ()
+
+  if has-support('firefox < 22')
+    push(vendors, moz)
+
+  if has-support(
+        'chrome < 29',
+        'opera < 17',
+        'ios-safari',
+        'blackberry-browser'
+      )
+    push(vendors, webkit)
+
+  vendorize('order', arguments, vendors)

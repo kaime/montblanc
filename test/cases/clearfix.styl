@@ -8,6 +8,7 @@ support('ie 7')
 
 // @expect
 .clearfix {
+  *zoom: expression(this.runtimeStyle.zoom="1", this.appendChild(document.createElement("br")).style.cssText="clear:both;font:0/0 serif");
   *zoom: 1;
 }
 .clearfix:before,
@@ -19,13 +20,32 @@ support('ie 7')
   clear: both;
 }
 
-// @it only includes IE specific rules when `support-for-ie` is < 8
+// @it only includes IE specific rules when supporting IE < 8
 support('ie 8')
 
 .clearfix
   clearfix()
 
 // @expect
+.clearfix:before,
+.clearfix:after {
+  content: " ";
+  display: table;
+}
+.clearfix:after {
+  clear: both;
+}
+
+// @it supports ancient Firefox and Safari with `overflow: hidden`
+support('firefox 2')
+
+.clearfix
+  clearfix()
+
+// @expect
+.clearfix {
+  overflow: hidden;
+}
 .clearfix:before,
 .clearfix:after {
   content: " ";

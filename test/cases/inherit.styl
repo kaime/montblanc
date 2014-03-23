@@ -38,3 +38,20 @@ html body {
   width: inherit !important;
   height: inherit !important;
 }
+
+// @it works along with other mixins
+support('firefox 1', 'chrome 1')
+body
+  inherit: box-sizing font;
+  inherit: border-radius !important
+
+// @expect
+body {
+  -moz-box-sizing: inherit;
+  -webkit-box-sizing: inherit;
+  box-sizing: inherit;
+  font: inherit;
+  -moz-border-radius: inherit !important;
+  -webkit-border-radius: inherit !important;
+  border-radius: inherit !important;
+}

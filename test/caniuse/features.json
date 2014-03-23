@@ -32,5 +32,51 @@
       "type": "property",
       "name": "box-shadow"
     }
+  ],
+  "border-image": [
+    {
+      "type": "property",
+      "name": "border-image"
+    }
+  ],
+  "css-transitions": [
+    {
+      "type": "property",
+      "name": "transition"
+    },
+    {
+      "type": "property",
+      "name": "transition-property"
+    },
+    {
+      "type": "property",
+      "name": "transition-duration"
+    },
+    {
+      "type": "property",
+      "name": "transition-timing-function"
+    },
+    {
+      "type": "property",
+      "name": "transition-delay"
+    }
+  ],
+  "css-hyphens": [
+    {
+      "type": "property",
+      "name": "hyphens"
+    }
+  ],
+  "user-select-none": [
+    {
+      "type": "property",
+      "name": "user-select"
+    }
+  ],
+  "css3-tabsize": [
+    {
+      "type": "property",
+      "name": "tab-size"
+    }
   ]
 }

@@ -1,0 +1,34 @@
+// @describe `align-content`
+
+// @it Adds prefixes for old Firefox and Webkit and shims old IE 10 syntax
+support('ie 9', 'chrome 10', 'firefox 8')
+body
+  align-content: flex-start
+  align-content: flex-end !important
+  align-content: space-between
+  align-content: space-around
+  align-content: stretch !important
+
+// @expect
+body {
+  -ms-flex-line-pack: start;
+  -moz-align-content: flex-start;
+  -webkit-align-content: flex-start;
+  align-content: flex-start;
+  -ms-flex-line-pack: end !important;
+  -moz-align-content: flex-end !important;
+  -webkit-align-content: flex-end !important;
+  align-content: flex-end !important;
+  -ms-flex-line-pack: justify;
+  -moz-align-content: space-between;
+  -webkit-align-content: space-between;
+  align-content: space-between;
+  -ms-flex-line-pack: distribute;
+  -moz-align-content: space-around;
+  -webkit-align-content: space-around;
+  align-content: space-around;
+  -ms-flex-line-pack: stretch !important;
+  -moz-align-content: stretch !important;
+  -webkit-align-content: stretch !important;
+  align-content: stretch !important;
+}

@@ -2,13 +2,7 @@
  * http://caniuse.com/css3-boxsizing
  */
 
-box-sizing(mode)
-  if has-support('ie < 8')
-    warn('IE < 8 does not support `box-sizing`')
-
-  if has-support('opera < 9.5')
-    warn('Opera < 9.5 does not support `box-sizing`')
-
+box-sizing()
   vendors = ()
 
   if has-support(
@@ -26,4 +20,4 @@ box-sizing(mode)
     )
     push(vendors, webkit)
 
-  vendorize(box-sizing, mode, vendors)
+  vendorize(box-sizing, arguments, vendors)

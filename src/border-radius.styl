@@ -1,12 +1,11 @@
 /**
  * References:
+ *
+ * http://www.w3.org/TR/css3-background/#the-border-radius
  * http://caniuse.com/border-radius
  */
 
-border-radius()
-  if has-support('ie < 9')
-    warn('IE < 9 does not support `border-radius`');
-
+-vendorize-border-radius(property, arguments)
   vendors = ()
 
   if has-support('firefox < 4')
@@ -20,73 +19,20 @@ border-radius()
     )
     push(vendors, webkit)
 
-  vendorize('border-radius', arguments, vendors)
+  vendorize(property, arguments, vendors)
 
+border-radius()
+  -vendorize-border-radius('border-radius', arguments)
 
 border-top-left-radius()
-  if has-support('ie < 9')
-    warn('IE < 9 does not support `border-radius`');
-
-  vendors = ()
-
-  if has-support('firefox < 4')
-    push(vendors, moz)
-
-  if has-support('chrome < 5') or \
-    has-support('android-browser < 2.2') or \
-    has-support('safari < 5') or \
-    has-support('ios-safari < 4')
-    push(vendors, webkit)
-
-  vendorize('border-top-left-radius', arguments, vendors)
+  -vendorize-border-radius('border-top-left-radius', arguments)
 
 border-top-right-radius()
-  if has-support('ie < 9')
-    warn('IE < 9 does not support `border-radius`');
-
-  vendors = ()
-
-  if has-support('firefox < 4')
-    push(vendors, moz)
-
-  if has-support('chrome < 5') or \
-    has-support('android-browser < 2.2') or \
-    has-support('safari < 5') or \
-    has-support('ios-safari < 4')
-    push(vendors, webkit)
-
-  vendorize('border-top-right-radius', arguments, vendors)
+  -vendorize-border-radius('border-top-right-radius', arguments)
 
 border-bottom-left-radius()
-  if has-support('ie < 9')
-    warn('IE < 9 does not support `border-radius`');
-
-  vendors = ()
-
-  if has-support('firefox < 4')
-    push(vendors, moz)
-
-  if has-support('chrome < 5') or \
-    has-support('android-browser < 2.2') or \
-    has-support('safari < 5') or \
-    has-support('ios-safari < 4')
-    push(vendors, webkit)
-
-  vendorize('border-bottom-left-radius', arguments, vendors)
+  -vendorize-border-radius('border-bottom-left-radius', arguments)
 
 border-bottom-right-radius()
-  if has-support('ie < 9')
-    warn('IE < 9 does not support `border-radius`');
+  -vendorize-border-radius('border-bottom-right-radius', arguments)
 
-  vendors = ()
-
-  if has-support('firefox < 4')
-    push(vendors, moz)
-
-  if has-support('chrome < 5') or \
-    has-support('android-browser < 2.2') or \
-    has-support('safari < 5') or \
-    has-support('ios-safari < 4')
-    push(vendors, webkit)
-
-  vendorize('border-bottom-right-radius', arguments, vendors)

@@ -1,0 +1,49 @@
+// @describe `flex`
+
+// @it adds the needed prefixes and legacy `box-flex` for old browsers
+support('ie 9', 'safari 4', 'firefox 8', 'chrome 5')
+
+body
+  flex: none
+
+body
+  flex: 1 !important
+
+body
+  flex: 0 auto
+body
+  flex: initial 2% 0 !important
+
+// @expect
+body {
+  -moz-box-flex: 0;
+  -webkit-box-flex: 0;
+  -ms-flex: none;
+  -moz-flex: none;
+  -webkit-flex: none;
+  flex: none;
+}
+body {
+  -moz-box-flex: 1 !important;
+  -webkit-box-flex: 1 !important;
+  -ms-flex: 1 !important;
+  -moz-flex: 1 !important;
+  -webkit-flex: 1 !important;
+  flex: 1 !important;
+}
+body {
+  -moz-box-flex: 0;
+  -webkit-box-flex: 0;
+  -ms-flex: 0 auto;
+  -moz-flex: 0 auto;
+  -webkit-flex: 0 auto;
+  flex: 0 auto;
+}
+body {
+  -moz-box-flex: 0 !important;
+  -webkit-box-flex: 0 !important;
+  -ms-flex: initial 2% 0 !important;
+  -moz-flex: initial 2% 0 !important;
+  -webkit-flex: initial 2% 0 !important;
+  flex: initial 2% 0 !important;
+}

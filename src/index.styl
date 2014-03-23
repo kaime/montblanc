@@ -5,22 +5,34 @@
 use('define.js')
 use('cast.js')
 
-@import 'support'
+@require 'support'
 
 // Utilities, add-on functions...
-@import 'vendorize'
-@import 'clearfix'
-@import 'grey'
-@import 'blend'
-
-@import 'opaque'
+@require 'vendorize'
+@require 'clearfix'
+use('grey.js')
+@require 'blend'
+@require 'opaque'
+@require 'normalize'
 
 // Add-on properties
-@import 'inherit'
-@import 'size'
+@require 'inherit'
+@require 'size'
 
 // Overloaded properties
-@import 'opacity'
-@import 'box-sizing'
-@import 'border-radius'
-@import 'box-shadow'
+@require 'display'
+@require 'justify-content'
+@require 'align-items'
+@require 'align-self'
+@require 'align-content'
+@require 'order'
+@require 'flexbox'
+@require 'opacity'
+@require 'box-sizing'
+@require 'border-radius'
+@require 'border-image'
+@require 'box-shadow'
+@require 'transition'
+@require 'hyphens'
+@require 'user-select'
+@require 'tab-size'

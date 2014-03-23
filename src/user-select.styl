@@ -1,0 +1,36 @@
+/**
+ * Note: `user-select` is not currently part of any W3C CSS specification.
+ *
+ * References:
+ *
+ * https://developer.mozilla.org/en-US/docs/Web/CSS/user-select
+ * http://caniuse.com/user-select-none
+ * http://css-tricks.com/almanac/properties/u/user-select/
+ * http://blogs.msdn.com/b/ie/archive/2012/01/11/controlling-selection-with-css-user-select.aspx
+ * https://developer.apple.com/library/safari/documentation/AppleApplications/Reference/SafariCSSRef/Articles/StandardCSSProperties.html#//apple_ref/doc/uid/TP30001266-UserInterface
+ */
+
+user-select()
+  vendors = ()
+
+  if has-support('ie', 'ie-mobile')
+    push(vendors, ms)
+
+  if has-support('firefox', 'android-firefox')
+    push(vendors, moz)
+
+  if has-support('safari < 3')
+    push(vendors, khtml)
+
+  if has-support(
+      'chrome',
+      'safari',
+      'opera',
+      'ios-safari',
+      'android-browser',
+      'blackberry-browser',
+      'android-chrome'
+    )
+    push(vendors, webkit)
+
+  vendorize('user-select', arguments, vendors)

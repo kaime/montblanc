@@ -6,12 +6,10 @@ size()
   importance = null
 
   for arg in arguments
-    if arg is a 'unit'
+    if arg is a 'unit' or arg is auto or arg is initial
       push(units, arg)
-    else if arg is !important
+    if arg is !important
       importance = !important
-    else
-      error()
 
   l = length(units)
   if l == 1
