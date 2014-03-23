@@ -52,9 +52,11 @@ reset()
       p is background or \
       p is background-image or \
       p is box-shadow or \
-      p is border or\
-      p is transition or\
-      p is transition-property
+      p is border or \
+      p is transition or \
+      p is transition-property or \
+      p is transform or \
+      p is perspective
       v = none
 
     else if \
@@ -82,7 +84,9 @@ reset()
       p is border-left-width
       v = medium
 
-    else if p is visibility
+    else if \
+      p is visibility or \
+      p is backface-visibility
       v = visible
 
     else if p is font-size
@@ -114,6 +118,9 @@ reset()
 
     else if p is position
       v = static
+
+    else if p is transform-origin
+      v = 50% 50%
 
     else if p is background-position
       v = 0 0

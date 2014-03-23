@@ -356,6 +356,34 @@ body {
   background-position: 0 0;
 }
 
+// @it resets `transform` and `perspective` to `none`
+body
+  reset: transform perspective
+
+// @expect
+body {
+  transform: none;
+  perspective: none;
+}
+
+// @it resets `transform-origin` to `50% 50%`
+body
+  reset: transform-origin !important;
+
+// @expect
+body {
+  transform-origin: 50% 50% !important;
+}
+
+// @it resets `backface-visibility` `visible`
+body
+  reset: backface-visibility
+
+// @expect
+body {
+  backface-visibility: visible;
+}
+
 // @it can be called with no arguments
 body
   reset()
