@@ -281,6 +281,17 @@ body {
   text-align: left;
 }
 
+// @it resets `text-align` to `right` when `@direction` is `rtl`
+body
+  direction: rtl;
+  reset: text-align
+
+// @expect
+body {
+  direction: rtl;
+  text-align: right;
+}
+
 // @it resets `font-size` to `medium`
 body
   reset: font-size
