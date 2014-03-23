@@ -1,8 +1,10 @@
 {
   "backface-visibility": "visible",
   "background": "none",
+  "background-clip": "border-box",
   "background-color": "transparent",
   "background-image": "none",
+  "background-origin": "padding-box",
   "background-position": "0 0",
   "background-size": "auto",
   "border": "none",
