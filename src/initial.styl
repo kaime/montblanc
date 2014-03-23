@@ -1,4 +1,4 @@
-initial-values = json('data/initial.json', { hash: true })
+initial-values = json('data/initial-values.json', { hash: true })
 
 for property, value in initial-values
   initial-values[property] = unquote('%s' % initial-values[property])
