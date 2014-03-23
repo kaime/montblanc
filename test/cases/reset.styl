@@ -272,6 +272,15 @@ body {
   direction: ltr;
 }
 
+// @it resets `text-align` to `left`
+body
+  reset: text-align
+
+// @expect
+body {
+  text-align: left;
+}
+
 // @it can be called with no arguments
 body
   reset()

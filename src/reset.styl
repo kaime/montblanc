@@ -88,5 +88,14 @@ reset()
     else if p is direction
       v = initial-direction
 
+    else if p is text-align
+      dir = @direction
+      dir ?= initial-direction
+
+      if dir is rtl
+        v = right
+      else
+        v = left
+
     if v isnt null
       add-property(p, v importance)
