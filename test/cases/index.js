@@ -50,7 +50,7 @@ describe('Cases', function() {
 
   reset = reset.join("\n")
 
-  var tests = glob.sync('test/cases/blend.styl');
+  var tests = glob.sync('test/cases/*.styl');
 
   tests.forEach(function(file) {
 
