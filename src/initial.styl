@@ -1,12 +1,24 @@
-initial-direction                  ?= ltr
-initial-font-family                ?= sans-serif
-initial-font-size                  ?= medium
-initial-color                      ?= black
-initial-line-height                ?= normal
-initial-box-sizing                 ?= content-box
-initial-tab-size                   ?= 8
-initial-transition-duration        ?= 0
-initial-transition-delay           ?= 0
-initial-transition-timing-function ?= ease
-initial-transform-origin           ?= 50% 50%
-initial-backface-visibility        ?= visible
+initial-values = json('data/initial.json', { hash: true })
+
+for property, value in initial-values
+  initial-values[property] = unquote('%s' % initial-values[property])
+
+initial()
+  property = cast(shift(arguments), 'string')
+
+  if length(arguments) > 0
+    // Jesus Christ...
+    value = unquote('')
+    for arg, i  in arguments
+      if i > 0
+        value = unquote('%s,' % value)
+      value = unquote('%s %s' % (value ('%s' % arg)))
+
+    value = unquote(value)
+    initial-values[property] = value
+  else
+    if initial-values[property]
+      return initial-values[property]
+    else
+      return null
+

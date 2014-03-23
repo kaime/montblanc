@@ -29,42 +29,42 @@ normalize()
   *,
   :before,
   :after
-    if initial-box-sizing isnt content-box
-      box-sizing: initial-box-sizing
+    if initial('box-sizing') isnt content-box
+      box-sizing: initial('box-sizing')
 
-    if initial-transition-duration isnt 0
-      transition-duration: initial-transition-duration
+    if initial('transition-duration') isnt 0
+      transition-duration: initial('transition-duration')
 
-    if initial-transition-delay isnt 0
-      transition-delay: initial-transition-delay
+    if initial('transition-delay') isnt 0
+      transition-delay: initial('transition-delay')
 
-    if initial-transition-timing-function isnt ease
-      transition-timing-function: initial-transition-timing-function
+    if initial('transition-timing-function') isnt ease
+      transition-timing-function: initial('transition-timing-function')
 
-    if initial-transform-origin isnt (50% 50%)
-      transform-origin: initial-transform-origin
+    if initial('transform-origin) isnt (50% 50%')
+      transform-origin: initial('transform-origin')
 
-    if initial-backface-visibility isnt visible
-      backface-visibility: initial-backface-visibility
+    if initial('backface-visibility') isnt visible
+      backface-visibility: initial('backface-visibility')
 
   html
     // Set default font family
-    font-family: initial-font-family
+    font-family: initial('font-family')
 
-    if initial-font-size isnt medium
-      font-size: initial-font-size
+    if initial('font-size') isnt medium
+      font-size: initial('font-size')
 
-    if initial-color isnt #000
-      color: initial-color
+    if initial('color') isnt #000
+      color: initial('color')
 
-    if initial-line-height isnt normal
-      line-height: initial-line-height
+    if initial('line-height') isnt normal
+      line-height: initial('line-height')
 
-    if initial-direction isnt ltr
-      direction: initial-direction
+    if initial('direction') isnt ltr
+      direction: initial('direction')
 
-    if initial-tab-size isnt 8
-      tab-size: initial-tab-size
+    if initial('tab-size') isnt 8
+      tab-size: initial('tab-size')
 
     if has-support('ie')
       // Correct text resizing oddly in IE when body `font-size` is set
@@ -255,7 +255,7 @@ normalize()
     // Address differences between Firefox and other browsers.
     // Known issue: no IE 6/7 normalization.
     hr
-      if initial-box-sizing is content-box
+      if initial('box-sizing') is content-box
         box-sizing: content-box
       height: 0
 
@@ -347,7 +347,7 @@ normalize()
     // the UA stylesheet.
     button,
     input
-      line-height: initial-line-height
+      line-height: initial('line-height')
 
   // It's recommended that you don't attempt to style these elements.
   // Firefox's implementation doesn't respect box-sizing, padding, or width.
