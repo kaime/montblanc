@@ -319,6 +319,14 @@ body {
   color: #000 !important;
 }
 
+// @it resets `background-color` to `transparent`
+body
+  reset: background-color
+
+// @expect
+body {
+  background-color: transparent;
+}
 
 // @it can be called with no arguments
 body
