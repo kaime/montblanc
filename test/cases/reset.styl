@@ -384,6 +384,15 @@ body {
   backface-visibility: visible;
 }
 
+// @it resets `text-shadow` to `none`
+body
+  reset: text-shadow
+
+// @expect
+body {
+  text-shadow: none;
+}
+
 // @it can be called with no arguments
 body
   reset()
