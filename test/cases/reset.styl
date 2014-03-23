@@ -429,6 +429,42 @@ body {
   background-attachment: scroll;
 }
 
+// @it resets `border-color` to `currentColor`
+unsupport('ie')
+body
+  reset: border-color border-top-color border-right-color border-bottom-color border-left-color
+
+// @expect
+body {
+  border-color: currentColor;
+  border-top-color: currentColor;
+  border-right-color: currentColor;
+  border-bottom-color: currentColor;
+  border-left-color: currentColor;
+}
+
+// @it fallbacks to current `@color` or initial `(border-)color` for `border-color` on browsers not supporting `currentColor`
+support('ie 6')
+body
+  color: red
+  reset: border-color
+
+body
+  border-color: white
+  reset: border-left-color
+
+// @expect
+body {
+  color: #f00;
+  border-color: #f00;
+  border-color: currentColor;
+}
+body {
+  border-color: #fff;
+  border-left-color: #fff;
+  border-left-color: currentColor;
+}
+
 // @it can be called with no arguments
 body
   reset()
