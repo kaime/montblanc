@@ -475,14 +475,14 @@ body {
   border-left-color: currentColor;
 }
 
-// @it resets `animation` and `animation-property` to `none`
+// @it resets `animation` and `animation-name` to `none`
 body
-  reset: animation-property !important
+  reset: animation-name !important
   reset: animation
 
 // @expect
 body {
-  animation-property: none !important;
+  animation-name: none !important;
   animation: none;
 }
 
