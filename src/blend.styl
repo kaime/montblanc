@@ -21,7 +21,7 @@ blend-channels(s, b, fn)
     fn(red(s) / 255, red(b) / 255) * 255,
     fn(green(s) / 255, green(b) / 255) * 255,
     fn(blue(s) / 255, blue(b) / 255) * 255,
-    alpha(s) * alpha(b) // @todo
+    alpha(s) * alpha(b)
   )
 
 // Separable modes //
