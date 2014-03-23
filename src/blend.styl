@@ -3,11 +3,12 @@
  *
  * http://www.w3.org/TR/compositing-1/
  *
- * @todo Alpha channels. More and more tests against other implementations and
- *       actual Photoshop results.
+ * @todo Alpha channels. Tests against actual Photoshop results (other
+ *       implementations?).
+ *
+ * @todo Add `vivid-light` and others?
+ * @todo Optional `amount` to override source alpha?
  */
-
-// Separable modes //
 
 /**
  * Helper for separable modes.
@@ -20,8 +21,10 @@ blend-channels(s, b, fn)
     fn(red(s) / 255, red(b) / 255) * 255,
     fn(green(s) / 255, green(b) / 255) * 255,
     fn(blue(s) / 255, blue(b) / 255) * 255,
-    alpha(s) * alpha(b)
+    alpha(s) * alpha(b) // @todo
   )
+
+// Separable modes //
 
 /**
  * The no-blending mode. This simply selects the source color.
@@ -33,12 +36,11 @@ blend-normal(source, backdrop)
   return source
 
 /**
- * The source color is multiplied by the destination color and replaces the
- * destination.
+ * The source color is multiplied by the backgrop.
  *
- * The resultant color is always at least as dark as either the source or
- * destination color. Multiplying any color with black results in black.
- * Multiplying any color with white preserves the original color.
+ * The result color is always at least as dark as either the source or backdrop
+ * color. Multiplying any color with black produces black. Multiplying any color
+ * with white leaves the color unchanged.
  */
 blend-channel-multiply(s, b)
   return b * s
@@ -51,9 +53,9 @@ blend-multiply(s, b)
  * complements the result.
  *
  * The result color is always at least as light as either of the two constituent
- *  colors. Screening any color with white produces white; screening with black
- *  leaves the original color unchanged. The effect is similar to projecting
- *  multiple photographic slides simultaneously onto a single screen.
+ * colors. Screening any color with white produces white; screening with black
+ * leaves the original color unchanged. The effect is similar to projecting
+ * multiple photographic slides simultaneously onto a single screen.
  */
 blend-channel-screen(s, b)
   return b + s - (b * s)
@@ -101,8 +103,8 @@ blend-lighten(s, b)
   return blend-channels(s, b, blend-channel-lighten)
 
 /**
- * Brrightens the backdrop color to reflect the source color. Painting with
- * black produces no changes.
+ * Brightens the backdrop color to reflect the source color. Blending with black
+ * produces no changes.
  */
 blend-channel-color-dodge(s, b)
   if b == 0
@@ -116,8 +118,8 @@ blend-color-dodge(s, b)
   return blend-channels(s, b, blend-channel-color-dodge)
 
 /**
- * Darkens the backdrop color to reflect the source color. Painting with white
- * produces no change.
+ * Darkens the backdrop color to reflect the source color. Blending with white
+ * produces no changes.
  */
 blend-channel-color-burn(s, b)
   if b == 1
@@ -237,7 +239,6 @@ blend-color(s, b)
  */
 blend-luminosity(s, b)
   return hsla(hue(b), saturation(b), lightness(s), alpha(s) * alpha(b))
-
 
 /**
  * Generic `blend()` function.
