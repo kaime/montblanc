@@ -2,8 +2,7 @@ var stylus = require('stylus'),
     montblanc = require('../../'),
     fs = require('fs'),
     path = require('path'),
-    glob = require('glob'),
-    browsers = require('../../src/support/browsers.json');
+    glob = require('glob');
 
 var readFile = function(file) {
  return fs.readFileSync(file, 'utf8').replace(/\r/g, '');
