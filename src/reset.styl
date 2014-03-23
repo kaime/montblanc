@@ -90,31 +90,31 @@ reset()
       v = visible
 
     else if p is font-size
-      v = initial-font-size
+      v = initial('font-size')
 
     else if p is font-family
-      v = initial-font-family
+      v = initial('font-family')
 
     else if p is box-sizing
-      v = initial-box-sizing
+      v = initial('box-sizing')
 
     else if p is transition-duration
-      v = initial-transition-duration
+      v = initial('transition-duration')
 
     else if p is transition-delay
-      v = initial-transition-delay
+      v = initial('transition-delay')
 
     else if p is transition-timing-function
-      v = initial-transition-timing-function
+      v = initial('transition-timing-function')
 
     else if p is tab-size
-      v = initial-tab-size
+      v = initial('tab-size')
 
     else if p is color
-      v = initial-color
+      v = initial('color')
 
     else if p is direction
-      v = initial-direction
+      v = initial('direction')
 
     else if p is position
       v = static
@@ -127,7 +127,7 @@ reset()
 
     else if p is text-align
       dir = @direction
-      dir ?= initial-direction
+      dir ?= initial('direction')
 
       if dir is rtl
         v = right
