@@ -1,0 +1,57 @@
+/**
+ * Resets one or more properties to their initial values.
+ */
+reset()
+  importance = null
+  if arguments[length(arguments) - 1] is !important
+    importance = !important
+
+  for prop in arguments
+    v = initial('%s' % prop)
+
+    if v is null
+      // Special cases
+      if prop is text-align
+        dir = @direction or initial('direction')
+
+        if dir is rtl
+          v = right
+        else
+          v = left
+
+      else if \
+        prop is border-color or \
+        prop is border-top-color or \
+        prop is border-right-color or \
+        prop is border-bottom-color or \
+        prop is border-left-color
+        // All these default to `currentColor`, which has limited support
+        // https://developer.mozilla.org/en-US/docs/Web/CSS/color_value#currentColor_keyword
+
+        // @todo Add android-firefox, ie-mobile, ios-safari, android-browser...
+        if has-support(
+            'firefox <= 1.5',
+            'ie < 9',
+            'opera < 9.5',
+            'safari < 4'
+          )
+
+          v = @color
+
+          if v is null
+            if prop isnt border-color
+              v = @border-color or initial('border-color')
+
+          if v is null
+            v = initial('color')
+
+          if v isnt null
+            add-property(prop, v importance)
+
+        v = currentColor
+
+    if v isnt null
+      if importance isn null
+        add-property(prop, v importance)
+      else
+        add-property(prop, v)

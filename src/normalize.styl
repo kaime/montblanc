@@ -47,6 +47,18 @@ normalize()
     if initial('backface-visibility') isnt visible
       backface-visibility: initial('backface-visibility')
 
+    if initial('animation-duration') isnt 0
+      animation-duration: initial('animation-duration')
+
+    if initial('animation-delay') isnt 0
+      animation-delay: initial('animation-delay')
+
+    if initial('animation-iteration-count') isnt 1
+      animation-iteration-count: initial('animation-iteration-count')
+
+    if initial('animation-timing-function') isnt ease
+      animation-timing-function: initial('animation-timing-function')
+
   html
     // Set default font family
     font-family: initial('font-family')
