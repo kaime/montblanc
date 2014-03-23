@@ -347,6 +347,15 @@ body {
   position: static;
 }
 
+// @it resets `background-position` to `0 0`
+body
+  reset: background-position
+
+// @expect
+body {
+  background-position: 0 0;
+}
+
 // @it can be called with no arguments
 body
   reset()

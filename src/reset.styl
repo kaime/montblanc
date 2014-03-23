@@ -21,7 +21,8 @@ reset()
       p is top or \
       p is right or \
       p is bottom or \
-      p is left
+      p is left or \
+      p is background-size
       v = auto
 
     else if \
@@ -107,6 +108,9 @@ reset()
 
     else if p is position
       v = static
+
+    else if p is background-position
+      v = 0 0
 
     else if p is text-align
       dir = @direction
