@@ -242,7 +242,7 @@ blend-luminosity(s, b)
 /**
  * Generic `blend()` function.
  */
-blend(source, backdrop = #fff, mode = normal)
+blend(mode = normal, source, backdrop = #fff)
   mode = cast(mode, 'string')
   blend-fn = lookup('blend-' + mode)
 
