@@ -1,5 +1,5 @@
 /**
- * All rules and most comments based on Nicolas Gallagher's "normalize.css".
+ * Most rules and comments based on Nicolas Gallagher's "normalize.css".
  *
  * normalize.css v1.1.3 | MIT License | git.io/normalize
  * normalize.css v3.0.0 | MIT License | git.io/normalize
@@ -26,9 +26,31 @@
  */
 
 normalize()
+  if initial-box-sizing isnt content-box or \
+    initial-transition-timing-function isnt ease
+    *,
+    :before,
+    :after
+      if initial-box-sizing isnt content-box
+        box-sizing: initial-box-sizing
+      if initial-transition-timing-function isnt ease
+        transition-timing-function: initial-transition-timing-function
+
   html
-    // Set default font family to sans-serif
-    font-family: sans-serif
+    // Set default font family
+    font-family: initial-font-family
+
+    if initial-font-size isnt medium
+      font-size: initial-font-size
+
+    if initial-color isnt #000
+      color: initial-color
+
+    if initial-line-height isnt normal
+      line-height: initial-line-height
+
+    if initial-tab-size isnt 8
+      tab-size: initial-tab-size
 
     if has-support('ie')
       // Correct text resizing oddly in IE when body `font-size` is set
@@ -219,7 +241,8 @@ normalize()
     // Address differences between Firefox and other browsers.
     // Known issue: no IE 6/7 normalization.
     hr
-      box-sizing: content-box
+      if initial-box-sizing is content-box
+        box-sizing: content-box
       height: 0
 
   // Contain overflow in all browsers.
