@@ -33,6 +33,10 @@ normalize()
     :after
       if initial-box-sizing isnt content-box
         box-sizing: initial-box-sizing
+
+      if initial-transition-duration isnt 0
+        transition-duration: initial-transition-duration
+
       if initial-transition-timing-function isnt ease
         transition-timing-function: initial-transition-timing-function
 
