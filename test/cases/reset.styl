@@ -281,6 +281,34 @@ body {
   text-align: left;
 }
 
+// @it resets `font-size` to `medium`
+body
+  reset: font-size
+
+// @expect
+body {
+  font-size: medium;
+}
+
+// @it resets `font-family` to `sans-serif`
+body
+  reset: font-family
+
+// @expect
+body {
+  font-family: sans-serif;
+}
+
+// @it resets `color` to `black`
+body
+  reset: color !important
+
+// @expect
+body {
+  color: #000 !important;
+}
+
+
 // @it can be called with no arguments
 body
   reset()
