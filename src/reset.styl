@@ -2,138 +2,25 @@
  * Resets one or more properties to their initial values.
  */
 reset()
-  importance = unquote('')
+  importance = null
   if arguments[length(arguments) - 1] is !important
     importance = !important
 
-  for p in arguments
+  for prop in arguments
+    v = initial('%s' % prop)
 
-    v = null
+    if v is null
+      if prop is text-align
+        dir = @direction
+        dir ?= initial('direction')
 
-    if \
-      p is width or \
-      p is height or \
-      p is min-width or \
-      p is min-height or \
-      p is max-width or \
-      p is max-height or \
-      p is size or \
-      p is top or \
-      p is right or \
-      p is bottom or \
-      p is left or \
-      p is background-size
-      v = auto
-
-    else if \
-      p is border-radius or \
-      p is border-top-left-radius or \
-      p is border-top-right-radius or \
-      p is border-bottom-right-radius or \
-      p is border-bottom-left-radius or\
-      p is margin or \
-      p is margin-top or \
-      p is margin-right or \
-      p is margin-bottom or \
-      p is margin-left or \
-      p is padding or \
-      p is padding-top or \
-      p is padding-right or \
-      p is padding-bottom or \
-      p is padding-left or \
-      p is transition-delay or \
-      p is transition-duration
-      v = 0
-
-    else if \
-      p is float or \
-      p is font-decoration or \
-      p is text-transform or \
-      p is background or \
-      p is background-image or \
-      p is box-shadow or \
-      p is text-shadow or \
-      p is border or \
-      p is transition or \
-      p is transition-property or \
-      p is transform or \
-      p is perspective
-      v = none
-
-    else if \
-      p is font-style or \
-      p is font-stretch or \
-      p is font-weight or \
-      p is line-height or \
-      p is border-style
-      v = normal
-
-    else if p is background-color
-      v = transparent
-
-    else if p is opacity
-      v = 1
-
-    else if p is cursor
-      v = default
-
-    else if \
-      p is border-width or \
-      p is border-top-width or \
-      p is border-right-width or \
-      p is border-bottom-width or \
-      p is border-left-width
-      v = medium
-
-    else if \
-      p is visibility or \
-      p is backface-visibility
-      v = visible
-
-    else if p is font-size
-      v = initial('font-size')
-
-    else if p is font-family
-      v = initial('font-family')
-
-    else if p is box-sizing
-      v = initial('box-sizing')
-
-    else if p is transition-duration
-      v = initial('transition-duration')
-
-    else if p is transition-delay
-      v = initial('transition-delay')
-
-    else if p is transition-timing-function
-      v = initial('transition-timing-function')
-
-    else if p is tab-size
-      v = initial('tab-size')
-
-    else if p is color
-      v = initial('color')
-
-    else if p is direction
-      v = initial('direction')
-
-    else if p is position
-      v = static
-
-    else if p is transform-origin
-      v = 50% 50%
-
-    else if p is background-position
-      v = 0 0
-
-    else if p is text-align
-      dir = @direction
-      dir ?= initial('direction')
-
-      if dir is rtl
-        v = right
-      else
-        v = left
+        if dir is rtl
+          v = right
+        else
+          v = left
 
     if v isnt null
-      add-property(p, v importance)
+      if importance isn null
+        add-property(prop, v importance)
+      else
+        add-property(prop, v)
