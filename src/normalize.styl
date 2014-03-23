@@ -26,22 +26,26 @@
  */
 
 normalize()
-  if initial-box-sizing isnt content-box or \
-    initial-transition-timing-function isnt ease
-    *,
-    :before,
-    :after
-      if initial-box-sizing isnt content-box
-        box-sizing: initial-box-sizing
+  *,
+  :before,
+  :after
+    if initial-box-sizing isnt content-box
+      box-sizing: initial-box-sizing
 
-      if initial-transition-duration isnt 0
-        transition-duration: initial-transition-duration
+    if initial-transition-duration isnt 0
+      transition-duration: initial-transition-duration
 
-      if initial-transition-delay isnt 0
-        transition-delay: initial-transition-delay
+    if initial-transition-delay isnt 0
+      transition-delay: initial-transition-delay
 
-      if initial-transition-timing-function isnt ease
-        transition-timing-function: initial-transition-timing-function
+    if initial-transition-timing-function isnt ease
+      transition-timing-function: initial-transition-timing-function
+
+    if initial-transform-origin isnt (50% 50%)
+      transform-origin: initial-transform-origin
+
+    if initial-backface-visibility isnt visible
+      backface-visibility: initial-backface-visibility
 
   html
     // Set default font family
