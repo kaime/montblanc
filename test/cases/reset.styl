@@ -118,7 +118,7 @@ body {
   background-image: none;
 }
 
-// @it resets `font-weight`, `font-style`, `font-stretch` and `line-height` to `normal`
+// @it resets `font-weight`, `font-style`, and `font-stretch` to `normal`
 body
   reset: font-weight font-style font-stretch
   reset: line-height
@@ -128,6 +128,15 @@ body {
   font-weight: normal;
   font-style: normal;
   font-stretch: normal;
+  line-height: normal;
+}
+
+// @it resets `line-height` to `normal`
+body
+  reset: line-height
+
+// @expect
+body {
   line-height: normal;
 }
 

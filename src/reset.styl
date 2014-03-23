@@ -22,7 +22,6 @@ reset()
       p is right or \
       p is bottom or \
       p is left
-
       v = auto
 
     else if \
@@ -43,7 +42,6 @@ reset()
       p is padding-left or \
       p is transition-delay or \
       p is transition-duration
-
       v = 0
 
     else if \
@@ -61,12 +59,10 @@ reset()
       p is border or\
       p is transition or\
       p is transition-property
-
       v = none
 
     else if \
       p is cursor
-
       v = default
 
     else if \
@@ -75,33 +71,27 @@ reset()
       p is font-weight or \
       p is line-height or \
       p is border-style
-
       v = normal
 
     else if \
       p is border-width
-
       v = medium
 
     else if \
       p is visibility
-
       v = visible
 
     else if \
       p is box-sizing
-
-      v = content-box
+      v = initial-box-sizing
 
     else if \
       p is transition-timing-function
-
-      v = ease
+      v = initial-transition-timing-function
 
     else if \
       p is tab-size
-
-      v = 8
+      v = initial-tab-size
 
     if v isnt null
       add-property(p, v importance)
