@@ -73,7 +73,12 @@ reset()
     else if p is cursor
       v = default
 
-    else if p is border-width
+    else if \
+      p is border-width or \
+      p is border-top-width or \
+      p is border-right-width or \
+      p is border-bottom-width or \
+      p is border-left-width
       v = medium
 
     else if p is visibility

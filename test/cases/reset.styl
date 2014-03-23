@@ -218,9 +218,19 @@ body {
 body
   reset: border-width
 
+body
+  reset: border-left-width border-top-width border-bottom-width
+  reset: border-right-width !important
+
 // @expect
 body {
   border-width: medium;
+}
+body {
+  border-left-width: medium;
+  border-top-width: medium;
+  border-bottom-width: medium;
+  border-right-width: medium !important;
 }
 
 // @it resets `transition` and `transition-property` to `none`
