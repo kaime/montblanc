@@ -328,6 +328,15 @@ body {
   background-color: transparent;
 }
 
+// @it resets `position` to `static`
+body
+  reset: position
+
+// @expect
+body {
+  position: static;
+}
+
 // @it can be called with no arguments
 body
   reset()

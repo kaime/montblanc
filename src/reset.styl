@@ -100,6 +100,9 @@ reset()
     else if p is direction
       v = initial-direction
 
+    else if p is position
+      v = static
+
     else if p is text-align
       dir = @direction
       dir ?= initial-direction
