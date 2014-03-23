@@ -411,6 +411,24 @@ body {
   background-clip: border-box;
 }
 
+// @it resets `background-repeat` to `repeat`
+body
+  reset: background-repeat
+
+// @expect
+body {
+  background-repeat: repeat;
+}
+
+// @it resets `background-attachment` to `scroll`
+body
+  reset: background-attachment
+
+// @expect
+body {
+  background-attachment: scroll;
+}
+
 // @it can be called with no arguments
 body
   reset()
