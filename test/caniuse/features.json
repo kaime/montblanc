@@ -72,5 +72,11 @@
       "type": "property",
       "name": "user-select"
     }
+  ],
+  "css3-tabsize": [
+    {
+      "type": "property",
+      "name": "tab-size"
+    }
   ]
 }

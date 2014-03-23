@@ -1,0 +1,10 @@
+tab-size()
+  vendors = ()
+
+  if has-support('firefox', 'android-firefox')
+    push(vendors, moz)
+
+  if has-support('opera < 15', 'opera-mobile < 16')
+    push(vendors, o)
+
+  vendorize('tab-size', arguments, vendors)
