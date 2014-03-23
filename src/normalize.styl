@@ -53,6 +53,9 @@ normalize()
     if initial('animation-delay') isnt 0
       animation-delay: initial('animation-delay')
 
+    if initial('animation-iteration-count') isnt 1
+      animation-iteration-count: initial('animation-iteration-count')
+
     if initial('animation-timing-function') isnt ease
       animation-timing-function: initial('animation-timing-function')
 
