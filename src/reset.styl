@@ -45,11 +45,6 @@ reset()
       v = 0
 
     else if \
-      p is opacity
-
-      v = 1
-
-    else if \
       p is float or \
       p is font-decoration or \
       p is text-transform or \
@@ -62,10 +57,6 @@ reset()
       v = none
 
     else if \
-      p is cursor
-      v = default
-
-    else if \
       p is font-style or \
       p is font-stretch or \
       p is font-weight or \
@@ -73,25 +64,29 @@ reset()
       p is border-style
       v = normal
 
-    else if \
-      p is border-width
+    else if p is opacity
+      v = 1
+
+    else if p is cursor
+      v = default
+
+    else if p is border-width
       v = medium
 
-    else if \
-      p is visibility
+    else if p is visibility
       v = visible
 
-    else if \
-      p is box-sizing
+    else if p is box-sizing
       v = initial-box-sizing
 
-    else if \
-      p is transition-timing-function
+    else if p is transition-timing-function
       v = initial-transition-timing-function
 
-    else if \
-      p is tab-size
+    else if p is tab-size
       v = initial-tab-size
+
+    else if p is direction
+      v = initial-direction
 
     if v isnt null
       add-property(p, v importance)

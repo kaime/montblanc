@@ -263,6 +263,15 @@ body {
   tab-size: 8;
 }
 
+// @it resets `direction` to `ltr`
+body
+  reset: direction
+
+// @expect
+body {
+  direction: ltr;
+}
+
 // @it can be called with no arguments
 body
   reset()
