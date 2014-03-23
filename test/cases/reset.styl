@@ -393,6 +393,24 @@ body {
   text-shadow: none;
 }
 
+// @it resets `background-origin` to `padding-box`
+body
+  reset: background-origin
+
+// @expect
+body {
+  background-origin: padding-box;
+}
+
+// @it resets `background-clip` to `border-box`
+body
+  reset: background-clip
+
+// @expect
+body {
+  background-clip: border-box;
+}
+
 // @it can be called with no arguments
 body
   reset()
