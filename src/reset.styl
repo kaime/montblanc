@@ -12,13 +12,13 @@ reset()
     if v is null
       // Special cases
       if prop is text-align
-        dir = @direction
-        dir ?= initial('direction')
+        dir = @direction or initial('direction')
 
         if dir is rtl
           v = right
         else
           v = left
+
       else if \
         prop is border-color or \
         prop is border-top-color or \
