@@ -26,22 +26,34 @@ body {
   bottom: auto;
 }
 
-// @it resets `(min/max-)width/height` to `auto`
+// @it resets `width/height` to `auto`
 body
   reset: width height
-body
-  reset: min-width max-height min-height max-width
 
 // @expect
 body {
   width: auto;
   height: auto;
 }
+
+// @it resets `min-width/height` to `0`
+body
+  reset: min-width min-height
+
+// @expect
 body {
-  min-width: auto;
-  max-height: auto;
-  min-height: auto;
-  max-width: auto;
+  min-width: 0;
+  min-height: 0;
+}
+
+// @it resets `max-width/height` to `none`
+body
+  reset: max-width max-height
+
+// @expect
+body {
+  max-width: none;
+  max-height: none;
 }
 
 // @it resets both `width` and `height` to `auto` with `reset: size`
