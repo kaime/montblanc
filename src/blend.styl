@@ -188,6 +188,7 @@ blend-exclusion(s, b)
 
 /**
  * Computes the average of the source and backdrop colors on a per-channel basis.
+ * @todo Dont include it now
  */
 blend-channel-average(s, b)
   return (s + b) / 2;
@@ -197,6 +198,7 @@ blend-average(s, b)
 
 /**
  * Produces the opposite effect to `difference`. The result is a brighter color.
+ * @todo Dont include it now
  */
 blend-channel-negation(s, b)
   return 1 - abs(s + b - 1)
