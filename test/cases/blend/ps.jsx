@@ -230,8 +230,8 @@ var oldSettings = {
 }
 
 // ...before setting custom preferences.
-preferences.rulerUnits = Units.PIXELS
-app.displayDialogs = DialogModes.NO
+preferences.rulerUnits = Units.PIXELS;
+app.displayDialogs = DialogModes.NO;
 
 // Create the doc. We only need 1px.
 var doc = app.documents.add(1, 1);
