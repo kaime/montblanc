@@ -1,9 +1,13 @@
-// @describe `size`
+// @describe `(min/max-)size`
 
-// @it takes one or two unit arguments and sets both `width` and `height` at once
+// @it takes one or two unit arguments and sets both `(min/max-)width` and `(min/max-)height` at once
 div
   size: 10px
   size: 10px 20px
+  min-size: 1px
+  max-size: 99px
+  min-size: 1px 2px
+  max-size: 2px 4px
 
 // @expect
 div {
@@ -11,11 +15,19 @@ div {
   height: 10px;
   width: 10px;
   height: 20px;
+  min-width: 1px;
+  min-height: 1px;
+  max-width: 99px;
+  max-height: 99px;
+  min-width: 1px;
+  min-height: 2px;
+  max-width: 2px;
+  max-height: 4px;
 }
 
 // @it handles `auto` and `initial` values
 div
-  size: auto 20px
+  min-size: auto 20px
 
 div
   size: auto
@@ -25,8 +37,8 @@ div
 
 // @expect
 div {
-  width: auto;
-  height: 20px;
+  min-width: auto;
+  min-height: 20px;
 }
 div {
   width: auto;
@@ -41,7 +53,8 @@ div {
 div
   size: 10px !important
   size: 10px auto !important
-  size: auto !important
+  min-size: auto !important
+  max-size: 1920px 1080px !important
 
 // @expect
 div {
@@ -49,6 +62,8 @@ div {
   height: 10px !important;
   width: 10px !important;
   height: auto !important;
-  width: auto !important;
-  height: auto !important;
+  min-width: auto !important;
+  min-height: auto !important;
+  max-width: 1920px !important;
+  max-height: 1080px !important;
 }

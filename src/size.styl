@@ -1,11 +1,12 @@
 // Allows
 // 	`size: w h` => `width: w; height: h`
 //  `size: l` => `width: l; height: l`
-size()
+
+-size(prefix, args)
   units = ()
   importance = null
 
-  for arg in arguments
+  for arg in args
     if arg is a 'unit' or arg is auto or arg is initial
       push(units, arg)
     if arg is !important
@@ -17,5 +18,14 @@ size()
   else if l != 2
     error()
 
-  width: units[0] importance
-  height: (units[1] or units[0]) importance
+  {prefix}width: units[0] importance
+  {prefix}height: (units[1] or units[0]) importance
+
+size()
+  -size('', arguments)
+
+min-size()
+  -size('min-', arguments)
+
+max-size()
+  -size('max-', arguments)
