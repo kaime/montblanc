@@ -72,7 +72,7 @@ function whereAmI() {
  */
 var MODES = {
   'normal':      BlendMode.NORMAL,
-  'multiply':    BlendMode.MULTIPLY,
+  'multiply':    BlendMode.MULTIPLY/*,
   'screen':      BlendMode.SCREEN,
   'overlay':     BlendMode.OVERLAY,
   'darken':      BlendMode.DARKEN,
@@ -86,7 +86,7 @@ var MODES = {
   'hue':         BlendMode.HUE,
   'saturation':  BlendMode.SATURATION,
   'color':       BlendMode.COLORBLEND,
-  'luminosity':  BlendMode.LUMINOSITY
+  'luminosity':  BlendMode.LUMINOSITY*/
 };
 
 /**
@@ -473,8 +473,8 @@ app.displayDialogs = DialogModes.NO;
 // Create the doc. We only need 1px.
 var doc = app.documents.add(1, 1);
 //doc.bitsPerChannel = BitsPerChannelType.EIGHT;
-doc.bitsPerChannel = BitsPerChannelType.SIXTEEN;
-//doc.bitsPerChannel = BitsPerChannelType.THIRTYTWO;
+//doc.bitsPerChannel = BitsPerChannelType.SIXTEEN;
+doc.bitsPerChannel = BitsPerChannelType.THIRTYTWO;
 
 // Add a color sampler to query result color
 var sampler = doc.colorSamplers.add([0, 0]);
