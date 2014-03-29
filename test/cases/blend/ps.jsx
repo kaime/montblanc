@@ -264,7 +264,8 @@ app.displayDialogs = DialogModes.NO;
 
 // Create the doc. We only need 1px.
 var doc = app.documents.add(1, 1);
-doc.bitsPerChannel = BitsPerChannelType.SIXTEEN;
+doc.bitsPerChannel = BitsPerChannelType.EIGHT;
+//doc.bitsPerChannel = BitsPerChannelType.SIXTEEN;
 
 // Add a color sampler to query result color
 var sampler = doc.colorSamplers.add([0, 0]);
