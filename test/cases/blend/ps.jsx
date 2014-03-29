@@ -72,7 +72,7 @@ function whereAmI() {
  */
 var MODES = {
   'normal':      BlendMode.NORMAL,
-  'multiply':    BlendMode.MULTIPLY/*,
+  'multiply':    BlendMode.MULTIPLY,
   'screen':      BlendMode.SCREEN,
   'overlay':     BlendMode.OVERLAY,
   'darken':      BlendMode.DARKEN,
@@ -86,7 +86,7 @@ var MODES = {
   'hue':         BlendMode.HUE,
   'saturation':  BlendMode.SATURATION,
   'color':       BlendMode.COLORBLEND,
-  'luminosity':  BlendMode.LUMINOSITY*/
+  'luminosity':  BlendMode.LUMINOSITY
 };
 
 /**
