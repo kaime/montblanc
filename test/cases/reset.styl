@@ -1,0 +1,536 @@
+// @describe `reset`
+
+// @it can be called with no arguments and does nothing
+body
+  reset()
+  foo: bar
+
+// @expect
+body {
+  foo: bar;
+}
+
+// @it resets `top`, `right`, `bottom`, `left` to `auto`
+body
+  reset: left !important;
+body
+  reset: right top bottom;
+
+// @expect
+body {
+  left: auto !important;
+}
+body {
+  right: auto;
+  top: auto;
+  bottom: auto;
+}
+
+// @it resets `width/height` to `auto`
+body
+  reset: width height
+
+// @expect
+body {
+  width: auto;
+  height: auto;
+}
+
+// @it resets `min-width/height` to `0`
+body
+  reset: min-width min-height
+
+// @expect
+body {
+  min-width: 0;
+  min-height: 0;
+}
+
+// @it resets `max-width/height` to `none`
+body
+  reset: max-width max-height
+
+// @expect
+body {
+  max-width: none;
+  max-height: none;
+}
+
+// @it resets both `width` and `height` to `auto` with `reset: size`
+body
+  reset: size !important;
+
+// @expect
+body {
+  width: auto !important;
+  height: auto !important;
+}
+
+// @it resets paddings and and margins to `0`
+body
+  reset: padding margin;
+  reset: padding-left margin-right padding-top margin-bottom;
+  reset: margin-left padding-right margin-top padding-bottom;
+
+// @expect
+body {
+  padding: 0;
+  margin: 0;
+  padding-left: 0;
+  margin-right: 0;
+  padding-top: 0;
+  margin-bottom: 0;
+  margin-left: 0;
+  padding-right: 0;
+  margin-top: 0;
+  padding-bottom: 0;
+}
+
+// @it resets `border-radius` to `0`
+body
+  reset: border-top-left-radius;
+  reset: border-top-right-radius;
+  reset: border-bottom-right-radius;
+  reset: border-bottom-left-radius;
+
+support('firefox 1', 'chrome 1')
+body
+  reset: border-radius !important;
+
+// @expect
+body {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+body {
+  -moz-border-radius: 0 !important;
+  -webkit-border-radius: 0 !important;
+  border-radius: 0 !important;
+}
+
+// @it resets `float` to `none`
+body
+  reset: float
+
+// @expect
+body {
+  float: none;
+}
+
+// @it resets `text-transform` and `font-decoration` to `none`
+body
+  reset: text-transform font-decoration
+
+// @expect
+body {
+  text-transform: none;
+  font-decoration: none;
+}
+
+// @it resets `background` and `background-image` to `none`
+body
+  reset: background
+  reset: background-image
+
+// @expect
+body {
+  background: none;
+  background-image: none;
+}
+
+// @it resets `font-weight`, `font-style`, and `font-stretch` to `normal`
+body
+  reset: font-weight font-style font-stretch
+  reset: line-height
+
+// @expect
+body {
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+}
+
+// @it resets `line-height` to `normal`
+body
+  reset: line-height
+
+// @expect
+body {
+  line-height: normal;
+}
+
+// @it resets `box-shadow` to `none`
+body
+  reset: box-shadow
+
+support('safari 3')
+body
+  reset: box-shadow
+
+// @expect
+body {
+  box-shadow: none;
+}
+body {
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+// @it resets `visibility` to `visible`
+body
+  reset: visibility
+
+// @expect
+body {
+  visibility: visible;
+}
+
+// @it resets `box-sizing` to `content-box`
+support('firefox 1')
+body
+  reset: box-sizing
+
+// @expect
+body {
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+}
+
+// @it resets `opacity` to `1`
+support('ie 8')
+body
+  reset: opacity
+
+support('ie 7')
+body
+  reset: opacity !important
+
+// @expect
+body {
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+  opacity: 1;
+}
+body {
+  *filter: alpha(opacity=100) !important;
+  opacity: 1 !important;
+}
+
+// @it resets `cursor` to `default`
+body
+  reset: cursor
+
+// @expect
+body {
+  cursor: default;
+}
+
+// @it resets `border-style` to `normal`
+body
+  reset: border-style
+
+// @expect
+body {
+  border-style: normal;
+}
+
+// @it resets `border-width` to `medium`
+body
+  reset: border-width
+
+body
+  reset: border-left-width border-top-width border-bottom-width
+  reset: border-right-width !important
+
+// @expect
+body {
+  border-width: medium;
+}
+body {
+  border-left-width: medium;
+  border-top-width: medium;
+  border-bottom-width: medium;
+  border-right-width: medium !important;
+}
+
+// @it resets `transition` and `transition-property` to `none`
+body
+  reset: transition-property !important
+  reset: transition
+
+// @expect
+body {
+  transition-property: none !important;
+  transition: none;
+}
+
+// @it resets `transition-duration` and `transition-delay` to `0`
+body
+  reset: transition-duration transition-delay !important
+
+
+// @expect
+body {
+  transition-duration: 0 !important;
+  transition-delay: 0 !important;
+}
+
+// @it resets `transition-timing-function` to `ease`
+body
+  reset: transition-timing-function
+
+// @expect
+body {
+  transition-timing-function: ease;
+}
+
+// @it resets `tab-size` to `8`
+body
+  reset: tab-size
+
+// @expect
+body {
+  tab-size: 8;
+}
+
+// @it resets `direction` to `ltr`
+body
+  reset: direction
+
+// @expect
+body {
+  direction: ltr;
+}
+
+// @it resets `text-align` to `left`
+body
+  reset: text-align
+
+// @expect
+body {
+  text-align: left;
+}
+
+// @it resets `text-align` to `right` when `@direction` is `rtl`
+body
+  direction: rtl;
+  reset: text-align
+
+// @expect
+body {
+  direction: rtl;
+  text-align: right;
+}
+
+// @it resets `font-size` to `medium`
+body
+  reset: font-size
+
+// @expect
+body {
+  font-size: medium;
+}
+
+// @it resets `font-family` to `sans-serif`
+body
+  reset: font-family
+
+// @expect
+body {
+  font-family: sans-serif;
+}
+
+// @it resets `color` to `black`
+body
+  reset: color !important
+
+// @expect
+body {
+  color: #000 !important;
+}
+
+// @it resets `background-color` to `transparent`
+body
+  reset: background-color
+
+// @expect
+body {
+  background-color: transparent;
+}
+
+// @it resets `position` to `static`
+body
+  reset: position
+
+// @expect
+body {
+  position: static;
+}
+
+// @it resets `background-position` to `0 0`
+body
+  reset: background-position
+
+// @expect
+body {
+  background-position: 0 0;
+}
+
+// @it resets `transform` and `perspective` to `none`
+body
+  reset: transform perspective
+
+// @expect
+body {
+  transform: none;
+  perspective: none;
+}
+
+// @it resets `transform-origin` to `50% 50%`
+body
+  reset: transform-origin !important;
+
+// @expect
+body {
+  transform-origin: 50% 50% !important;
+}
+
+// @it resets `backface-visibility` `visible`
+body
+  reset: backface-visibility
+
+// @expect
+body {
+  backface-visibility: visible;
+}
+
+// @it resets `text-shadow` to `none`
+body
+  reset: text-shadow
+
+// @expect
+body {
+  text-shadow: none;
+}
+
+// @it resets `background-origin` to `padding-box`
+body
+  reset: background-origin
+
+// @expect
+body {
+  background-origin: padding-box;
+}
+
+// @it resets `background-clip` to `border-box`
+body
+  reset: background-clip
+
+// @expect
+body {
+  background-clip: border-box;
+}
+
+// @it resets `background-repeat` to `repeat`
+body
+  reset: background-repeat
+
+// @expect
+body {
+  background-repeat: repeat;
+}
+
+// @it resets `background-attachment` to `scroll`
+body
+  reset: background-attachment
+
+// @expect
+body {
+  background-attachment: scroll;
+}
+
+// @it resets `border-color` to `currentColor`
+unsupport('ie')
+body
+  reset: border-color border-top-color border-right-color border-bottom-color border-left-color
+
+// @expect
+body {
+  border-color: currentColor;
+  border-top-color: currentColor;
+  border-right-color: currentColor;
+  border-bottom-color: currentColor;
+  border-left-color: currentColor;
+}
+
+// @it fallbacks to current `@color` or initial `(border-)color` for `border-color` on browsers not supporting `currentColor`
+support('ie 6')
+body
+  color: red
+  reset: border-color
+
+body
+  border-color: white
+  reset: border-left-color
+
+// @expect
+body {
+  color: #f00;
+  border-color: #f00;
+  border-color: currentColor;
+}
+body {
+  border-color: #fff;
+  border-left-color: #fff;
+  border-left-color: currentColor;
+}
+
+// @it resets `animation` and `animation-name` to `none`
+body
+  reset: animation-name !important
+  reset: animation
+
+// @expect
+body {
+  animation-name: none !important;
+  animation: none;
+}
+
+// @it resets `animation-duration` and `animation-delay` to `0`
+body
+  reset: animation-duration animation-delay !important
+
+// @expect
+body {
+  animation-duration: 0 !important;
+  animation-delay: 0 !important;
+}
+
+// @it resets `animation-timing-function` to `ease`
+body
+  reset: animation-timing-function
+
+// @expect
+body {
+  animation-timing-function: ease;
+}
+
+// @it resets `animation-fill-mode` to `none`
+body
+  reset: animation-fill-mode
+
+// @expect
+body {
+  animation-fill-mode: none;
+}
+
+// @it resets `animation-iteration-count` to `1`
+body
+  reset: animation-iteration-count
+
+// @expect
+body {
+  animation-iteration-count: 1;
+}

@@ -7,7 +7,7 @@ var stylus = require('stylus'),
       data: require('./data/data.json')
     },
     features = require('./features.json'),
-    browsers = require('../../src/support/browsers.json');
+    browsers = require('../../src/data/browsers.json');
 
 function getVersions(versions) {
 

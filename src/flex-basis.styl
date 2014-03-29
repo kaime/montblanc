@@ -11,10 +11,19 @@
  * https://gist.github.com/cimmanon/4461470
  */
 
-@require 'flex-direction'
-@require 'flex-wrap'
-@require 'flex-grow'
-@require 'flex-shrink'
-@require 'flex-basis'
-@require 'flex-flow'
-@require 'flex'
+flex-basis()
+  vendors = ()
+
+  if has-support('firefox < 22')
+    push(vendors, moz)
+
+  if has-support(
+      'chrome < 29',
+      'safari',
+      'opera < 17',
+      'ios-safari',
+      'blackberry-browser'
+    )
+    push(vendors, webkit)
+
+  vendorize('flex-basis', arguments, vendors)

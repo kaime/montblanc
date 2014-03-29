@@ -3,15 +3,13 @@
  * [1] http://caniuse.com/css-opacity
  * [2] https://developer.mozilla.org/en-US/docs/Web/CSS/opacity
  */
-opacity()
-  importance = unquote('')
-  for arg in arguments
-    if type-of(arg) is 'unit'
-      alpha = arg
-    else if arg is !important
-      importance = arg
-    else
-      throw('bad args')
+opacity(alpha)
+  if arguments[length(arguments) - 1] is !important
+    importance = !important
+  else
+    importance = unquote('')
+
+  alpha = cast(alpha, 'unit')
 
   if has-support('ie < 9')
     perc = round(alpha * 100)
@@ -22,4 +20,4 @@ opacity()
     else
       -ms-filter: '"progid:DXImageTransform.Microsoft.Alpha(Opacity=%s)"' % perc importance
 
-  opacity: alpha importance
+  opacity: arguments
