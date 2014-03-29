@@ -1,4 +1,4 @@
-/**
+﻿/**
  * This PS script automatically creates the test cases for `blend()` based on
  * *actual Photoshop results*. It:
  *
@@ -17,42 +17,79 @@
  */
 
 /**
+ * `Array.prototype.map` polyfill.
+ * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map
+ */
+if (!Array.prototype.map) {
+
+  Array.prototype.map = function(fun /*, thisArg */) {
+
+    "use strict";
+
+    if (this === void 0 || this === null)
+      throw new TypeError();
+
+    var t = Object(this);
+    var len = t.length >>> 0;
+    if (typeof fun !== "function")
+      throw new TypeError();
+
+    var res = new Array(len);
+    var thisArg = arguments.length >= 2 ? arguments[1] : void 0;
+    for (var i = 0; i < len; i++)
+    {
+      // NOTE: Absolute correctness would demand Object.defineProperty
+      //       be used.  But this method is fairly new, and failure is
+      //       possible only if Object.prototype or Array.prototype
+      //       has a property |i| (very unlikely), so use a less-correct
+      //       but more portable alternative.
+      if (i in t)
+        res[i] = fun.call(thisArg, t[i], i, t);
+    }
+
+    return res;
+  };
+}
+
+/**
+ * This tells the path of this script.
+ *
+ * From http://www.ps-scripts.com/bb/viewtopic.php?f=2&t=3446
+ */
+function whereAmI() {
+
+  var where;
+
+  try {
+    var forcedError = FORCEDRRROR;
+  } catch (e) {
+    where = File(e.fileName).parent;
+  }
+
+  return where;
+}
+
+/**
  * Pairs `blend()` modes with PS ones.
  */
-var MODES = (function() {
-
-  var modes = [
-    'normal',
-    'multiply',
-    'screen',
-    'overlay',
-    'darken',
-    'lighten',
-    'color-dodge',
-    'color-burn',
-    'hard-light',
-    'soft-light',
-    'difference',
-    'exclusion',
-    'hue',
-    'saturation',
-    'color',
-    'luminosity'/*,
-    'pin-light',
-    'vivid-light',
-    'hard-light',
-    'hard-mix',
-    'linear-burn',
-    'linear-light',
-    'substract'
-    */
-  ];
-
-  return modes.map(function(mode) {
-    return mode.toUpperCase().replace(/-/, '');
-  });
-
-})();
+var MODES = {
+  'normal':      BlendMode.NORMAL,
+  'multiply':    BlendMode.MULTIPLY,
+  'screen':      BlendMode.SCREEN,
+  'overlay':     BlendMode.OVERLAY,
+  'darken':      BlendMode.DARKEN,
+  'lighten':     BlendMode.LIGHTEN,
+  'color-dodge': BlendMode.COLORDODGE,
+  'color-burn':  BlendMode.COLORBURN,
+  'hard-light':  BlendMode.HARDLIGHT,
+  'soft-light':  BlendMode.SOFTLIGHT,
+  'difference':  BlendMode.DIFFERENCE,
+  'exclusion':   BlendMode.EXCLUSION,
+  'hue':         BlendMode.HUE,
+  'saturation':  BlendMode.SATURATION,
+  'color':       BlendMode.COLORBLEND,
+  'luminosity':  BlendMode.LUMINOSITY
+};
 
 /**
  * CSSColor class. Represents an RGBA color.
@@ -61,10 +98,10 @@ function CSSColor(r, g, b, a) {
 
   if (typeof a === 'undedined') a = 1;
 
-  this.red = parseInt(r, 10);
-  this.green = parseInt(g, 10);
-  this.blue = parseInt(b, 10);
-  this.alpha = parseFloat(a);
+  this.red = Math.round(parseFloat(r));
+  this.green = Math.round(parseFloat(g));
+  this.blue = Math.round(parseFloat(b));
+  this.alpha = Math.round(parseFloat(a));
 }
 
 /**
@@ -72,15 +109,7 @@ function CSSColor(r, g, b, a) {
  */
 CSSColor.parseRGBA = (function() {
 
-  var regRGBA = new RegExp([
-    '^\s*rgba?\s*',
-    '\(\s*',
-    '([0-9\.]+)\s*',
-    ',\s*([0-9\.]+)\s*',
-    ',\s*([0-9\.]+)\s*',
-    '(?:,\s*([0-9\.]+\s*(%?)))?\s*',
-    '\)\s*$',
-  ].join(''), 'i');
+  var regRGBA = /^\s*rgba?\s*\(\s*([0-9\.]+)\s*,\s*([0-9\.]+)\s*,\s*([0-9\.]+)\s*(?:,\s*([0-9\.]+\s*(%?)))?\s*\)\s*$/i;
 
   return function(rgba) {
     var m = rgba.match(regRGBA)
@@ -108,11 +137,11 @@ CSSColor.parseRGBA = (function() {
 CSSColor.parseHex = (function() {
 
   var regHex = new RegExp([
-    '^\s*#',
-    '([0-9a-f]{2})'
-    '([0-9a-f]{2})'
+    '^\\s*#',
     '([0-9a-f]{2})',
-    '\s*$'
+    '([0-9a-f]{2})',
+    '([0-9a-f]{2})',
+    '\\s*$'
   ].join(''), 'i');
 
   return function(hex) {
@@ -120,9 +149,9 @@ CSSColor.parseHex = (function() {
 
     if (m) {
       return new CSSColor(
-          parseFloat(m[1], 16),
-          parseFloat(m[2], 16),
-          parseFloat(m[3], 16),
+          parseInt(m[1], 16),
+          parseInt(m[2], 16),
+          parseInt(m[3], 16),
           1
       );
     }
@@ -136,7 +165,7 @@ CSSColor.parseHex = (function() {
  * Parses a rgb(a) or hexadecimal CSS color.
  */
 CSSColor.parse = function(color) {
-  return CSSColor.parseRGBAColor(color) || CSSColor.parseHexColor(color);
+  return CSSColor.parseRGBA(color) || CSSColor.parseHex(color);
 }
 
 /**
@@ -158,11 +187,11 @@ CSSColor.fromPSColor = function(color, alpha) {
  * Returns equivalent (opaque) PS `solidColor`.
  */
 CSSColor.prototype.toPSColor = function() {
-  var color = new solidColor;
+  var color = new SolidColor;
 
-  color.red = this.red;
-  color.green = this.green;
-  color.blue = this.blue;
+  color.rgb.red = this.red;
+  color.rgb.green = this.green;
+  color.rgb.blue = this.blue;
 
   return color;
 }
@@ -179,7 +208,7 @@ CSSColor.prototype.toString = function() {
 
   var hex = [this.red, this.green, this.blue].map(
     function(c) {
-      return c.toString(16).toLowerCase()
+      return ('0' + c.toString(16).toLowerCase()).substr(-2);
     }
   );
 
@@ -197,7 +226,7 @@ CSSColor.prototype.toString = function() {
 /**
  * Parses a JSON string.
  */
-function parseJON(json) {
+function parseJSON(json) {
   return eval('(' + json + ')');
 }
 
@@ -205,7 +234,7 @@ function parseJON(json) {
  * Reads and parses a JSON file.
  */
 function readJSON(path) {
-  var file = File(path);
+  var file = File(whereAmI() + path);
 
   if (file.exists) {
     file.open('r');
@@ -216,7 +245,7 @@ function readJSON(path) {
 }
 
 // Read samples from JSON file.
-var colors = readJSON('samples.json');
+var colors = readJSON('./samples.json');
 
 // Actual stylus code.
 var code = [
@@ -226,7 +255,7 @@ var code = [
 // Keep old Photoshop settings...
 var oldSettings = {
   rulerUnits: app.preferences.rulerUnits,
-  displayDialogs = app.displayDialogs
+  displayDialogs: app.displayDialogs
 }
 
 // ...before setting custom preferences.
@@ -235,6 +264,7 @@ app.displayDialogs = DialogModes.NO;
 
 // Create the doc. We only need 1px.
 var doc = app.documents.add(1, 1);
+doc.bitsPerChannel = BitsPerChannelType.SIXTEEN;
 
 /**
  * Gets the color of the (only pixel of the) document using the color sampler.
@@ -248,11 +278,14 @@ function eyeDrop() {
 
   var sampler = doc.colorSamplers.add([0, 0]);
 
+  $.writeln(sampler.color.rgb.hexValue);
+  $.writeln(sampler.color.rgb.red, ', ' , sampler.color.rgb.green, ', ' , sampler.color.rgb.blue);
+
   return CSSColor.fromPSColor(sampler.color);
 }
 
-// "Backgrop" layer.
-var backgropLayer = doc.backgroundLayer;
+// "Backdrop" layer.
+var backdropLayer = doc.backgroundLayer;
 
 // Create the "source" layer.
 var sourceLayer = doc.artLayers.add();
@@ -280,12 +313,12 @@ for (mode in MODES) {
 
   for (i = 0; i < l; i++) {
 
-    // The backgrop color.
+    // The backdrop color.
     backdrop = CSSColor.parse(colors[i]);
 
     // Apply to backdrop layer.
-    doc.activeLayer = backgropLayer;
-    doc.selection.fill(color.toPSColor());
+    doc.activeLayer = backdropLayer;
+    doc.selection.fill(backdrop.toPSColor());
 
     for (j = 0; j < l; j++) {
 
@@ -294,20 +327,22 @@ for (mode in MODES) {
 
       // Apply to source layer.
       doc.activeLayer = sourceLayer;
-      doc.selection.fill(color.toPSColor());
-      sourceLayer.opacity = color.alpha;
+      doc.selection.fill(source.toPSColor());
+      sourceLayer.opacity = source.alpha * 100;
 
       // Collect computed result.
       result = eyeDrop();
 
+      $.writeln(mode + ': ' , source, ' + ', backdrop, ' = ', result);
+
       // Append to Stylus code.
       code.push(
-        "  color: blend('" + mode + "', " + colors[i] + ', ' + colors[j] + ')'
+        "  color: blend('" + mode + "', " + colors[j] + ', ' + colors[i] + ')'
       );
 
       // Append to expected CSS code
       expect.push(
-        '  color: ' + toCSSColor(result)
+        '  color: ' + result + ';'
       );
     }
   }
@@ -318,7 +353,9 @@ for (mode in MODES) {
   );
 
   code = code.concat([
-    '// @expect'
+    '',
+    '// @expect',
+    ''
   ], expect);
 }
 
@@ -326,10 +363,14 @@ for (mode in MODES) {
 app.preferences.rulerUnits = oldSettings.rulerUnits;
 app.displayDialogs = oldSettings.displayDialogs;
 
+// And silently close document.
+doc.close(SaveOptions.DONOTSAVECHANGES);
+
 // Open save dialog and write code if not cancelled
-var file = File.saveDialog();
+var file = File.saveDialog('Save test case', "Stylus:*.styl");
 
 if (file) {
+  code = code.join("\n");
   file.open('w');
   file.write(code);
   file.close();

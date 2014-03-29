@@ -1,481 +1,241 @@
-// @describe `blend` mixes colors with different blending modes
-
+// @describe `blend()`
 // @it `normal`
-#normal
-  lorem: blend(normal, black, white)
-  ipsum: blend(normal, grey, white)
-  dolor: blend(normal, #fc0a8b, white)
+body
+  color: blend('normal', #a633da, #a633da)
+  color: blend('normal', #4be5b4, #a633da)
+  color: blend('normal', #a633da, #4be5b4)
+  color: blend('normal', #4be5b4, #4be5b4)
 
 // @expect
-#normal {
-  lorem: #000;
-  ipsum: #808080;
-  dolor: #fc0a8b;
-}
 
+body {
+  color: #a633da;
+  color: #4be5b4;
+  color: #a633da;
+  color: #4be5b4;
+}
 // @it `multiply`
-#multiply
-  lorem: blend(multiply, black, white)
-  ipsum: blend(multiply, grey, white)
-  dolor: blend(multiply, #fc0a8b, white)
-  amet: blend(multiply, rgb(27,198,93), white)
-  consectetur: blend(multiply, white, black)
-  adipiscing: blend(multiply, grey, black)
-  elit: blend(multiply, #fc0a8b, black)
-  etiam: blend(multiply, rgb(27,198,93), black)
-  hendrerit: blend(multiply, white, grey)
-  mauris: blend(multiply, black, grey)
-  erat: blend(multiply, #fc0a8b, grey)
-  feugiat: blend(multiply, rgb(27,198,93), grey)
-  sagittis: blend(multiply, white, #fc0a8b)
-  pharetra: blend(multiply, black, #fc0a8b)
-  libero: blend(multiply, grey, #fc0a8b)
-  sollicitudin: blend(multiply, rgb(27,198,93), #fc0a8b)
-  pellentesque: blend(multiply, white, rgb(27,198,93))
-  fermentum: blend(multiply, black, rgb(27,198,93))
-  ante: blend(multiply, grey, rgb(27,198,93))
-  interdum: blend(multiply, #fc0a8b, rgb(27,198,93))
-
+body
+  color: blend('multiply', #a633da, #a633da)
+  color: blend('multiply', #4be5b4, #a633da)
+  color: blend('multiply', #a633da, #4be5b4)
+  color: blend('multiply', #4be5b4, #4be5b4)
 
 // @expect
-#multiply {
-  lorem: #000;
-  ipsum: #808080;
-  dolor: #fc0a8b;
-  amet: #1bc65d;
-  consectetur: #000;
-  adipiscing: #000;
-  elit: #000;
-  etiam: #000;
-  hendrerit: #808080;
-  mauris: #000;
-  erat: #7e0546;
-  feugiat: #0e632f;
-  sagittis: #fc0a8b;
-  pharetra: #000;
-  libero: #7e0546;
-  sollicitudin: #1b0833;
-  pellentesque: #1bc65d;
-  fermentum: #000;
-  ante: #0e632f;
-  interdum: #1b0833;
-}
 
+body {
+  color: #6c0aba;
+  color: #312e9a;
+  color: #312e9a;
+  color: #16ce7f;
+}
 // @it `screen`
-#screen
-  lorem: blend(screen, black, white)
-  ipsum: blend(screen, grey, white)
-  dolor: blend(screen, #fc0a8b, white)
-  amet: blend(screen, rgb(27,198,93), white)
-  consectetur: blend(screen, white, black)
-  adipiscing: blend(screen, grey, black)
-  elit: blend(screen, #fc0a8b, black)
-  etiam: blend(screen, rgb(27,198,93), black)
-  hendrerit: blend(screen, white, grey)
-  mauris: blend(screen, black, grey)
-  erat: blend(screen, #fc0a8b, grey)
-  feugiat: blend(screen, rgb(27,198,93), grey)
-  sagittis: blend(screen, white, #fc0a8b)
-  pharetra: blend(screen, black, #fc0a8b)
-  libero: blend(screen, grey, #fc0a8b)
-  sollicitudin: blend(screen, rgb(27,198,93), #fc0a8b)
-  pellentesque: blend(screen, white, rgb(27,198,93))
-  fermentum: blend(screen, black, rgb(27,198,93))
-  ante: blend(screen, grey, rgb(27,198,93))
-  interdum: blend(screen, #fc0a8b, rgb(27,198,93))
-
+body
+  color: blend('screen', #a633da, #a633da)
+  color: blend('screen', #4be5b4, #a633da)
+  color: blend('screen', #a633da, #4be5b4)
+  color: blend('screen', #4be5b4, #4be5b4)
 
 // @expect
-#screen {
-  lorem: #fff;
-  ipsum: #fff;
-  dolor: #fff;
-  amet: #fff;
-  consectetur: #fff;
-  adipiscing: #808080;
-  elit: #fc0a8b;
-  etiam: #1bc65d;
-  hendrerit: #fff;
-  mauris: #808080;
-  erat: #fe85c5;
-  feugiat: #8de3ae;
-  sagittis: #fff;
-  pharetra: #fc0a8b;
-  libero: #fe85c5;
-  sollicitudin: #fcc8b5;
-  pellentesque: #fff;
-  fermentum: #1bc65d;
-  ante: #8de3ae;
-  interdum: #fcc8b5;
-}
 
+body {
+  color: #e05cfa;
+  color: #c0eaf4;
+  color: #c0eaf4;
+  color: #80fce9;
+}
 // @it `overlay`
-#overlay
-  lorem: blend(overlay, black, white)
-  ipsum: blend(overlay, grey, white)
-  dolor: blend(overlay, #fc0a8b, white)
-  amet: blend(overlay, rgb(27,198,93), white)
-  consectetur: blend(overlay, white, black)
-  adipiscing: blend(overlay, grey, black)
-  elit: blend(overlay, #fc0a8b, black)
-  etiam: blend(overlay, rgb(27,198,93), black)
-  hendrerit: blend(overlay, white, grey)
-  mauris: blend(overlay, black, grey)
-  erat: blend(overlay, #fc0a8b, grey)
-  feugiat: blend(overlay, rgb(27,198,93), grey)
-  sagittis: blend(overlay, white, #fc0a8b)
-  pharetra: blend(overlay, black, #fc0a8b)
-  libero: blend(overlay, grey, #fc0a8b)
-  sollicitudin: blend(overlay, rgb(27,198,93), #fc0a8b)
-  pellentesque: blend(overlay, white, rgb(27,198,93))
-  fermentum: blend(overlay, black, rgb(27,198,93))
-  ante: blend(overlay, grey, rgb(27,198,93))
-  interdum: blend(overlay, #fc0a8b, rgb(27,198,93))
-
+body
+  color: blend('overlay', #a633da, #a633da)
+  color: blend('overlay', #4be5b4, #a633da)
+  color: blend('overlay', #a633da, #4be5b4)
+  color: blend('overlay', #4be5b4, #4be5b4)
 
 // @expect
-#overlay {
-  lorem: #fff;
-  ipsum: #fff;
-  dolor: #fff;
-  amet: #fff;
-  consectetur: #000;
-  adipiscing: #000;
-  elit: #000;
-  etiam: #000;
-  hendrerit: #fff;
-  mauris: #010101;
-  erat: #fc0b8b;
-  feugiat: #1cc65e;
-  sagittis: #ff14ff;
-  pharetra: #f90017;
-  libero: #fc0a8b;
-  sollicitudin: #fa106c;
-  pellentesque: #36ffba;
-  fermentum: #008d00;
-  ante: #1bc65d;
-  interdum: #359165;
+
+body {
+  color: #c114f4;
+  color: #815ce9;
+  color: #62d5e9;
+  color: #2cfad3;
 }
-
-// @it `soft-light`
-#soft-light
-  lorem: blend(soft-light, black, white)
-  ipsum: blend(soft-light, grey, white)
-  dolor: blend(soft-light, #fc0a8b, white)
-  amet: blend(soft-light, rgb(27,198,93), white)
-  consectetur: blend(soft-light, white, black)
-  adipiscing: blend(soft-light, grey, black)
-  elit: blend(soft-light, #fc0a8b, black)
-  etiam: blend(soft-light, rgb(27,198,93), black)
-  hendrerit: blend(soft-light, white, grey)
-  mauris: blend(soft-light, black, grey)
-  erat: blend(soft-light, #fc0a8b, grey)
-  feugiat: blend(soft-light, rgb(27,198,93), grey)
-  sagittis: blend(soft-light, white, #fc0a8b)
-  pharetra: blend(soft-light, black, #fc0a8b)
-  libero: blend(soft-light, grey, #fc0a8b)
-  sollicitudin: blend(soft-light, rgb(27,198,93), #fc0a8b)
-  pellentesque: blend(soft-light, white, rgb(27,198,93))
-  fermentum: blend(soft-light, black, rgb(27,198,93))
-  ante: blend(soft-light, grey, rgb(27,198,93))
-  interdum: blend(soft-light, #fc0a8b, rgb(27,198,93))
-
+// @it `darken`
+body
+  color: blend('darken', #a633da, #a633da)
+  color: blend('darken', #4be5b4, #a633da)
+  color: blend('darken', #a633da, #4be5b4)
+  color: blend('darken', #4be5b4, #4be5b4)
 
 // @expect
-#soft-light {
-  lorem: #fff;
-  ipsum: #fff;
-  dolor: #fff;
-  amet: #fff;
-  consectetur: #000;
-  adipiscing: #000;
-  elit: #000;
-  etiam: #000;
-  hendrerit: #c0c0c0;
-  mauris: #404040;
-  erat: #be4586;
-  feugiat: #4ea36f;
-  sagittis: #ff14ca;
-  pharetra: #f9004c;
-  libero: #fc0a8b;
-  sollicitudin: #fa0f7a;
-  pellentesque: #33f298;
-  fermentum: #039a22;
-  ante: #1bc65d;
-  interdum: #339d62;
-}
 
+body {
+  color: #a633da;
+  color: #4b33b4;
+  color: #4b33b4;
+  color: #4be5b4;
+}
+// @it `lighten`
+body
+  color: blend('lighten', #a633da, #a633da)
+  color: blend('lighten', #4be5b4, #a633da)
+  color: blend('lighten', #a633da, #4be5b4)
+  color: blend('lighten', #4be5b4, #4be5b4)
+
+// @expect
+
+body {
+  color: #a633da;
+  color: #a6e5da;
+  color: #a6e5da;
+  color: #4be5b4;
+}
+// @it `color-dodge`
+body
+  color: blend('color-dodge', #a633da, #a633da)
+  color: blend('color-dodge', #4be5b4, #a633da)
+  color: blend('color-dodge', #a633da, #4be5b4)
+  color: blend('color-dodge', #4be5b4, #4be5b4)
+
+// @expect
+
+body {
+  color: #ff40ff;
+  color: #ebffff;
+  color: #d7ffff;
+  color: #6affff;
+}
+// @it `color-burn`
+body
+  color: blend('color-burn', #a633da, #a633da)
+  color: blend('color-burn', #4be5b4, #a633da)
+  color: blend('color-burn', #a633da, #4be5b4)
+  color: blend('color-burn', #4be5b4, #4be5b4)
+
+// @expect
+
+body {
+  color: #7600d4;
+  color: #001ccb;
+  color: #007da7;
+  color: #00e295;
+}
 // @it `hard-light`
-#hard-light
-  lorem: blend(hard-light, black, white)
-  ipsum: blend(hard-light, grey, white)
-  dolor: blend(hard-light, #fc0a8b, white)
-  amet: blend(hard-light, rgb(27,198,93), white)
-  consectetur: blend(hard-light, white, black)
-  adipiscing: blend(hard-light, grey, black)
-  elit: blend(hard-light, #fc0a8b, black)
-  etiam: blend(hard-light, rgb(27,198,93), black)
-  hendrerit: blend(hard-light, white, grey)
-  mauris: blend(hard-light, black, grey)
-  erat: blend(hard-light, #fc0a8b, grey)
-  feugiat: blend(hard-light, rgb(27,198,93), grey)
-  sagittis: blend(hard-light, white, #fc0a8b)
-  pharetra: blend(hard-light, black, #fc0a8b)
-  libero: blend(hard-light, grey, #fc0a8b)
-  sollicitudin: blend(hard-light, rgb(27,198,93), #fc0a8b)
-  pellentesque: blend(hard-light, white, rgb(27,198,93))
-  fermentum: blend(hard-light, black, rgb(27,198,93))
-  ante: blend(hard-light, grey, rgb(27,198,93))
-  interdum: blend(hard-light, #fc0a8b, rgb(27,198,93))
-
+body
+  color: blend('hard-light', #a633da, #a633da)
+  color: blend('hard-light', #4be5b4, #a633da)
+  color: blend('hard-light', #a633da, #4be5b4)
+  color: blend('hard-light', #4be5b4, #4be5b4)
 
 // @expect
-#hard-light {
-  lorem: #000;
-  ipsum: #fff;
-  dolor: #ff14ff;
-  amet: #36ffba;
-  consectetur: #fff;
-  adipiscing: #010101;
-  elit: #f90017;
-  etiam: #008d00;
-  hendrerit: #fff;
-  mauris: #000;
-  erat: #fc0a8b;
-  feugiat: #1bc65d;
-  sagittis: #fff;
-  pharetra: #000;
-  libero: #fc0b8b;
-  sollicitudin: #359165;
-  pellentesque: #fff;
-  fermentum: #000;
-  ante: #1cc65e;
-  interdum: #fa106c;
-}
 
+body {
+  color: #c114f4;
+  color: #62d5e9;
+  color: #815ce9;
+  color: #2cfad3;
+}
+// @it `soft-light`
+body
+  color: blend('soft-light', #a633da, #a633da)
+  color: blend('soft-light', #4be5b4, #a633da)
+  color: blend('soft-light', #a633da, #4be5b4)
+  color: blend('soft-light', #4be5b4, #4be5b4)
+
+// @expect
+
+body {
+  color: #b21be7;
+  color: #8e65e1;
+  color: #5ed7cc;
+  color: #35efc2;
+}
 // @it `difference`
-#difference
-  lorem: blend(difference, black, white)
-  ipsum: blend(difference, grey, white)
-  dolor: blend(difference, #fc0a8b, white)
-  amet: blend(difference, rgb(27,198,93), white)
-  consectetur: blend(difference, white, black)
-  adipiscing: blend(difference, grey, black)
-  elit: blend(difference, #fc0a8b, black)
-  etiam: blend(difference, rgb(27,198,93), black)
-  hendrerit: blend(difference, white, grey)
-  mauris: blend(difference, black, grey)
-  erat: blend(difference, #fc0a8b, grey)
-  feugiat: blend(difference, rgb(27,198,93), grey)
-  sagittis: blend(difference, white, #fc0a8b)
-  pharetra: blend(difference, black, #fc0a8b)
-  libero: blend(difference, grey, #fc0a8b)
-  sollicitudin: blend(difference, rgb(27,198,93), #fc0a8b)
-  pellentesque: blend(difference, white, rgb(27,198,93))
-  fermentum: blend(difference, black, rgb(27,198,93))
-  ante: blend(difference, grey, rgb(27,198,93))
-  interdum: blend(difference, #fc0a8b, rgb(27,198,93))
-
+body
+  color: blend('difference', #a633da, #a633da)
+  color: blend('difference', #4be5b4, #a633da)
+  color: blend('difference', #a633da, #4be5b4)
+  color: blend('difference', #4be5b4, #4be5b4)
 
 // @expect
-#difference {
-  lorem: #fff;
-  ipsum: #7f7f7f;
-  dolor: #03f574;
-  amet: #e439a2;
-  consectetur: #fff;
-  adipiscing: #808080;
-  elit: #fc0a8b;
-  etiam: #1bc65d;
-  hendrerit: #7f7f7f;
-  mauris: #808080;
-  erat: #7c760b;
-  feugiat: #654623;
-  sagittis: #03f574;
-  pharetra: #fc0a8b;
-  libero: #7c760b;
-  sollicitudin: #e1bc2e;
-  pellentesque: #e439a2;
-  fermentum: #1bc65d;
-  ante: #654623;
-  interdum: #e1bc2e;
-}
 
+body {
+  color: #000;
+  color: #5bb226;
+  color: #5bb226;
+  color: #000;
+}
 // @it `exclusion`
-#exclusion
-  lorem: blend(exclusion, black, white)
-  ipsum: blend(exclusion, grey, white)
-  dolor: blend(exclusion, #fc0a8b, white)
-  amet: blend(exclusion, rgb(27,198,93), white)
-  consectetur: blend(exclusion, white, black)
-  adipiscing: blend(exclusion, grey, black)
-  elit: blend(exclusion, #fc0a8b, black)
-  etiam: blend(exclusion, rgb(27,198,93), black)
-  hendrerit: blend(exclusion, white, grey)
-  mauris: blend(exclusion, black, grey)
-  erat: blend(exclusion, #fc0a8b, grey)
-  feugiat: blend(exclusion, rgb(27,198,93), grey)
-  sagittis: blend(exclusion, white, #fc0a8b)
-  pharetra: blend(exclusion, black, #fc0a8b)
-  libero: blend(exclusion, grey, #fc0a8b)
-  sollicitudin: blend(exclusion, rgb(27,198,93), #fc0a8b)
-  pellentesque: blend(exclusion, white, rgb(27,198,93))
-  fermentum: blend(exclusion, black, rgb(27,198,93))
-  ante: blend(exclusion, grey, rgb(27,198,93))
-  interdum: blend(exclusion, #fc0a8b, rgb(27,198,93))
-
+body
+  color: blend('exclusion', #a633da, #a633da)
+  color: blend('exclusion', #4be5b4, #a633da)
+  color: blend('exclusion', #a633da, #4be5b4)
+  color: blend('exclusion', #4be5b4, #4be5b4)
 
 // @expect
-#exclusion {
-  lorem: #fff;
-  ipsum: #7f7f7f;
-  dolor: #03f574;
-  amet: #e439a2;
-  consectetur: #fff;
-  adipiscing: #808080;
-  elit: #fc0a8b;
-  etiam: #1bc65d;
-  hendrerit: #7f7f7f;
-  mauris: #808080;
-  erat: #7f807f;
-  feugiat: #807f80;
-  sagittis: #03f574;
-  pharetra: #fc0a8b;
-  libero: #7f807f;
-  sollicitudin: #e2c083;
-  pellentesque: #e439a2;
-  fermentum: #1bc65d;
-  ante: #807f80;
-  interdum: #e2c083;
+
+body {
+  color: #74523f;
+  color: #8fbc5a;
+  color: #8fbc5a;
+  color: #6a2f6a;
 }
-
-// @it `average`
-#average
-  lorem: blend(average, black, white)
-  ipsum: blend(average, grey, white)
-  dolor: blend(average, #fc0a8b, white)
-  amet: blend(average, rgb(27,198,93), white)
-  consectetur: blend(average, white, black)
-  adipiscing: blend(average, grey, black)
-  elit: blend(average, #fc0a8b, black)
-  etiam: blend(average, rgb(27,198,93), black)
-  hendrerit: blend(average, white, grey)
-  mauris: blend(average, black, grey)
-  erat: blend(average, #fc0a8b, grey)
-  feugiat: blend(average, rgb(27,198,93), grey)
-  sagittis: blend(average, white, #fc0a8b)
-  pharetra: blend(average, black, #fc0a8b)
-  libero: blend(average, grey, #fc0a8b)
-  sollicitudin: blend(average, rgb(27,198,93), #fc0a8b)
-  pellentesque: blend(average, white, rgb(27,198,93))
-  fermentum: blend(average, black, rgb(27,198,93))
-  ante: blend(average, grey, rgb(27,198,93))
-  interdum: blend(average, #fc0a8b, rgb(27,198,93))
-
-// @expect
-#average {
-  lorem: #808080;
-  ipsum: #c0c0c0;
-  dolor: #fe85c5;
-  amet: #8de3ae;
-  consectetur: #808080;
-  adipiscing: #404040;
-  elit: #7e0546;
-  etiam: #0e632f;
-  hendrerit: #c0c0c0;
-  mauris: #404040;
-  erat: #be4585;
-  feugiat: #4ea36f;
-  sagittis: #fe85c5;
-  pharetra: #7e0546;
-  libero: #be4585;
-  sollicitudin: #8c6874;
-  pellentesque: #8de3ae;
-  fermentum: #0e632f;
-  ante: #4ea36f;
-  interdum: #8c6874;
-}
-
-// @it `negation`
-#negation
-  lorem: blend(negation, black, white)
-  ipsum: blend(negation, grey, white)
-  dolor: blend(negation, #fc0a8b, white)
-  amet: blend(negation, rgb(27,198,93), white)
-  consectetur: blend(negation, white, black)
-  adipiscing: blend(negation, grey, black)
-  elit: blend(negation, #fc0a8b, black)
-  etiam: blend(negation, rgb(27,198,93), black)
-  hendrerit: blend(negation, white, grey)
-  mauris: blend(negation, black, grey)
-  erat: blend(negation, #fc0a8b, grey)
-  feugiat: blend(negation, rgb(27,198,93), grey)
-  sagittis: blend(negation, white, #fc0a8b)
-  pharetra: blend(negation, black, #fc0a8b)
-  libero: blend(negation, grey, #fc0a8b)
-  sollicitudin: blend(negation, rgb(27,198,93), #fc0a8b)
-  pellentesque: blend(negation, white, rgb(27,198,93))
-  fermentum: blend(negation, black, rgb(27,198,93))
-  ante: blend(negation, grey, rgb(27,198,93))
-  interdum: blend(negation, #fc0a8b, rgb(27,198,93))
-
-
-// @expect
-#negation {
-  lorem: #fff;
-  ipsum: #7f7f7f;
-  dolor: #03f574;
-  amet: #e439a2;
-  consectetur: #fff;
-  adipiscing: #808080;
-  elit: #fc0a8b;
-  etiam: #1bc65d;
-  hendrerit: #7f7f7f;
-  mauris: #808080;
-  erat: #828af3;
-  feugiat: #9bb8dd;
-  sagittis: #03f574;
-  pharetra: #fc0a8b;
-  libero: #828af3;
-  sollicitudin: #e7d0e8;
-  pellentesque: #e439a2;
-  fermentum: #1bc65d;
-  ante: #9bb8dd;
-  interdum: #e7d0e8;
-}
-
 // @it `hue`
-#hue
-  lorem: blend-hue(black, white)
+body
+  color: blend('hue', #a633da, #a633da)
+  color: blend('hue', #4be5b4, #a633da)
+  color: blend('hue', #a633da, #4be5b4)
+  color: blend('hue', #4be5b4, #4be5b4)
 
 // @expect
-#hue {
-  lorem: red
-}
 
+body {
+  color: #a633da;
+  color: #009c6a;
+  color: #dc8dff;
+  color: #4be5b4;
+}
 // @it `saturation`
-#saturation
-  lorem: blend-saturation(black, white)
+body
+  color: blend('saturation', #a633da, #a633da)
+  color: blend('saturation', #4be5b4, #a633da)
+  color: blend('saturation', #a633da, #4be5b4)
+  color: blend('saturation', #4be5b4, #4be5b4)
 
 // @expect
-#saturation {
-  lorem: red
-}
 
+body {
+  color: #a633da;
+  color: #a137d1;
+  color: #42e9b4;
+  color: #4be5b4;
+}
 // @it `color`
-#color
-  lorem: blend-color(black, white)
+body
+  color: blend('color', #a633da, #a633da)
+  color: blend('color', #4be5b4, #a633da)
+  color: blend('color', #a633da, #4be5b4)
+  color: blend('color', #4be5b4, #4be5b4)
 
 // @expect
-#color {
-  lorem: red
+
+body {
+  color: #a633da;
+  color: #019b6a;
+  color: #dc8dff;
+  color: #4be5b4;
 }
-
 // @it `luminosity`
-#luminosity
-  lorem: blend-luminosity(black, white)
+body
+  color: blend('luminosity', #a633da, #a633da)
+  color: blend('luminosity', #4be5b4, #a633da)
+  color: blend('luminosity', #a633da, #4be5b4)
+  color: blend('luminosity', #4be5b4, #4be5b4)
 
 // @expect
-#luminosity {
-  lorem: red
+
+body {
+  color: #a633da;
+  color: #dc8dff;
+  color: #019b6a;
+  color: #4be5b4;
 }

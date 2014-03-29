@@ -10,6 +10,10 @@
  * @todo Optional `amount` to override source alpha?
  */
 
+luminosity()
+  return
+Lum(C) = 0.3 x Cred + 0.59 x Cgreen + 0.11 x Cblue
+
 /**
  * Helper for separable modes.
  */
@@ -212,8 +216,9 @@ blend-negation(s, b)
  * Creates a color with the hue of the source color and the saturation and
  * luminosity of the backdrop color.
  */
-blend-hue(s, b)
-  return hsla(hue(s), saturation(b), lightness(b), alpha(s) * alpha(b))
+blend-hue(b, s)
+  return hsla(hue(s), saturation(b), lightness(b), 1)
+
 /**
  * Creates a color with the saturation of the source color and the hue and
  * luminosity of the backdrop color.
@@ -222,7 +227,7 @@ blend-hue(s, b)
  * saturation) produces no change.
  */
 blend-saturation(s, b)
-  return hsla(hue(b), saturation(s), lightness(b), alpha(s) * alpha(b))
+  return hsla(hue(b), saturation(s), lightness(b), 1)
 
 /**
  * Creates a color with the hue and saturation of the source color and the
@@ -232,7 +237,7 @@ blend-saturation(s, b)
  * monochrome images or tinting color images.
  */
 blend-color(s, b)
-  return hsla(hue(s), saturation(s), lightness(b), alpha(s) * alpha(b))
+  return hsla(hue(s), saturation(s), lightness(b), 1)
 
 /**
  * Creates a color with the luminosity of the source color and the hue and
@@ -240,7 +245,7 @@ blend-color(s, b)
  * the `color` mode.
  */
 blend-luminosity(s, b)
-  return hsla(hue(b), saturation(b), lightness(s), alpha(s) * alpha(b))
+  return hsla(hue(b), saturation(b), lightness(s), 1)
 
 /**
  * Generic `blend()` function.
