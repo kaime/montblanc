@@ -1,5 +1,20 @@
 [
   "grey(25%)",
   "gray",
-  "gray(0)"
+  "gray(0)",
+  "black",
+  "chocolate",
+  "darkkhaki",
+  "salmon",
+  "sienna",
+  "royalblue",
+  "yellowgreen",
+  "slategrey",
+  "crimson",
+  "cornflowerblue",
+  "#a633da",
+  "#4be5b4",
+  "#2fee48",
+  "#a6ca0e",
+  "#c22be1"
 ]
