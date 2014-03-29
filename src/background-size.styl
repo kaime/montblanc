@@ -1,0 +1,27 @@
+/**
+ * http://www.w3.org/TR/css3-background/#the-background-size
+ * https://developer.mozilla.org/es/docs/CSS/background-size
+ * http://caniuse.com/background-img-opts
+ */
+
+background-size()
+  vendors = ()
+
+  if has-support('firefox < 4')
+    push(vendors, moz)
+
+  if has-support(
+      'android-browser < 3',
+      'safari < 4.1'
+    )
+    push(vendors, webkit)
+    // Todo: Add polyfill for browsers supporting only the old syntax, where
+    // `100px` meant `100px 100px` instead of `100px auto` (no `cover` or
+    // `contain`).
+
+  // @todo Konqueror!
+
+  if has-support('opera < 10.5')
+    push(vendors, o)
+
+  vendorize(background-size, arguments, vendors)
