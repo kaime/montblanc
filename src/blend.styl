@@ -10,9 +10,37 @@
  * @todo Optional `amount` to override source alpha?
  */
 
-luminosity()
-  return
-Lum(C) = 0.3 x Cred + 0.59 x Cgreen + 0.11 x Cblue
+luminosity(c)
+  return .3 * red(c) + .59 * green(c) + .11 * blue(c)
+
+clip-color(c)
+  r = red(c)
+  g = green(c)
+  b = blue(c)
+  l = luminosity(c)
+
+  n = min(r, g, b)
+  x = max(r, g, b)
+
+  if n < 0
+    r = l + (((r - l) * l) / (l - n))
+    g = l + (((g - l) * l) / (l - n))
+    b = l + (((b - l) * l) / (l - n))
+
+  if x > 1
+    r = l + (((r - l) * (1 - l)) / (x - l))
+    g = l + (((g - l) * (1 - l)) / (x - l))
+    b = l + (((b - l) * (1 - l)) / (x - l))
+
+  return rgb(r, g, b)
+
+set-luminosity(c, l)
+  d = l - luminosity(c)
+  r = red(c) + d
+  g = green(c) + d
+  b = blue(c) + d
+
+  return clip-color(rgb(r, g, b))
 
 /**
  * Helper for separable modes.
@@ -111,12 +139,9 @@ blend-lighten(s, b)
  * produces no changes.
  */
 blend-channel-color-dodge(s, b)
-  if b == 0
-    return 0
-  else if s == 1
-    return 1
-  else
-    return min(1, b / (1 - s))
+  return 0 if b is 0
+  return 1 if s is 1
+  return min(1, b / (1 - s))
 
 blend-color-dodge(s, b)
   return blend-channels(s, b, blend-channel-color-dodge)
@@ -126,12 +151,9 @@ blend-color-dodge(s, b)
  * produces no changes.
  */
 blend-channel-color-burn(s, b)
-  if b == 1
-    return 1
-  else if s == 0
-    return 0
-  else
-    return 1 - min(1, (1 - b) / s)
+  return 1 if b == 1
+  return 0 if s == 0
+  return 1 - min(1, (1 - b) / s)
 
 blend-color-burn(s, b)
   return blend-channels(s, b, blend-channel-color-burn)
@@ -185,30 +207,10 @@ blend-difference(s, b)
  * produces no change.
  */
 blend-channel-exclusion(s, b)
-  return b + s - 2 * b * s
+  return s + b - 2 * s * b
 
 blend-exclusion(s, b)
   return blend-channels(s, b, blend-channel-exclusion)
-
-/**
- * Computes the average of the source and backdrop colors on a per-channel basis.
- * @todo Dont include it now
- */
-blend-channel-average(s, b)
-  return (s + b) / 2;
-
-blend-average(s, b)
-  return blend-channels(s, b, blend-channel-average)
-
-/**
- * Produces the opposite effect to `difference`. The result is a brighter color.
- * @todo Dont include it now
- */
-blend-channel-negation(s, b)
-  return 1 - abs(s + b - 1)
-
-blend-negation(s, b)
-  return blend-channels(s, b, blend-channel-negation)
 
 // Non-separable modes //
 
@@ -216,8 +218,8 @@ blend-negation(s, b)
  * Creates a color with the hue of the source color and the saturation and
  * luminosity of the backdrop color.
  */
-blend-hue(b, s)
-  return hsla(hue(s), saturation(b), lightness(b), 1)
+blend-hue(s, b)
+  return hsl(hue(s), saturation(b), lightness(b))
 
 /**
  * Creates a color with the saturation of the source color and the hue and

@@ -266,23 +266,8 @@ app.displayDialogs = DialogModes.NO;
 var doc = app.documents.add(1, 1);
 doc.bitsPerChannel = BitsPerChannelType.SIXTEEN;
 
-/**
- * Gets the color of the (only pixel of the) document using the color sampler.
- */
-function eyeDrop() {
-
-  // Remove all current color samplers because PS has a limit of 4 or so.
-  for (var i = 0, l = doc.colorSamplers.length; i < l; i++) {
-    doc.colorSamplers[i].remove();
-  }
-
-  var sampler = doc.colorSamplers.add([0, 0]);
-
-  $.writeln(sampler.color.rgb.hexValue);
-  $.writeln(sampler.color.rgb.red, ', ' , sampler.color.rgb.green, ', ' , sampler.color.rgb.blue);
-
-  return CSSColor.fromPSColor(sampler.color);
-}
+// Add a color sampler to query result color
+var sampler = doc.colorSamplers.add([0, 0]);
 
 // "Backdrop" layer.
 var backdropLayer = doc.backgroundLayer;
@@ -331,7 +316,7 @@ for (mode in MODES) {
       sourceLayer.opacity = source.alpha * 100;
 
       // Collect computed result.
-      result = eyeDrop();
+      result = CSSColor.fromPSColor(sampler.color);
 
       $.writeln(mode + ': ' , source, ' + ', backdrop, ' = ', result);
 
