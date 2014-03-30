@@ -84,5 +84,51 @@
       "type": "property",
       "name": "background-size"
     }
+  ],
+  "multicolumn": [
+    {
+      "type": "property",
+      "name": "columns"
+    },
+    {
+      "type": "property",
+      "name": "column-count"
+    },
+    {
+      "type": "property",
+      "name": "column-width"
+    },
+    {
+      "type": "property",
+      "name": "column-gap"
+    },
+    {
+      "type": "property",
+      "name": "column-fill"
+    },
+    {
+      "type": "property",
+      "name": "column-span"
+    },
+    {
+      "type": "property",
+      "name": "column-rule-width"
+    },
+    {
+      "type": "property",
+      "name": "column-rule-color"
+    },
+    {
+      "type": "property",
+      "name": "column-rule-style"
+    },
+    {
+      "type": "property",
+      "name": "column-rule"
+    },
+    {
+      "type": "property",
+      "name": "columns"
+    }
   ]
 }

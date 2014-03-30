@@ -1,0 +1,56 @@
+/**
+ * References:
+ *
+ * http://www.w3.org/TR/css3-multicol
+ * http://caniuse.com/multicolumn
+ */
+-vendorize-columns(property, args)
+  vendors = ()
+
+  if has-support('firefox', 'android-firefox')
+    push(vendors, moz)
+
+  if has-support(
+      'chrome',
+      'safari',
+      'ios-safari',
+      'android-browser',
+      'android-chrome',
+      'opera',
+      'opera-mobile',
+      'blackberry-browser'
+    )
+    push(vendors, webkit)
+
+  vendorize(property, args, vendors)
+
+column-width()
+  -vendorize-columns('column-width', arguments)
+
+column-count()
+  -vendorize-columns('column-count', arguments)
+
+column-gap()
+  -vendorize-columns('column-gap', arguments)
+
+column-rule-color()
+  -vendorize-columns('column-rule-color', arguments)
+
+column-rule-style()
+  -vendorize-columns('column-rule-style', arguments)
+
+column-rule-width()
+  -vendorize-columns('column-rule-width', arguments)
+
+column-rule()
+  -vendorize-columns('column-rule', arguments)
+
+column-span()
+  -vendorize-columns('column-span', arguments)
+
+column-fill()
+  -vendorize-columns('column-fill', arguments)
+
+columns()
+  -vendorize-columns('columns', arguments)
+
