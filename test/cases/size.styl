@@ -3,7 +3,6 @@
 // @it takes one or two unit arguments and sets both `(min/max-)width` and `(min/max-)height` at once
 div
   size: 10px
-  size: 10px 20px
   min-size: 1px
   max-size: 99px
   min-size: 1px 2px
@@ -13,8 +12,6 @@ div
 div {
   width: 10px;
   height: 10px;
-  width: 10px;
-  height: 20px;
   min-width: 1px;
   min-height: 1px;
   max-width: 99px;
@@ -25,24 +22,39 @@ div {
   max-height: 4px;
 }
 
-// @it handles `auto` and `initial` values
+// @it accepts `auto`, `none`, `inherit` and `initial` values
 div
-  min-size: auto 20px
+  min-size: inherit 20px
+  max-size: none
+  max-size: inherit none
 
 div
   size: auto
+  size: auto 20px
+  size: inherit;
+  size: 20px initial;
 
 div
   size: 50% initial
 
 // @expect
 div {
-  min-width: auto;
+  min-width: inherit;
   min-height: 20px;
+  max-width: none;
+  max-height: none;
+  max-width: inherit;
+  max-height: none;
 }
 div {
   width: auto;
   height: auto;
+  width: auto;
+  height: 20px;
+  width: inherit;
+  height: inherit;
+  width: 20px;
+  height: initial;
 }
 div {
   width: 50%;
@@ -53,7 +65,7 @@ div {
 div
   size: 10px !important
   size: 10px auto !important
-  min-size: auto !important
+  min-size: 0 !important
   max-size: 1920px 1080px !important
 
 // @expect
@@ -62,8 +74,8 @@ div {
   height: 10px !important;
   width: 10px !important;
   height: auto !important;
-  min-width: auto !important;
-  min-height: auto !important;
+  min-width: 0 !important;
+  min-height: 0 !important;
   max-width: 1920px !important;
   max-height: 1080px !important;
 }

@@ -2,17 +2,20 @@
 // 	`size: w h` => `width: w; height: h`
 //  `size: l` => `width: l; height: l`
 
--size(prefix, args)
+-size(prefix, args, x-values = ())
   units = ()
   importance = null
 
   for arg in args
-    if arg is a 'unit' or arg is auto or arg is initial
+    if arg is a 'unit' or \
+      arg in (initial inherit) or \
+      arg in (x-values)
       push(units, arg)
-    if arg is !important
+    else if arg is !important
       importance = !important
 
   l = length(units)
+
   if l == 1
     push(units, units[0])
   else if l != 2
@@ -22,10 +25,10 @@
   {prefix}height: (units[1] or units[0]) importance
 
 size()
-  -size('', arguments)
+  -size('', arguments, (auto))
 
 min-size()
   -size('min-', arguments)
 
 max-size()
-  -size('max-', arguments)
+  -size('max-', arguments, (none))
