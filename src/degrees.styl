@@ -1,0 +1,22 @@
+degrees(angle)
+  degs = null
+
+  if angle is a 'unit'
+    u = unit(angle)
+    if u is ''
+      v = angle
+      u = 'rad'
+    else
+      v = unit(angle, '')
+
+    if u is 'deg'
+      degs = unit(angle, '')
+    else if u is 'rad'
+      degs = v * 180 / PI
+    else if u is 'turn'
+      degs = v * 360
+
+  if degs is null
+    error('Not a valid angle: %s' % angle)
+
+  return unit(degs, 'deg')
