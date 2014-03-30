@@ -1,0 +1,56 @@
+/**
+ * References:
+ *
+ * http://www.w3.org/TR/css3-animations/
+ * http://caniuse.com/css-animation
+ */
+-vendorize-animation(property, args)
+  vendors = ()
+
+  if has-support('firefox < 16')
+    push(vendors, moz)
+
+  if has-support(
+      'chrome',
+      'safari',
+      'ios-safari',
+      'android-browser',
+      'android-chrome',
+      'blackberry-browser',
+      'opera',
+      'opera-mobile'
+    )
+    push(vendors, webkit)
+
+  if has-support('opera <= 12')
+    push(vendors, o)
+
+  vendorize(property, args, vendors)
+
+animation-name()
+  -vendorize-animation('animation-name', arguments)
+
+animation-duration()
+  -vendorize-animation('animation-duration', arguments)
+
+animation-timing-function()
+  -vendorize-animation('animation-timing-function', arguments)
+
+animation-delay()
+  -vendorize-animation('animation-delay', arguments)
+
+animation-direction()
+  -vendorize-animation('animation-direction', arguments)
+
+animation-iteration-count()
+  -vendorize-animation('animation-iteration-count', arguments)
+
+animation-fill-mode()
+  -vendorize-animation('animation-fill-mode', arguments)
+
+animation-play-state()
+  -vendorize-animation('animation-play-state', arguments)
+
+animation()
+  -vendorize-animation('animation', arguments)
+

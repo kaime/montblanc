@@ -84,5 +84,43 @@
       "type": "property",
       "name": "background-size"
     }
+  ],
+  "css-animation": [
+    {
+      "type": "property",
+      "name": "animation"
+    },
+    {
+      "type": "property",
+      "name": "animation-name"
+    },
+    {
+      "type": "property",
+      "name": "animation-duration"
+    },
+    {
+      "type": "property",
+      "name": "animation-timing-function"
+    },
+    {
+      "type": "property",
+      "name": "animation-delay"
+    },
+    {
+      "type": "property",
+      "name": "animation-fill-mode"
+    },
+    {
+      "type": "property",
+      "name": "animation-direction"
+    },
+    {
+      "type": "property",
+      "name": "animation-iteration-count"
+    },
+    {
+      "type": "property",
+      "name": "animation-play-state"
+    }
   ]
 }
