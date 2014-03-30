@@ -3,4 +3,8 @@
  * 100%.
  */
 opaque(color)
+  if color is transparent
+    // http://www.w3.org/TR/css3-color/#transparent-def
+    return black
+
   return rgba(color, 100%)
