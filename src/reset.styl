@@ -9,8 +9,27 @@ reset()
   for prop in arguments
     v = initial('%s' % prop)
 
-    if v is null
-      // Special cases
+    // Special cases
+    if v is currentColor
+      // https://developer.mozilla.org/en-US/docs/Web/CSS/color_value#currentColor_keyword
+      // @todo Add android-firefox, ie-mobile, ios-safari, android-browser...
+      // @todo If it's only for IE, then bang the property
+      if has-support(
+          'firefox <= 1.5',
+          'ie < 9',
+          'opera < 9.5',
+          'safari < 4'
+        )
+
+        v = @color or initial('color')
+
+        if v isnt null
+          add-property(prop, v importance)
+
+        v = currentColor
+
+    else if v is null
+
       if prop is text-align
         dir = @direction or initial('direction')
 
@@ -18,37 +37,6 @@ reset()
           v = right
         else
           v = left
-
-      else if \
-        prop is border-color or \
-        prop is border-top-color or \
-        prop is border-right-color or \
-        prop is border-bottom-color or \
-        prop is border-left-color
-        // All these default to `currentColor`, which has limited support
-        // https://developer.mozilla.org/en-US/docs/Web/CSS/color_value#currentColor_keyword
-
-        // @todo Add android-firefox, ie-mobile, ios-safari, android-browser...
-        if has-support(
-            'firefox <= 1.5',
-            'ie < 9',
-            'opera < 9.5',
-            'safari < 4'
-          )
-
-          v = @color
-
-          if v is null
-            if prop isnt border-color
-              v = @border-color or initial('border-color')
-
-          if v is null
-            v = initial('color')
-
-          if v isnt null
-            add-property(prop, v importance)
-
-        v = currentColor
 
     if v isnt null
       if importance isn null
