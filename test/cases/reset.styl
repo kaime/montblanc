@@ -66,6 +66,26 @@ body {
   height: auto !important;
 }
 
+// @it resets both `min-width` and `min-height` to `0` with `reset: min-size`
+body
+  reset: min-size;
+
+// @expect
+body {
+  min-width: 0;
+  min-height: 0;
+}
+
+// @it resets both `max-width` and `max-height` to `none` with `reset: max-size`
+body
+  reset: max-size;
+
+// @expect
+body {
+  max-width: none;
+  max-height: none;
+}
+
 // @it resets paddings and and margins to `0`
 body
   reset: padding margin;
