@@ -1,56 +1,33 @@
+/**
+ *
+ */
 vendorize()
-  // Lots of trouble here with lists and lists of lists...
-  // Some things may look weirdly implemented
-  args = ((arguments[0]) (arguments[1]) (arguments[2]) (arguments[3]))
+  args = clone(arguments)
+  property = mixin ? unquote(shift(args)) : current-property
 
-  // args = arguments
+  l = length(args)
 
-  //args = arguments
-  l = length(arguments)
+  value = l > 0 ? args[0] : null;
+  value = unquote(value) if value is a 'string'
 
-  if mixin
-    property = shift(args)
-    l = l - 1
-  else
-    property = current-property
+  prefixes = ()
+  push(prefixes, args[1]) if l > 1
 
-  if property is a 'string'
-    property = unquote(property)
-
-  if l > 0
-    value = args[0]
-  else
-    value = null
-
-  if value is a 'string'
-    value = unquote(value)
-
-  if l > 1
-    prefixes = (args[1])
-  else
-    prefixes = ()
-
-  if l > 2
-    unprefixed = args[2] ? true : false
-  else
-    unprefixed = true
+  unprefixed = (l <= 2) or args[2]
 
   if mixin
-    // @dtodo Don't know why, but this dummy `if` is a workaround for a
+    // @dtodo Don't know why, but this dummy `if true` is a workaround for a
     // bug. If removed, variables are not available after `if unprefixed`
     if true
       for prefix in prefixes
-        prefixed = '-%s-%s' % (prefix property)
-        add-property(prefixed, value)
-
+        add-property('-%s-%s' % (prefix property), value)
     if unprefixed
       add-property('%s' % property, value)
-
   else
-    p = length(prefixes)
+    k = length(prefixes)
     for prefix, i in prefixes
       prefixed = '-%s-%s' % (prefix value)
-      if ((i + 1) >= p) and (not unprefixed)
+      if ((i + 1) >= k) and (not unprefixed)
         return prefixed
       else
         add-property(property, prefixed)
