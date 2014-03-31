@@ -3,7 +3,8 @@
  */
 vendorize()
   args = clone(arguments)
-  property = mixin ? unquote(shift(args)) : current-property
+  property = mixin ? shift(args) : current-property
+  property = unquote(property) if property is a 'string'
 
   l = length(args)
 
