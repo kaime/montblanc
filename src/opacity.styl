@@ -3,13 +3,13 @@
  * [1] http://caniuse.com/css-opacity
  * [2] https://developer.mozilla.org/en-US/docs/Web/CSS/opacity
  */
-opacity(alpha)
+opacity()
   if arguments[length(arguments) - 1] is !important
     importance = !important
   else
     importance = unquote('')
 
-  alpha = cast(alpha, 'unit')
+  alpha = cast(arguments[0], 'unit')
 
   if has-support('ie < 9')
     perc = round(alpha * 100)
