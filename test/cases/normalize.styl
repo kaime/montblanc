@@ -7,7 +7,9 @@ support('chrome 4')
 support('firefox 4')
 support('ios-safari 5')
 
-normalize()
+normalize({
+  hey: 2
+})
 
 // @expect
 html {
@@ -209,13 +211,13 @@ support('chrome 4')
 support('firefox 4')
 support('ios-safari 5')
 
-initial('font-family', "Georgia", serif)
-
-normalize()
+normalize({
+  font-family: serif
+})
 
 // @expect
 html {
-  font-family: "Georgia", serif;
+  font-family: serif;
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
 }
@@ -413,9 +415,9 @@ support('chrome 4')
 support('firefox 4')
 support('ios-safari 5')
 
-initial('box-sizing', border-box)
-
-normalize()
+normalize({
+  box-sizing: border-box
+})
 
 // @expect
 *,

@@ -1,0 +1,36 @@
+// @describe `degrees()`
+
+// @it translates radians into degrees
+body
+  foo: degrees(0.87rad)
+  bar: round(degrees(0.29rad), 2)
+
+// @expect
+body {
+  foo: 49.847328176381616deg;
+  bar: 16.62deg;
+}
+
+// @it translates turns into degrees
+body
+  foo: degrees(-2turn)
+  bar: degrees(0.25turn)
+
+// @expect
+body {
+  foo: -720deg;
+  bar: 90deg;
+}
+
+// @it defaults to radians when no unit is supplied
+body
+  foo: degrees(PI)
+  foo: degrees(-2 * PI)
+  foo: degrees(0)
+
+// @expect
+body {
+  foo: 180deg;
+  foo: -360deg;
+  foo: 0deg;
+}

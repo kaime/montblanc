@@ -10,3 +10,12 @@ body {
   color: #f00;
   color: #000;
 }
+
+// @it understands `transparent` as `rgba(0,0,0,0)`
+body
+  color: opaque(transparent)
+
+// @expect
+body {
+  color: #000;
+}

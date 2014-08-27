@@ -57,7 +57,7 @@ describe('Cases', function() {
         expected = null,
         them = [];
 
-    var lines = readFile(file, 'utf8').split(/\r?\n/);
+    var lines = readFile(file).split(/\r?\n/);
 
     for (var line, dir, i = 0, l = lines.length; i < l; i++) {
 

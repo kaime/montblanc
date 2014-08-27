@@ -25,7 +25,11 @@
  * IN THE SOFTWARE.
  */
 
-normalize()
+normalize(initials = {})
+  if initials is a 'object'
+    for prop, val in initials
+      initial(prop, val)
+
   *,
   :before,
   :after
