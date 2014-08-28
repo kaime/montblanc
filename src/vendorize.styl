@@ -19,9 +19,8 @@ vendorize()
   if mixin
     // @dtodo Don't know why, but this dummy `if true` is a workaround for a
     // bug. If removed, variables are not available after `if unprefixed`
-    if true
-      for prefix in prefixes
-        add-property('-%s-%s' % (prefix property), value)
+    for prefix in prefixes
+      add-property('-%s-%s' % (prefix property), value)
     if unprefixed
       add-property('%s' % property, value)
   else
