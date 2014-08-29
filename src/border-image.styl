@@ -16,6 +16,8 @@ border-image()
   if has-support('firefox < 15')
     push(vendors, moz)
 
+  // Check this: caniuse says Opera partialy supported it on 10.5 and 10.6 with
+  // no prefix, and started needing it from version 11.
   if has-support(
       'chrome < 16',
       'safari < 6',
@@ -25,7 +27,8 @@ border-image()
     )
     push(vendors, webkit)
 
-  if has-support('opera < 15', 'opera-mobile < 16')
+  if (has-support('opera >= 11') and has-support('opera < 15')) or \
+    has-support('opera-mobile < 16')
     push(vendors, o)
 
   vendorize(border-image, arguments, vendors)

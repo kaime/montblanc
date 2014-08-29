@@ -10,10 +10,7 @@ background-size()
   if has-support('firefox < 4')
     push(vendors, moz)
 
-  if has-support(
-      'android-browser < 3',
-      'safari < 4.1'
-    )
+  if has-support('android-browser < 3')
     push(vendors, webkit)
     // Todo: Add polyfill for browsers supporting only the old syntax, where
     // `100px` meant `100px 100px` instead of `100px auto` (no `cover` or

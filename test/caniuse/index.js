@@ -81,6 +81,13 @@ describe("The `browsers.json` file", function() {
 
 describe("According to caniuse browser data", function() {
 
+  function getStats(ciu) {
+
+    var stats = [];
+
+    return stats;
+  }
+
   caniuse.data.should.have.property('data');
   caniuse.data['data'].should.be.an.Object;
 
@@ -149,6 +156,9 @@ describe("According to caniuse browser data", function() {
           var versions = getVersions([vers]);
 
           // versions.should.not.be.empty; @todo Check this
+          //
+
+          //var versions = getVersionRanges([vers]);
 
           versions.forEach(function(version) {
 
@@ -162,61 +172,71 @@ describe("According to caniuse browser data", function() {
               switch (node.type) {
 
                 case 'property':
+                  if (!supported) break;
+
                   node.should.have.property('name');
 
-                  if (prefix) {
+                  var values = [
+                    'bar',
+                    'foo baz("bar") !important'
+                  ];
 
-                    it('the property `' + node.name + '` needs to be prefixed with "' + prefix + '" on ' + browsers[caniuse.vendors[vendor]].name + ' ' + version, function() {
+                  var expected = [];
 
-                      var values = [
-                        'bar',
-                        'foo baz("bar") !important'
-                      ];
+                  var styl = [
+                    'support-none()',
+                    "support('" + caniuse.vendors[vendor] + ' ' + version + "')"
+                  ];
 
-                      var prefix = this.prefix,
-                          vendor = this.vendor;
+                  it('the property `' + node.name + '` ' + (prefix ? 'needs' : 'does not need') + ' to be prefixed' + (prefix ? ' with "' + prefix + '"' : '') + ' on ' + browsers[caniuse.vendors[vendor]].name + ' ' + version, function() {
 
-                      var styl = [
-                        'support-none()',
-                        "support('" + caniuse.vendors[vendor] + ' ' + version + "')"
-                      ];
+                    var prefix = this.prefix,
+                        vendor = this.vendor;
 
-                      var expected = [];
+                    values.forEach(function(value) {
+                      styl.push(
+                        'div',
+                        '  ' + node.name + ': ' + value
+                      );
 
-                      values.forEach(function(value) {
-                        styl.push(
-                          'div',
-                          '  ' + node.name + ': ' + value
-                        );
+                      expected.push(
+                        'div {'
+                      );
+
+                      if (prefix) {
                         expected.push(
-                          'div {',
-                          '  ' + String(prefix) + node.name + ': ' + value + ';',
-                          '  ' + node.name + ': ' + value + ';',
-                          '}'
+                          '  ' + String(prefix) + node.name + ': ' + value + ';'
                         );
-                      });
+                      }
 
-                      styl = styl.join("\n");
-                      expected = expected.join("\n");
+                      expected.push(
+                        '  ' + node.name + ': ' + value + ';',
+                        '}'
+                      );
 
-                      var style = stylus(styl)
-                                    .use(montblanc())
-                                    .set('filename', node.name + '.styl');
+                    });
 
-                      style.render(function(err, css) {
+                    styl = styl.join("\n");
+                    expected = expected.join("\n");
 
-                        if (err) {
-                          throw err;
-                        }
+                    var style = stylus(styl)
+                                  .use(montblanc())
+                                  .set('filename', node.name + '.styl');
 
-                        css.trim().should.equal(expected);
-                      });
+                    style.render(function(err, css) {
 
-                    }.bind({
-                      prefix: prefix,
-                      vendor: vendor,
-                    }));
-                  }
+                      if (err) {
+                        throw err;
+                      }
+
+                      css.trim().should.equal(expected);
+                    });
+
+                  }.bind({
+                    prefix: prefix,
+                    vendor: vendor
+                  }));
+
                   break;
               }
 
