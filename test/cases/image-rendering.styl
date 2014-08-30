@@ -1,0 +1,96 @@
+// @describe `image-rendering`
+
+// @it prefixes `crisp-edges` values for Firefox and Opera
+support('firefox 3','opera 10')
+body
+  image-rendering: crisp-edges;
+  image-rendering: auto;
+
+// @expect
+body {
+  image-rendering: -moz-crisp-edges;
+  image-rendering: -o-crisp-edges;
+  image-rendering: crisp-edges;
+  image-rendering: auto;
+}
+
+// @it translates `crisp-edges` to `-webkit-optimize-contrast` for webkit
+support('chrome 5')
+body
+  image-rendering: crisp-edges
+
+// @expect
+body {
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+}
+
+// @it translates syntax into IE's "interpolation modes"
+support('ie 8')
+body
+  image-rendering: pixelated
+
+  img
+    image-rendering: crisp-edges
+
+    &#bar
+      image-rendering: auto
+
+// @expect
+body {
+  -ms-interpolation-mode: nearest-neighbor;
+  image-rendering: pixelated;
+}
+body img {
+  -ms-interpolation-mode: nearest-neighbor;
+  image-rendering: crisp-edges;
+}
+body img#bar {
+  -ms-interpolation-mode: bicubic;
+  image-rendering: auto;
+}
+
+// @it does not add `-ms-interpolation-mode` on IE 9 and up
+support('ie 9')
+body
+  image-rendering: pixelated
+
+// @expect
+body {
+  image-rendering: pixelated;
+}
+
+// @it handles `!important`
+support('chrome 6', 'firefox 4', 'safari 4', 'ie 7', 'opera 10.5')
+
+body
+  image-rendering: crisp-edges !important
+
+  div
+    image-rendering: pixelated !important
+
+    img
+      image-rendering: auto !important
+
+      &.foo
+        image-rendering: inherit !important
+
+// @expect
+body {
+  image-rendering: -moz-crisp-edges !important;
+  image-rendering: -o-crisp-edges !important;
+  image-rendering: -webkit-optimize-contrast !important;
+  -ms-interpolation-mode: nearest-neighbor !important;
+  image-rendering: crisp-edges !important;
+}
+body div {
+  -ms-interpolation-mode: nearest-neighbor !important;
+  image-rendering: pixelated !important;
+}
+body div img {
+  -ms-interpolation-mode: bicubic !important;
+  image-rendering: auto !important;
+}
+body div img.foo {
+  image-rendering: inherit !important;
+}
