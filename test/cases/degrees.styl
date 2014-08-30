@@ -34,3 +34,12 @@ body {
   foo: -360deg;
   foo: 0deg;
 }
+
+// @it does nothing with degrees
+body
+  foo: degrees(2deg) !important
+
+// @expect
+body {
+  foo: 2deg !important;
+}
