@@ -1,0 +1,29 @@
+// @describe `initial()`
+
+// @it returns "initial" values as described in `initial-values.json`
+body
+  color: initial(color) !important
+
+// @expect
+body {
+  color: #000 !important;
+}
+
+// @it can also set "initial" values which override `initial-values.json`
+initial(color, red)
+body
+  color: initial(color)
+
+// @expect
+body {
+  color: #f00;
+}
+
+// @it does not break the `initial` keyword
+body
+  border-color: initial
+
+// @expect
+body {
+  border-color: initial;
+}
