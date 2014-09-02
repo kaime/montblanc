@@ -1,4 +1,4 @@
 --require should
+--ui bdd
 --reporter spec
---recursive
 --slow 1000

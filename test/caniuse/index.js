@@ -1,251 +1,204 @@
 var stylus = require('stylus'),
     montblanc = require('../../'),
-    caniuse = {
-      // This is a caniuse-name => montblanc-name lookup table
-      vendors: require('./vendors.json'),
-      // This is the full caniuse browser support and usage data
-      data: require('./data/data.json')
-    },
     features = require('./features.json'),
-    browsers = require('../../src/data/browsers.json');
-
-function getVersions(versions) {
-
-  var ret = [];
-
-  versions.should.be.an.Array;
-
-  for (var i = 0, l = versions.length; i < l; i++) {
-
-    if (versions[i] === null) {
-      // Ignore nulls. I think they're only there to align caniuse.com tables
-      continue;
-    }
-
-    versions[i].should.be.an.String;
-
-    // Some caniuse versions are actually version ranges: "opera 9.5-9.6"
-    versions[i].split('-').forEach(function(v) {
-
-      if (v === '0') {
-        // Ignore '0' *for now*. @todo
-        return;
-      }
-
-      v.should.match(/^[0-9]+(\.[0-9]+)?$/);
-      ret.push(v);
-
-    });
-  }
-
-  ret.sort(function(a, b) {
-    return parseFloat(b) - parseFloat(a);
-  });
-
-  return ret;
-}
+    browsers = require('./browsers'),
+    getBrowser  = require('./getBrowser');
 
 describe("The `browsers.json` file", function() {
 
-  it("contains all caniuse vendors and versions", function() {
+  describe("contains all caniuse versions of", function() {
+
+    var caniuse = {
+      // This is a montblanc => caniuse-name lookup table
+      vendors: require('./vendors.json'),
+      // This is the full caniuse browser support and usage data
+      data: require('./data/data.json')
+    };
+
 
     caniuse.data.should.have.property('agents');
     caniuse.data.agents.should.be.an.Object;
 
+    function getVersions(versions) {
+
+      var ret = [];
+
+      versions.should.be.an.Array;
+
+      for (var i = 0, l = versions.length; i < l; i++) {
+
+        if (versions[i] === null) {
+          // Ignore nulls. I think they're only there to align caniuse.com tables
+          continue;
+        }
+
+        versions[i].should.be.an.String;
+
+        // Some caniuse versions are actually version ranges: "opera 9.5-9.6"
+        versions[i].split('-').forEach(function(v) {
+
+          if (v === '0') {
+            // Ignore '0' *for now*. @todo
+            return;
+          }
+
+          v.should.match(/^[0-9]+(\.[0-9]+){0,2}$/);
+          ret.push(v);
+
+        });
+      }
+
+      ret.sort(function(a, b) {
+        return parseFloat(b) - parseFloat(a);
+      });
+
+      return ret;
+    }
+
     // Iterate over all caniuse vendors and versions and check they we know
     // them all
-    for (var vendor in caniuse.vendors) {
+    //
+    // @todo Until it makes sense, also test we don't have more vendors or
+    // versions than caniuse has
+    for (var vendor in caniuse.data.agents) {
 
-      // Make sure our lookup table is up to date
-      caniuse.vendors.should.have.property(vendor);
-
-      browsers.should.have.property(caniuse.vendors[vendor]);
-
-      // @todo Until it makes sense, also test we don't have more vendors or
-      // versions than caniuse has
-
-      caniuse.data.agents.should.have.property(vendor);
       caniuse.data.agents[vendor].should.have.property('versions');
-      caniuse.data.agents[vendor].versions.should.be.an.Array;
 
       var versions = getVersions(caniuse.data.agents[vendor].versions);
 
+      var its = [];
+
       versions.forEach(function(version) {
-        browsers[caniuse.vendors[vendor]].versions.should.have.property(version);
+
+        var browser = getBrowser(vendor, version);
+
+        its[browser.id] = its[browser.id] || [];
+        its[browser.id].push(version);
+
       });
+
+      var browser;
+
+      for (var b in its) {
+
+        browser = browsers[b];
+
+        it(browser.name, function(browser, vers) {
+          vers.forEach(function(version) {
+            browser.versions.should.have.property(version);
+          });
+        }.bind(this, browser, its[b]));
+
+      }
     }
 
   });
-
 });
 
-describe("According to caniuse browser data", function() {
+describe("According to caniuse browser data,", function() {
 
-  function getStats(ciu) {
+  var getStats       = require('./getStats'),
+      versionInRange = require('./versionInRange'),
+      formatRange    = require('./formatRange');
 
-    var stats = [];
+  var values = [
+        'bar',
+        'foo baz("bar") !important'
+      ];
 
-    return stats;
-  }
+  var ft, group;
 
-  caniuse.data.should.have.property('data');
-  caniuse.data['data'].should.be.an.Object;
+  for (group in features) {
 
-  caniuse.features = caniuse.data['data'];
+    var stats = getStats(group);
 
-  for (var feature in caniuse.features) {
+    stats.should.not.be.empty;
 
-    caniuse.features[feature].should.have.property('stats');
-    caniuse.features[feature].stats.should.be.an.Object;
+    for (var feature in features[group]) {
 
-    // @todo check we know all caniuse properties
-    if (feature in features) {
+      ft = features[group][feature];
 
-      features[feature].should.be.an.Array;
+      if (ft.type !== 'property') continue;
 
-      var stats = caniuse.features[feature].stats;
+      describe('the property `' + ft.name + '` ', function() {
 
-      for (var vendor in stats) {
+        stats.forEach(function(st) {
 
-        stats[vendor].should.be.an.Object;
+          if (!st.supported) return;
 
-        for (var vers in stats[vendor]) {
+          var browser = st.browser;
 
-          var supported = false,
-              prefix = false,
-              partial = false;
+          it((st.prefix ? 'needs' : 'does not need') + ' to be prefixed' + (st.prefix ? ' with "' + st.prefix  + '"' : '') + ' on ' + browser.name + ' ' + formatRange(st.versions), function() {
 
-          var p = stats[vendor][vers].split(' ');
+            var ft = this.ft,
+                group = this.group;
 
-          p.should.not.be.empty;
+            var styl = [],
+                expected = [];
 
-          switch (p[0]) {
-            case 'y': // Supported
-              supported = true;
-              break;
+            browser._versions.forEach(function(version) {
 
-            case 'n': // Not supported at all
-            case 'p': // Not supported - polyfill available @todo
-              supported = false;
-              break;
+              if (versionInRange(version, st.versions)) {
 
-            case 'a': // Partial support @todo warnings
-              supported = true;
-              partial = true;
-              break;
 
-            case 'u': // Unknown
-              continue;
+                var c = "/* " + browser.name + ' ' + version + '*/';
 
-            default:
-              throw "Unexpected status: " + p[0];
-          }
+                styl.push(
+                  c,
+                  "support-none()",
+                  "support('" + st.browser.id + ' ' + version + "')"
+                );
 
-          if (p.length > 1) {
-            p[1].should.equal('x');
-            caniuse.data.agents[vendor].should.have.property('prefix');
-            var prefix = caniuse.data.agents[vendor].prefix;
-            if ('prefix_exceptions' in caniuse.data.agents[vendor]) {
-              if (vers in caniuse.data.agents[vendor]['prefix_exceptions']) {
-                prefix = caniuse.data.agents[vendor]['prefix_exceptions'][vers];
+                expected.push(c);
+
+                values.forEach(function(value) {
+                  styl.push(
+                    'div',
+                    '  ' + ft.name + ': ' + value
+                  );
+
+                  expected.push(
+                    'div {'
+                  );
+
+                  if (st.prefix) {
+                    expected.push(
+                      '  ' + st.prefix + ft.name + ': ' + value + ';'
+                    );
+                  }
+
+                  expected.push(
+                    '  ' + ft.name + ': ' + value + ';',
+                    '}'
+                  );
+                });
               }
-            }
-            prefix = '-' + prefix + '-';
-          }
-
-          var versions = getVersions([vers]);
-
-          // versions.should.not.be.empty; @todo Check this
-          //
-
-          //var versions = getVersionRanges([vers]);
-
-          versions.forEach(function(version) {
-
-            features[feature].forEach(function(node) {
-
-              node.should.be.an.Object;
-              node.should.have.property('type');
-
-              ['property'].should.containEql(node.type);
-
-              switch (node.type) {
-
-                case 'property':
-                  if (!supported) break;
-
-                  node.should.have.property('name');
-
-                  var values = [
-                    'bar',
-                    'foo baz("bar") !important'
-                  ];
-
-                  var expected = [];
-
-                  var styl = [
-                    'support-none()',
-                    "support('" + caniuse.vendors[vendor] + ' ' + version + "')"
-                  ];
-
-                  it('the property `' + node.name + '` ' + (prefix ? 'needs' : 'does not need') + ' to be prefixed' + (prefix ? ' with "' + prefix + '"' : '') + ' on ' + browsers[caniuse.vendors[vendor]].name + ' ' + version, function() {
-
-                    var prefix = this.prefix,
-                        vendor = this.vendor;
-
-                    values.forEach(function(value) {
-                      styl.push(
-                        'div',
-                        '  ' + node.name + ': ' + value
-                      );
-
-                      expected.push(
-                        'div {'
-                      );
-
-                      if (prefix) {
-                        expected.push(
-                          '  ' + String(prefix) + node.name + ': ' + value + ';'
-                        );
-                      }
-
-                      expected.push(
-                        '  ' + node.name + ': ' + value + ';',
-                        '}'
-                      );
-
-                    });
-
-                    styl = styl.join("\n");
-                    expected = expected.join("\n");
-
-                    var style = stylus(styl)
-                                  .use(montblanc())
-                                  .set('filename', node.name + '.styl');
-
-                    style.render(function(err, css) {
-
-                      if (err) {
-                        throw err;
-                      }
-
-                      css.trim().should.equal(expected);
-                    });
-
-                  }.bind({
-                    prefix: prefix,
-                    vendor: vendor
-                  }));
-
-                  break;
-              }
-
             });
 
-          }); // versions.forEach(function(version)
-        } // for (var vers in stats[vendor])
-      }
+            styl = styl.join("\n");
+            expected = expected.join("\n");
+
+            if (false && st.browser.id === 'opera-mobile') {
+              console.log(styl, expected);
+              console.log(st);
+            }
+
+            stylus(styl)
+              .use(montblanc())
+              .set('filename', ft.name + '.styl')
+              .render(function(err, css) {
+                if (err) {
+                  throw err;
+                }
+                css.trim().should.equal(expected);
+              });
+          }.bind({
+            ft: ft,
+            group: group
+          }));
+        });
+
+      });
     }
   }
 });
-

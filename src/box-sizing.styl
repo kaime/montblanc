@@ -5,10 +5,7 @@
 box-sizing()
   vendors = ()
 
-  if has-support(
-      'firefox < 29',
-      'android-firefox'
-    )
+  if has-support('firefox < 29')
     push(vendors, moz)
 
   if has-support(

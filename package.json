@@ -13,7 +13,7 @@
   ],
   "main": "index.js",
   "scripts": {
-    "test": "node ./node_modules/mocha/bin/mocha"
+    "test": "node ./node_modules/mocha/bin/mocha test"
   },
   "repository": "https://github.com/krokis/montblanc.git",
   "dependencies": {
@@ -23,6 +23,7 @@
     "should": "~3.1.2",
     "mocha": "~1.17.1",
     "glob": "~3.2.8",
-    "path": "~0.4.9"
+    "path": "~0.4.9",
+    "semver": "~3.0.1"
   }
 }

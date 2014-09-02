@@ -21,8 +21,16 @@ support('firefox 15')
     four: 4
   if has-support('chrome', 'firefox < 20')
     five: 5
-  if has-support('chrome')
+  if has-support('ie > 9')
     six: 6
+  if has-support('ie >= 9.1.0')
+    seven: 7
+  if has-support('firefox < 16')
+    eight: 8
+  if has-support('firefox <= 15')
+    nine: 9
+  if has-support('chrome')
+    one: 6
 
 
 // @expect
@@ -33,4 +41,8 @@ support('firefox 15')
   three: 3;
   four: 4;
   five: 5;
+  six: 6;
+  seven: 7;
+  eight: 8;
+  nine: 9;
 }
